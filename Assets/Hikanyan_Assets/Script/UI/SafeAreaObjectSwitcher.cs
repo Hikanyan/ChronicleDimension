@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class SafeAreaObjectSwitcher : MonoBehaviour
 {
-    [SerializeField] private GameObject windowsObject;        // WindowsŠÂ‹«‚ÅŽg—p‚·‚éGameObject
-    [SerializeField] private GameObject simulatorObject;      // SimulatorŠÂ‹«‚ÅŽg—p‚·‚éGameObject
+    [SerializeField] private GameObject windowsObject;        // Windowsç’°å¢ƒã§ä½¿ç”¨ã™ã‚‹GameObject
+    [SerializeField] private GameObject simulatorObject;      // Simulatorç’°å¢ƒã§ä½¿ç”¨ã™ã‚‹GameObject
 
     private void Start()
     {
         if (Application.isMobilePlatform)
         {
-            // ƒZ[ƒtƒGƒŠƒA‚É‡‚í‚¹‚½RectTransform‚ðŽ‚ÂƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ðƒAƒNƒeƒBƒu‚É‚·‚é
+            // ã‚»ãƒ¼ãƒ•ã‚¨ãƒªã‚¢ã«åˆã‚ã›ãŸRectTransformã‚’æŒã¤ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
             simulatorObject.SetActive(true);
             windowsObject.SetActive(false);
         }
         else
         {
-            // ’Êí‚ÌRectTransform‚ðŽ‚ÂƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ðƒAƒNƒeƒBƒu‚É‚·‚é
+            // é€šå¸¸ã®RectTransformã‚’æŒã¤ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã™ã‚‹
             simulatorObject.SetActive(false);
             windowsObject.SetActive(true);
         }

@@ -35,5 +35,11 @@ public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
         {
             Destroy(gameObject);
         }
+
+        OnAwake();
     }
+    /// <summary>
+    /// 継承先でAwakeが必要な場合
+    /// </summary>
+    protected virtual void OnAwake() { }
 }

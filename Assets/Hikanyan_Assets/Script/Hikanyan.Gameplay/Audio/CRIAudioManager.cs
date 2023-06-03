@@ -5,6 +5,8 @@ using UnityEngine;
 using CriWare;
 using UniRx;
 using Cysharp.Threading.Tasks;
+using Hikanyan.Core;
+
 public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
 {
     string _streamingAssetsPathACF = "ChronicleDimension";

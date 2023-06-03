@@ -5,7 +5,7 @@ using UnityEngine;
 using CriWare;
 using UniRx;
 using Cysharp.Threading.Tasks;
-public class CRIAudioManager : MonoBehaviour
+public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
 {
     string _streamingAssetsPathACF = "ChronicleDimension";
     string _cueSheetBGM = "CueSheet_BGM";
@@ -42,11 +42,11 @@ public class CRIAudioManager : MonoBehaviour
     }
 
     
-    // void  Task CRIBGMPlay(int index, float delayTime)
-    // {
-    //     await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
-    //     CRIBGMPlay(index);
-    // }
+    async UniTask CRIBGMPlay(int index, float delayTime)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
+        CRIBGMPlay(index);
+    }
     
     void CRIBGMPlay(int index)
     {

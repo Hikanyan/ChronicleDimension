@@ -7,15 +7,12 @@ public class GachaUI : UIBase
 {
     // Gacha UIの実装
     
-    [SerializeField] Image resultImage;
-
     private void Start()
     {
         // 初期状態で非表示にする
-        resultImage.gameObject.SetActive(false);
     }
 
-    public void  ShowResult(GachaItem item)
+    public void  ShowResult()
     {
         // ガチャの結果を非同期に処理
 

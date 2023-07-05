@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Hikanyan.Gameplay.UI
 {
-    public class MenuUIButto : InputUIButton
+    public class MenuUIButton : InputUIButton
     {
         [SerializeField]
         CanvasGroup _button;

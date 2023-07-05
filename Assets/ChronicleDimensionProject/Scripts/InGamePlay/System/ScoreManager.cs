@@ -1,20 +1,18 @@
 using UniRx;
-namespace Hikanyan.Gameplay
+
+public class ScoreManager
 {
-    public class ScoreManager
+    private IntReactiveProperty _score = new IntReactiveProperty(0);
+
+    public IReadOnlyReactiveProperty<int> Score => _score;
+
+    public void AddScore(int points)
     {
-        private IntReactiveProperty _score = new IntReactiveProperty(0);
+        _score.Value += points;
+    }
 
-        public IReadOnlyReactiveProperty<int> Score => _score;
-
-        public void AddScore(int points)
-        {
-            _score.Value += points;
-        }
-
-        public void ResetScore()
-        {
-            _score.Value = 0;
-        }
+    public void ResetScore()
+    {
+        _score.Value = 0;
     }
 }

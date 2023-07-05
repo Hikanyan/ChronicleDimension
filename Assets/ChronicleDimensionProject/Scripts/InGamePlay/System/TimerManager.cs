@@ -1,36 +1,34 @@
 using UniRx;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-namespace Hikanyan.Gameplay
+
+public class TimerManager
 {
-    public class TimerManager
+    private FloatReactiveProperty _timer = new FloatReactiveProperty(0f);
+    private CompositeDisposable _disposable = new CompositeDisposable();
+
+    public IReadOnlyReactiveProperty<float> Timer => _timer;
+
+    public async UniTask StartTimer(float duration)
     {
-        private FloatReactiveProperty _timer = new FloatReactiveProperty(0f);
-        private CompositeDisposable _disposable = new CompositeDisposable();
+        _timer.Value = duration;
 
-        public IReadOnlyReactiveProperty<float> Timer => _timer;
-
-        public async UniTask StartTimer(float duration)
+        while (_timer.Value > 0f)
         {
-            _timer.Value = duration;
-
-            while (_timer.Value > 0f)
-            {
-                await UniTask.DelayFrame(1);
-                _timer.Value -= Time.deltaTime;
-            }
-
-            _timer.Value = 0f;
+            await UniTask.DelayFrame(1);
+            _timer.Value -= Time.deltaTime;
         }
 
-        public void ResetTimer()
-        {
-            _timer.Value = 0f;
-        }
+        _timer.Value = 0f;
+    }
 
-        public void StopTimer()
-        {
-            _disposable.Clear();
-        }
+    public void ResetTimer()
+    {
+        _timer.Value = 0f;
+    }
+
+    public void StopTimer()
+    {
+        _disposable.Clear();
     }
 }

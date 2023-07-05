@@ -4,22 +4,18 @@ using UniRx;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
-namespace Hikanyan.Gameplay.UI
+
+public class MenuUIButto : InputUIButton
 {
-    public class MenuUIButton : InputUIButton
+    [SerializeField] CanvasGroup _button;
+
+
+    protected void OnPointerDown()
     {
-        [SerializeField]
-        CanvasGroup _button;
+        //transform.DO
+    }
 
-
-        protected void OnPointerDown()
-        {
-            //transform.DO
-        }
-
-        protected void OnPointerUp()
-        {
-            
-        }
+    protected void OnPointerUp()
+    {
     }
 }

@@ -1,0 +1,93 @@
+﻿@startuml
+
+class GameManager {
+ 
+}
+class RhythmGameManager{
+
+}
+class ScoreManager{
+
+}
+class CRIAudioManager{
+
+}
+class ParticleManager{
+
+}
+class TimeManager{
+
+}
+class InputManager{
+
+}
+class JudgeManager{
+
+}
+class NotesManager{
+
+}
+class UIManager{
+
+}
+class EventManager{
+
+}
+class GachaManager{
+
+}
+class NotesGenerator{
+
+}
+class NotesController{
+
+}
+
+class Player{
+
+}
+class Notes{
+
+}
+class Song{
+
+}
+class Item{
+
+}
+class Inventory{
+
+}
+class Character{
+
+}
+
+package ChronicleDimensionProject {
+    package GameManager {
+        
+        RhythmGameManager <|-- GameManager
+        GachaManager <|-- GameManager
+        
+        package RhythmGameManager{
+            ScoreManager <|-- RhythmGameManager
+            CRIAudioManager <|-- RhythmGameManager
+            ParticleManager <|-- RhythmGameManager
+            TimeManager <|-- RhythmGameManager
+            InputManager <|-- RhythmGameManager
+            JudgeManager <|-- RhythmGameManager
+            NotesManager <|-- RhythmGameManager
+            UIManager <|-- RhythmGameManager
+            EventManager <|-- RhythmGameManager
+            
+            NotesGenerator <|-- NotesManager
+            NotesController <|-- NotesManager
+            
+            NotesManager --* Notes
+        }
+        package GachaManager{
+            Item <|-- GachaManager
+        }
+    }
+}
+
+@enduml

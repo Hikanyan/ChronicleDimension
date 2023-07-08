@@ -1,7 +1,50 @@
 ﻿@startuml
 
+class BootLoader{
+    -sequenceManager:SequenceManager
+}
+class SequenceManager{
+    +Initialize():void
+    -InstantiatePreloadedAssets:void
+}
+abstract class AbstractSingleton<T> {
+  +Instance: T
+  #Awake(): void
+  #OnAwake(): void
+}
+abstract class AbstractSingleton<T>
+Class StateMachine<TOwner> {
+  -states: LinkedList<State>
+  -CurrentState: State
+  +Owner: TOwner
+  +StateMachine(owner: TOwner)
+  +Add<T>(): T
+  +GetOrAddState<T>(): T
+  +AddTransition<TFrom, TTo>(eventId: int)
+  +AddAnyTransition<TTo>(eventId: int)
+  +Start<TFirst>()
+  +Start(firstState: State)
+  +Update()
+  +Dispatch(eventId: int)
+  -Change(nextState: State)
+}
+
+abstract class State {
+  -stateMachine: StateMachine<TOwner>
+  -transitions: Dictionary<int, State>
+  +StateMachine: StateMachine<TOwner>
+  +Owner: TOwner
+  +Enter(prevState: State)
+  +OnEnter(prevState: State)
+  +Update()
+  +OnUpdate()
+  +Exit(nextState: State)
+  +OnExit(nextState: State)
+}
+
 class GameManager {
- 
+ -rhythmGameManager:RhythmGameManager
+ -gachaManager:GachaManager
 }
 class RhythmGameManager{
 
@@ -13,6 +56,9 @@ class CRIAudioManager{
 
 }
 class ParticleManager{
+
+}
+class SceneController{
 
 }
 class TimeManager{
@@ -62,32 +108,32 @@ class Character{
 
 }
 
-package ChronicleDimensionProject {
-    package GameManager {
-        
-        RhythmGameManager <|-- GameManager
-        GachaManager <|-- GameManager
-        
-        package RhythmGameManager{
-            ScoreManager <|-- RhythmGameManager
-            CRIAudioManager <|-- RhythmGameManager
-            ParticleManager <|-- RhythmGameManager
-            TimeManager <|-- RhythmGameManager
-            InputManager <|-- RhythmGameManager
-            JudgeManager <|-- RhythmGameManager
-            NotesManager <|-- RhythmGameManager
-            UIManager <|-- RhythmGameManager
-            EventManager <|-- RhythmGameManager
-            
-            NotesGenerator <|-- NotesManager
-            NotesController <|-- NotesManager
-            
-            NotesManager --* Notes
-        }
-        package GachaManager{
-            Item <|-- GachaManager
-        }
-    }
-}
+
+BootLoader <|-- SequenceManager
+StateMachine <|-- State
+
+GameManager <|-- RhythmGameManager
+
+RhythmGameManager <|-- ScoreManager
+RhythmGameManager <|-- CRIAudioManager
+RhythmGameManager <|-- ParticleManager
+RhythmGameManager <|-- SceneController
+RhythmGameManager <|-- TimeManager
+RhythmGameManager <|-- InputManager
+RhythmGameManager <|-- JudgeManager
+RhythmGameManager <|-- NotesManager
+RhythmGameManager <|-- UIManager
+RhythmGameManager <|-- EventManager
+
+Player<|-- InputManager
+
+NotesManager  <|-- NotesGenerator
+NotesManager  <|-- NotesController
+
+NotesGenerator <|-- Notes
+NotesController <|-- Notes
+
+
+GachaManager <|-- Item
 
 @enduml

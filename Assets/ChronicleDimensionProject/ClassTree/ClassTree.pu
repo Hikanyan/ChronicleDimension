@@ -126,6 +126,8 @@ RhythmGameManager <|-- UIManager
 RhythmGameManager <|-- EventManager
 
 Player<|-- InputManager
+Player<|-- Inventory
+Player<|-- Character
 
 NotesManager  <|-- NotesGenerator
 NotesManager  <|-- NotesController
@@ -133,6 +135,7 @@ NotesManager  <|-- NotesController
 NotesGenerator <|-- Notes
 NotesController <|-- Notes
 
+CRIAudioManager<|--Song
 
 GachaManager <|-- Item
 

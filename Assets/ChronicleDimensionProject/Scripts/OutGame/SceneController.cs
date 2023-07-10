@@ -20,7 +20,7 @@ public class SceneController
     }
 
     /// <summary>
-    ///  指定したシーンを非同期でロードします。
+    /// LoadSceneは、シーンをアンロードせずに指定したシーンを非同期でロードすることです。
     /// </summary>
     /// <param name="scene"></param>
     /// <exception cref="ArgumentException"></exception>
@@ -35,7 +35,7 @@ public class SceneController
     }
 
     /// <summary>
-    /// 新しいシーンを非同期でロードします。
+    /// LoadNewSceneは、シーンをアンロードしてから指定したシーンを非同期でロードすることです。
     /// </summary>
     /// <param name="scene"></param>
     /// <exception cref="ArgumentException"></exception>

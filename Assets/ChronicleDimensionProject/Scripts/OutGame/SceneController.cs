@@ -8,8 +8,10 @@ public class SceneController
 {
     private Scene _lastScene;
     private readonly Scene _neverUnloadScene;
-
+    /// <summary>
     //このコンストラクタは、SceneControllerオブジェクトを作成する際に呼び出される特殊なメソッドです。
+    /// </summary>
+    /// <param name="neverUnloadScene"></param>
     public SceneController(Scene neverUnloadScene)
     {
         //Debug.Log(neverUnloadScene.name);
@@ -17,7 +19,11 @@ public class SceneController
         _lastScene = _neverUnloadScene;
     }
 
-    // 指定したシーンを非同期でロードします。
+    /// <summary>
+    ///  指定したシーンを非同期でロードします。
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <exception cref="ArgumentException"></exception>
     public async UniTask LoadScene(string scene)
     {
         if (string.IsNullOrEmpty(scene))
@@ -28,7 +34,11 @@ public class SceneController
         await LoadSceneAdditive(scene);
     }
 
-    // 新しいシーンを非同期でロードします。
+    /// <summary>
+    /// 新しいシーンを非同期でロードします。
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <exception cref="ArgumentException"></exception>
     public async UniTask LoadNewScene(string scene)
     {
         if (string.IsNullOrEmpty(scene))
@@ -39,7 +49,10 @@ public class SceneController
         LoadNewSceneAdditive(scene);
     }
 
-    // シーンを非同期でアンロードします。
+    /// <summary>
+    /// シーンを非同期でアンロードします。
+    /// </summary>
+    /// <param name="scene"></param>
     private async UniTask UnloadScene(Scene scene)
     {
         if (!_lastScene.IsValid())
@@ -51,7 +64,10 @@ public class SceneController
         await UniTask.Yield();
     }
 
-    // シーンを非同期で追加ロードします。
+    /// <summary>
+    /// シーンを非同期で追加ロードします。
+    /// </summary>
+    /// <param name="scene"></param>
     private async UniTask LoadSceneAdditive(string scene)
     {
         var asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
@@ -67,7 +83,10 @@ public class SceneController
         }
     }
 
-    // 新しいシーンを追加ロードします。
+    /// <summary>
+    /// 新しいシーンを追加ロードします。
+    /// </summary>
+    /// <param name="sceneName"></param>
     private void LoadNewSceneAdditive(string sceneName)
     {
         var scene = SceneManager.CreateScene(sceneName);
@@ -75,7 +94,9 @@ public class SceneController
         _lastScene = scene;
     }
 
-    // 最後にロードされたシーンを非同期でアンロードします。
+    /// <summary>
+    /// 最後にロードされたシーンを非同期でアンロードします。
+    /// </summary>
     public async UniTask UnloadLastScene()
     {
         if (_lastScene != _neverUnloadScene)

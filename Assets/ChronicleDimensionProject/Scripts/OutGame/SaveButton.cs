@@ -29,8 +29,8 @@ public class SaveButton : MonoBehaviour
     /// </summary>
     public void OnClickSave()
     {
-        SaveManager.Instance.SaveData.PlayerName = "test";
-        SaveManager.Instance.SaveGame();
+        // SaveManager.Instance.SaveData.PlayerName = "test";
+        // SaveManager.Instance.SaveGame();
         Debug.Log("Saveしました。");
     }
 
@@ -39,21 +39,21 @@ public class SaveButton : MonoBehaviour
     /// </summary>
     public void OnClickLoad()
     {
-        SaveManager.Instance.LoadGame();
-        Debug.Log($"Loadしました。{SaveManager.Instance.SaveData.PlayerName}");
+        // SaveData setting = SaveManager.SaveSettings<SaveData>();
+        // Debug.Log($"Loadしました。{SaveManager.Instance.SaveData.PlayerName}");
     }
     /// <summary>
     /// OnClickDelete()はDeleteボタンが押された時の処理です。
     /// </summary>
     public void OnClickDelete()
     {
-        SaveManager.Instance.SeveDateDelete();
+        
     }
     
     
     //デバッグ用のテキストを更新する
     private void Update()
     {
-        text.text = SaveManager.Instance.SaveData.PlayerName;
+        
     }
 }

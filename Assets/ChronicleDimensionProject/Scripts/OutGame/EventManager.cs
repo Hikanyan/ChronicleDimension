@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //イベントを管理するクラス
-public class EventManager : MonoBehaviour
+public class EventManager : AbstractSingleton<EventManager>
 {
+    
     private void Start()
     {
         

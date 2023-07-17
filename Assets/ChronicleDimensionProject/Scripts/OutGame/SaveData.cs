@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 /// <summary>
 /// SaveDataクラスはセーブデータのクラスです。
 /// </summary>
@@ -7,6 +8,7 @@ using UnityEngine;
 public class SaveData
 {
     // ゲームの進行状況を保存する変数やプロパティを定義する
+    public List<RhythmGameDate> RhythmGameDate;
     public Sprite BackgroundImage = null;
     public Sprite CharacterStandImage = null;
     public Sprite CharacterFaceImage = null;
@@ -14,14 +16,18 @@ public class SaveData
     public string PlayerName = "Default";
     public AudioClip BGM = null;
     public AudioClip SE = null;
-    public List<RhythmGameScoreDate> ScoreData;
 }
 /// <summary>
 /// RhythmGameScoreDateクラスはリズムゲームのスコアデータのクラスです。
 /// </summary>
-[System.Serializable]
-public class RhythmGameScoreDate : ScriptableObject
+[CreateAssetMenu(fileName = "RhythmGameDate", menuName = "ScriptableObjects/CreateRhythmGameDateAsset")]
+public class RhythmGameDate : ScriptableObject
 {
+    [SerializeField] public int _musicNumber = default;//CRI
+    [SerializeField] public AssetReferenceT<TextAsset> _musicJsonReference;
+    [SerializeField] public float _delayTime = 0.0f;
+    
+    
     public int Score = 0;
     public int MaxCombo = 0;
     public int PerfectCount = 0;

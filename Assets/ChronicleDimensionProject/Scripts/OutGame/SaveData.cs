@@ -23,18 +23,17 @@ public class SaveData
 [CreateAssetMenu(fileName = "RhythmGameDate", menuName = "ScriptableObjects/CreateRhythmGameDateAsset")]
 public class RhythmGameDate : ScriptableObject
 {
-    [SerializeField] public int _musicNumber = default;//CRI
-    [SerializeField] public AssetReferenceT<TextAsset> _musicJsonReference;
-    [SerializeField] public float _delayTime = 0.0f;
+    public AssetReferenceT<TextAsset> _musicJsonReference;
+    public int _musicNumber = default;//CRI
+    public float _delayTime = 0.0f;
     
-    
-    public int Score = 0;
+    public int MaxScore = 0;
     public int MaxCombo = 0;
+    
     public int PerfectCount = 0;
     public int GreatCount = 0;
     public int GoodCount = 0;
     public int BadCount = 0;
     public int MissCount = 0;
-    public int MaxScore = 0;
     
 }

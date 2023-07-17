@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: RhythmGameDate
   m_EditorClassIdentifier: Assembly-CSharp::RhythmGameDate
-  Score: 0
+  _musicJsonReference:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _musicNumber: 0
+  _delayTime: 0
+  MaxScore: 0
   MaxCombo: 0
   PerfectCount: 0
   GreatCount: 0
   GoodCount: 0
   BadCount: 0
   MissCount: 0
-  MaxScore: 0

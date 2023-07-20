@@ -18,7 +18,10 @@ public class RhythmGameManager
         _gameState = GameState.None;
     }
 
-
+    void Update()
+    {
+        
+    }
     
     public void AddScore(int points)
     {

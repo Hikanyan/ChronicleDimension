@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+//SceneControllerクラスは、シーンのロードとアンロードを管理します。
 public class SceneController
 {
     private Scene _lastScene;

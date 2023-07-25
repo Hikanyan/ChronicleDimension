@@ -88,6 +88,9 @@ class NotesGenerator{
 class NotesController{
 
 }
+class SaveManager{
+
+}
 
 class Player{
 
@@ -124,6 +127,7 @@ RhythmGameManager <|-- JudgeManager
 RhythmGameManager <|-- NotesManager
 RhythmGameManager <|-- UIManager
 RhythmGameManager <|-- EventManager
+RhythmGameManager <|-- SaveManager
 
 Player<|-- InputManager
 Player<|-- Inventory

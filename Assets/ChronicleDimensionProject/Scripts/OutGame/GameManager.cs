@@ -22,6 +22,7 @@ public class GameManager : AbstractSingleton<GameManager>
     public void Initialize()
     {
         _sceneController = new SceneController(SceneManager.GetActiveScene());
+        _rhythmGameManager = new RhythmGameManager();
     }
 
     /// <summary>

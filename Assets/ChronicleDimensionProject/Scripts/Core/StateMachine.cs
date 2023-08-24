@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 
 /// <summary>
-/// ステートマシン
+/// StateMachineは、ステートマシンを表すクラスです。
 /// </summary>
 public class StateMachine<TOwner>
 {

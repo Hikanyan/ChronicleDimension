@@ -13,19 +13,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : AbstractSingleton<GameManager>
 {
     SceneController _sceneController;
-    RhythmGameManager _rhythmGameManager;
     GameState _gameState = GameState.None;
+
 
     protected override void OnAwake()
     {
-        
+        Initialize();
     }
-    private void Update()
-    {
-        
-    }
-
-
 
     /// <summary>
     /// Sceneの初期化を行います。
@@ -33,7 +27,6 @@ public class GameManager : AbstractSingleton<GameManager>
     public void Initialize()
     {
         _sceneController = new SceneController(SceneManager.GetActiveScene());
-        _rhythmGameManager = new RhythmGameManager();
     }
 
     /// <summary>

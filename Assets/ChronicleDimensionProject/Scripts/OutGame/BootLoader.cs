@@ -11,7 +11,7 @@ public class BootLoader : MonoBehaviour
 {
     [SerializeField] SequenceManager sequenceManagerPrefab;
 
-    void Start()
+    void Awake()
     {
         Instantiate(sequenceManagerPrefab);
         SequenceManager.Instance.Initialize();

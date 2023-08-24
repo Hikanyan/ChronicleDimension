@@ -13,8 +13,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : AbstractSingleton<GameManager>
 {
     SceneController _sceneController;
-    RhythmGameManager _rhythmGameManager;
     GameState _gameState = GameState.None;
+
+
+    protected override void OnAwake()
+    {
+        Initialize();
+    }
 
     /// <summary>
     /// Sceneの初期化を行います。

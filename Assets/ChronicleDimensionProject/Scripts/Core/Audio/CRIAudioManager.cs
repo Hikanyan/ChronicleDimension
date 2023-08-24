@@ -59,5 +59,4 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
     {
         _criAtomSourceSe.Play(index);
     }
-    
 }

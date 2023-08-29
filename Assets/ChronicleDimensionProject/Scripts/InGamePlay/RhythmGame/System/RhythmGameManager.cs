@@ -41,18 +41,5 @@ public class RhythmGameManager : MonoBehaviour
         _scoreManager.ResetScore();
     }
 
-    public async UniTask StartTimer(float duration)
-    {
-        await _timerManager.StartTimer(duration);
-    }
-
-    public void StopTimer()
-    {
-        _timerManager.StopTimer();
-    }
-
-    public void ResetTimer()
-    {
-        _timerManager.ResetTimer();
-    }
+    
 }

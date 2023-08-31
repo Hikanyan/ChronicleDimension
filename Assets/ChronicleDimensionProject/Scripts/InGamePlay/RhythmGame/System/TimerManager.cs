@@ -1,6 +1,7 @@
 using System;
 using UniRx;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class TimerManager
 {
@@ -15,11 +16,11 @@ public class TimerManager
     public event Action TimerUnpaused;
     public event Action TimerStopped;
 
-    private IDisposable timerDisposable;
+    private IDisposable _timerDisposable;
 
     public TimerManager()
     {
-        RealTime.Subscribe(UpdateRealTime).AddTo(GameObject.FindObjectOfType<MainThreadDispatcher>());
+        RealTime.Subscribe(UpdateRealTime).AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
     }
 
     public void TimerStart()
@@ -29,9 +30,9 @@ public class TimerManager
         TimerStarted?.Invoke();
 
         // 100ミリ秒ごとにUpdateRealTimeメソッドを呼び出す
-        timerDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1))
+        _timerDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1))
             .Subscribe(_ => UpdateRealTime(_startTime))
-            .AddTo(GameObject.FindObjectOfType<MainThreadDispatcher>());
+            .AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
     }
 
     public void TimerPause()
@@ -50,7 +51,7 @@ public class TimerManager
     {
         IsRunning.Value = false;
         TimerStopped?.Invoke();
-        timerDisposable?.Dispose();
+        _timerDisposable?.Dispose();
     }
 
     private void UpdateRealTime(double startTime)

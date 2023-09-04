@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class GameModeSelectUI : UIBase
+public class GameModeSelect : UIBase
 {
     // GameModeSelectUIの実装
     

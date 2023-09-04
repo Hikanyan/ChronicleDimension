@@ -1,9 +1,11 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class TitleUI : UIBase
+public class Title : UIBase
 {
     // Title UIの実装
+    
+    
     private void Update()
     {
         

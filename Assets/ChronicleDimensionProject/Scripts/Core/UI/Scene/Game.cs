@@ -3,12 +3,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ResultUI : UIBase
+public class Game : UIBase
 {
-    // Result UIの実装
- 
-
-    private void Update()
+    // Game UIの実装
+    
+    
+    private void Start()
     {
         
     }

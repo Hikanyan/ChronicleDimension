@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-public class GachaUI : UIBase
+public class Gacha : UIBase
 {
     // Gacha UIの実装
     

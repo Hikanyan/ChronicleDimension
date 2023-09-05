@@ -1,61 +1,64 @@
 using System;
 using UniRx;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using System.Threading;
+using Object = UnityEngine.Object;
 
 public class TimerManager
 {
-    private FloatReactiveProperty _timer = new FloatReactiveProperty(0f);
-    private CancellationTokenSource _cancellationTokenSource;
+    private double _startTime = 0;
+    private double _cacheTime = 0;
 
-    public IReadOnlyReactiveProperty<float> Timer => _timer;
+    public ReactiveProperty<double> RealTime { get; private set; } = new ReactiveProperty<double>();
+    public BoolReactiveProperty IsRunning { get; private set; } = new BoolReactiveProperty(false);
 
-    public async UniTask StartTimer(float duration)
+    public event Action TimerStarted;
+    public event Action TimerPaused;
+    public event Action TimerUnpaused;
+    public event Action TimerStopped;
+
+    private IDisposable _timerDisposable;
+
+    public TimerManager()
     {
-        // タイマーが既に実行中であれば中止する
-        if (_cancellationTokenSource != null)
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-        }
-
-        _timer.Value = duration;
-
-        // CancellationTokenSource を作成してタイマーを実行
-        _cancellationTokenSource = new CancellationTokenSource();
-        try
-        {
-            await UniTask.Delay((int)(duration * 1000), cancellationToken: _cancellationTokenSource.Token);
-        }
-        catch (OperationCanceledException)
-        {
-            // タイマーが中断された場合はここで処理
-            return;
-        }
-
-        _timer.Value = 0f;
+        RealTime.Subscribe(UpdateRealTime).AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
     }
 
-    public void ResetTimer()
+    public void TimerStart()
     {
-        // タイマーが既に実行中であれば中止する
-        if (_cancellationTokenSource != null)
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-        }
-        
-        _timer.Value = 0f;
+        IsRunning.Value = true;
+        _startTime = Time.realtimeSinceStartupAsDouble;
+        TimerStarted?.Invoke();
+
+        // 100ミリ秒ごとにUpdateRealTimeメソッドを呼び出す
+        _timerDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1))
+            .Subscribe(_ => UpdateRealTime(_startTime))
+            .AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
     }
 
-    public void StopTimer()
+    public void TimerPause()
     {
-        // タイマーが既に実行中であれば中止する
-        if (_cancellationTokenSource != null)
+        IsRunning.Value = false;
+        TimerPaused?.Invoke();
+    }
+
+    public void TimerUnPause()
+    {
+        IsRunning.Value = true;
+        TimerUnpaused?.Invoke();
+    }
+
+    public void TimerStop()
+    {
+        IsRunning.Value = false;
+        TimerStopped?.Invoke();
+        _timerDisposable?.Dispose();
+    }
+
+    private void UpdateRealTime(double startTime)
+    {
+        if (IsRunning.Value)
         {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
+            RealTime.Value = Time.realtimeSinceStartupAsDouble - startTime - _cacheTime;
         }
     }
 }

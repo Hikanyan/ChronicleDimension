@@ -5,17 +5,26 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
 
-public class MenuUIButto : InputUIButton
+public class MenuUIButton : InputUIButton
 {
-    [SerializeField] CanvasGroup _button;
-
-
-    protected void OnPointerDown()
+    CanvasGroup _button;
+    private Vector3 _originalScale;
+    private void Start()
     {
-        //transform.DO
+        _button = GetComponent<CanvasGroup>();
+        _originalScale = transform.localScale;
     }
 
-    protected void OnPointerUp()
+    protected override void OnPointerDown()
     {
+        //transform.DO
+        Debug.Log("OnPointerDown");
+        transform.DOScale(_originalScale * 0.8f, 0.2f);
+    }
+
+    protected override void OnPointerUp()
+    {
+        Debug.Log("OnPointerUp");
+        transform.DOScale(_originalScale, 0.2f);
     }
 }

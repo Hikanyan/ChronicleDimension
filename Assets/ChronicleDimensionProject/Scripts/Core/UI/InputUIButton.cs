@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 
 public abstract class InputUIButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler

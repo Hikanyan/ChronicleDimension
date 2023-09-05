@@ -7,11 +7,11 @@ using UniRx;
 using Cysharp.Threading.Tasks;
 
 
-public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
+public class CriAudioManager : AbstractSingleton<CriAudioManager>
 {
-    string _streamingAssetsPathACF = "ChronicleDimension";
+    string _streamingAssetsPathAcf = "ChronicleDimension";
     string _cueSheetBGM = "CueSheet_BGM";
-    string _cueSheetSE = "CueSheet_SE";
+    string _cueSheetSe = "CueSheet_SE";
     
     CriAtomSource _criAtomSourceBgm;
     CriAtomSource _criAtomSourceSe;
@@ -22,7 +22,7 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
     private void OnAwake()
     {
         //acf設定
-        string path = Common.streamingAssetsPath + $"/{_streamingAssetsPathACF}.acf";
+        string path = Common.streamingAssetsPath + $"/{_streamingAssetsPathAcf}.acf";
 
         CriAtomEx.RegisterAcf(null, path);
 
@@ -32,7 +32,7 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         // BGM acb追加
         CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", null, null);
         // SE acb追加
-        CriAtom.AddCueSheet(_cueSheetSE, $"{_cueSheetSE}.acb", null, null);
+        CriAtom.AddCueSheet(_cueSheetSe, $"{_cueSheetSe}.acb", null, null);
 
 
         //BGM用のCriAtomSourceを作成
@@ -40,23 +40,41 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         _criAtomSourceBgm.cueSheet = _cueSheetBGM;
         //SE用のCriAtomSourceを作成
         _criAtomSourceSe = gameObject.AddComponent<CriAtomSource>();
-        _criAtomSourceSe.cueSheet = _cueSheetSE;
+        _criAtomSourceSe.cueSheet = _cueSheetSe;
     }
 
     
-    async UniTask CRIBGMPlay(int index, float delayTime)
+    public async UniTask CribgmPlay(CRIAudioList index, float delayTime)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
-        CRIBGMPlay(index);
+        CribgmPlay(index);
     }
     
-    void CRIBGMPlay(int index)
+
+
+    public void CribgmPlay(CRIAudioList index)
     {
-        _criAtomExPlaybackBGM = _criAtomSourceBgm.Play(index);
+        string bgmName = Enum.GetName(typeof(CRIAudioList), index);
+        if (bgmName != null)
+        {
+            _criAtomExPlaybackBGM = _criAtomSourceBgm.Play(bgmName);
+        }
+        else
+        {
+            Debug.LogError("指定されたCRIAudioListのenumが見つかりません。");
+        }
     }
 
-    void CRISEPlay(int index)
+    public void CrisePlay(CRIAudioList index)
     {
-        _criAtomSourceSe.Play(index);
+        string bgmName = Enum.GetName(typeof(CRIAudioList), index);
+        if (bgmName != null)
+        {
+            _criAtomSourceSe.Play(bgmName);
+        }
+        else
+        {
+            Debug.LogError("指定されたCRIAudioListのenumが見つかりません。");
+        }
     }
 }

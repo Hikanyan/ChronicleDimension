@@ -29,6 +29,11 @@ public class GameManager : AbstractSingleton<GameManager>
         _sceneController = new SceneController(SceneManager.GetActiveScene());
     }
 
+    private void Start()
+    {
+        
+    }
+
     /// <summary>
     /// 指定したシーンを非同期でロードします。
     /// </summary>

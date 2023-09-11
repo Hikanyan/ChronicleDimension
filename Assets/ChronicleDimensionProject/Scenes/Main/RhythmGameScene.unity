@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
+    - target: {fileID: 3792372911887553622, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4.7479534
+      objectReference: {fileID: 0}
     - target: {fileID: 3792372911946791700, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -146,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
+    - target: {fileID: 3792372911946791700, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4.7479534
+      objectReference: {fileID: 0}
     - target: {fileID: 3792372912102502557, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
       propertyPath: m_Name
       value: TouchLight_4
@@ -170,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
+    - target: {fileID: 3792372912395745972, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4.7479534
+      objectReference: {fileID: 0}
     - target: {fileID: 3792372912717878937, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -226,6 +238,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
+    - target: {fileID: 3792372912797892213, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4.7479534
+      objectReference: {fileID: 0}
     - target: {fileID: 3792372912882101812, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
       propertyPath: m_Name
       value: 'WhereTheNotesFlow '
@@ -242,6 +258,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
+    - target: {fileID: 3792372912940473185, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4.7479534
+      objectReference: {fileID: 0}
     - target: {fileID: 3792372912984920964, guid: 78c7c7f841376034c9845b1f0d1e0fbf, type: 3}
       propertyPath: m_Name
       value: TouchLight_1

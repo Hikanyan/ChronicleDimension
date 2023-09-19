@@ -15,7 +15,6 @@ public class SequenceManager : AbstractSingleton<SequenceManager>
     public void Initialize()
     {
         InstantiatePreloadedAssets();
-        GameManager.Instance.Initialize();
     }
 
     /// <summary>

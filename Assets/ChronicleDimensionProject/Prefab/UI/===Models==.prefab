@@ -52,7 +52,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 589a599b8df7a384fbc00c1f6fa0e4dc, type: 2}
+  - {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +78,7 @@ LineRenderer:
   - {x: 2, y: 0.5, z: 14.38}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.7479534
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -96,26 +96,26 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 1, b: 1, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.5019608, b: 10.541177, a: 1}
+      key1: {r: 0, g: 2.0078433, b: 475.85883, a: 1}
+      key2: {r: 95.87451, g: 2.0078433, b: 0, a: 0.36078432}
+      key3: {r: 26.24517, g: 19.581429, b: 0.6870462, a: 0}
+      key4: {r: 0, g: 0.08235294, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0}
+      key7: {r: 16.020939, g: 16.020939, b: 16.020939, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 49151
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
+      ctime2: 31033
+      ctime3: 55724
+      ctime4: 65535
+      ctime5: 57632
+      ctime6: 61873
+      ctime7: 65535
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 55705
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -183,7 +183,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 589a599b8df7a384fbc00c1f6fa0e4dc, type: 2}
+  - {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,7 +209,7 @@ LineRenderer:
   - {x: 0, y: 0.5, z: 14.38}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.7479534
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -227,26 +227,26 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 1, b: 1, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.5019608, b: 10.541177, a: 1}
+      key1: {r: 0, g: 2.0078433, b: 475.85883, a: 1}
+      key2: {r: 95.87451, g: 2.0078433, b: 0, a: 0.36078432}
+      key3: {r: 26.24517, g: 19.581429, b: 0.6870462, a: 0}
+      key4: {r: 0, g: 0.08235294, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0}
+      key7: {r: 16.020939, g: 16.020939, b: 16.020939, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 49151
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
+      ctime2: 31033
+      ctime3: 55724
+      ctime4: 65535
+      ctime5: 57632
+      ctime6: 61873
+      ctime7: 65535
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 55705
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -274,9 +274,8 @@ GameObject:
   - component: {fileID: 3792372912102502558}
   - component: {fileID: 3792372912102502559}
   - component: {fileID: 3792372912102502556}
-  - component: {fileID: 3792372912102502552}
   m_Layer: 0
-  m_Name: TouchLight (3)
+  m_Name: TouchLight_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +324,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
+  - {fileID: 2100000, guid: 5de8ed0f42b17874aa3751e76cf28670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -360,21 +359,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3792372912102502552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912102502557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562734976491704483705e49641eb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 3
-  normalMat: {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
-  AltMat: {fileID: 2100000, guid: 53157c76d506a264687bc7bc7a605b5e, type: 2}
 --- !u!1 &3792372912364773638
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,9 +371,8 @@ GameObject:
   - component: {fileID: 3792372912364773635}
   - component: {fileID: 3792372912364773632}
   - component: {fileID: 3792372912364773633}
-  - component: {fileID: 3792372912364773645}
   m_Layer: 0
-  m_Name: TouchLight (2)
+  m_Name: TouchLight_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,7 +421,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
+  - {fileID: 2100000, guid: 5de8ed0f42b17874aa3751e76cf28670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -473,21 +456,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3792372912364773645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912364773638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562734976491704483705e49641eb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 3
-  normalMat: {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
-  AltMat: {fileID: 2100000, guid: 53157c76d506a264687bc7bc7a605b5e, type: 2}
 --- !u!1 &3792372912395745962
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +508,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 589a599b8df7a384fbc00c1f6fa0e4dc, type: 2}
+  - {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -566,7 +534,7 @@ LineRenderer:
   - {x: -2, y: 0.5, z: 14.38}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.7479534
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -584,26 +552,26 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 1, b: 1, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.5019608, b: 10.541177, a: 1}
+      key1: {r: 0, g: 2.0078433, b: 475.85883, a: 1}
+      key2: {r: 95.87451, g: 2.0078433, b: 0, a: 0.36078432}
+      key3: {r: 26.24517, g: 19.581429, b: 0.6870462, a: 0}
+      key4: {r: 0, g: 0.08235294, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0}
+      key7: {r: 16.020939, g: 16.020939, b: 16.020939, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 49151
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
+      ctime2: 31033
+      ctime3: 55724
+      ctime4: 65535
+      ctime5: 57632
+      ctime6: 61873
+      ctime7: 65535
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 55705
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -647,7 +615,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3792372912882101808}
   - {fileID: 3792372913197902389}
   - {fileID: 3792372913740235703}
   - {fileID: 3792372913628491348}
@@ -706,7 +673,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 589a599b8df7a384fbc00c1f6fa0e4dc, type: 2}
+  - {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -732,7 +699,7 @@ LineRenderer:
   - {x: -1, y: 0.5, z: 14.38}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.7479534
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -750,26 +717,26 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 1, b: 1, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.5019608, b: 10.541177, a: 1}
+      key1: {r: 0, g: 2.0078433, b: 475.85883, a: 1}
+      key2: {r: 95.87451, g: 2.0078433, b: 0, a: 0.36078432}
+      key3: {r: 26.24517, g: 19.581429, b: 0.6870462, a: 0}
+      key4: {r: 0, g: 0.08235294, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0}
+      key7: {r: 16.020939, g: 16.020939, b: 16.020939, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 49151
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
+      ctime2: 31033
+      ctime3: 55724
+      ctime4: 65535
+      ctime5: 57632
+      ctime6: 61873
+      ctime7: 65535
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 55705
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -785,103 +752,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!1 &3792372912882101812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3792372912882101808}
-  - component: {fileID: 3792372912882101809}
-  - component: {fileID: 3792372912882101814}
-  - component: {fileID: 3792372912882101815}
-  m_Layer: 0
-  m_Name: 'Where the notes flow '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3792372912882101808
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912882101812}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 8}
-  m_LocalScale: {x: 4, y: 0.01, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3792372912717878937}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3792372912882101809
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912882101812}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3792372912882101814
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912882101812}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 424c402936b87f14cbccfdea963649c2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3792372912882101815
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912882101812}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3792372912940473191
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +804,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 589a599b8df7a384fbc00c1f6fa0e4dc, type: 2}
+  - {fileID: 2100000, guid: c3c46c3a54b83ed4899273c049ddd67a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -960,7 +830,7 @@ LineRenderer:
   - {x: 1, y: 0.5, z: 14.38}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 4.7479534
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -978,26 +848,26 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
-      key2: {r: 0, g: 1, b: 1, a: 0}
-      key3: {r: 1, g: 1, b: 1, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.5019608, b: 10.541177, a: 1}
+      key1: {r: 0, g: 2.0078433, b: 475.85883, a: 1}
+      key2: {r: 95.87451, g: 2.0078433, b: 0, a: 0.36078432}
+      key3: {r: 26.24517, g: 19.581429, b: 0.6870462, a: 0}
+      key4: {r: 0, g: 0.08235294, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 0}
+      key7: {r: 16.020939, g: 16.020939, b: 16.020939, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 49151
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
+      ctime2: 31033
+      ctime3: 55724
+      ctime4: 65535
+      ctime5: 57632
+      ctime6: 61873
+      ctime7: 65535
       atime0: 0
       atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime2: 55705
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
@@ -1025,9 +895,8 @@ GameObject:
   - component: {fileID: 3792372912984920961}
   - component: {fileID: 3792372912984920966}
   - component: {fileID: 3792372912984920967}
-  - component: {fileID: 3792372912984920963}
   m_Layer: 0
-  m_Name: TouchLight
+  m_Name: TouchLight_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,7 +945,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
+  - {fileID: 2100000, guid: 5de8ed0f42b17874aa3751e76cf28670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1111,21 +980,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3792372912984920963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372912984920964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562734976491704483705e49641eb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 3
-  normalMat: {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
-  AltMat: {fileID: 2100000, guid: 53157c76d506a264687bc7bc7a605b5e, type: 2}
 --- !u!1 &3792372913197902378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,7 +991,7 @@ GameObject:
   - component: {fileID: 3792372913197902389}
   - component: {fileID: 3792372913197902388}
   m_Layer: 0
-  m_Name: 'Judgment line '
+  m_Name: JudgmentLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1010,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3792372912717878937}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &3792372913197902388
 LineRenderer:
@@ -1178,7 +1032,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9303bf478072c34197db6550baf8cef, type: 2}
+  - {fileID: 2100000, guid: 7310aa1a18378294e86bcf68a3e53867, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1291,7 +1145,7 @@ Transform:
   - {fileID: 3792372912797892202}
   - {fileID: 3792372912395745973}
   m_Father: {fileID: 3792372912717878937}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3792372913713817965
 GameObject:
@@ -1305,9 +1159,8 @@ GameObject:
   - component: {fileID: 3792372913713817966}
   - component: {fileID: 3792372913713817967}
   - component: {fileID: 3792372913713817964}
-  - component: {fileID: 3792372913713817960}
   m_Layer: 0
-  m_Name: TouchLight (1)
+  m_Name: TouchLight_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1356,7 +1209,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
+  - {fileID: 2100000, guid: 5de8ed0f42b17874aa3751e76cf28670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1391,21 +1244,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3792372913713817960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792372913713817965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562734976491704483705e49641eb72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 3
-  normalMat: {fileID: 2100000, guid: 66be0104f7ca7634a916cc009775bceb, type: 2}
-  AltMat: {fileID: 2100000, guid: 53157c76d506a264687bc7bc7a605b5e, type: 2}
 --- !u!1 &3792372913740235700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,5 +1277,5 @@ Transform:
   - {fileID: 3792372912364773634}
   - {fileID: 3792372912102502553}
   m_Father: {fileID: 3792372912717878937}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

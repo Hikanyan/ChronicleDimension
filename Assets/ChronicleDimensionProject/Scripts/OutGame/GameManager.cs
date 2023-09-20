@@ -11,10 +11,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : AbstractSingleton<GameManager>
 {
     public StateMachine<GameManager> stateMachine;
-    SceneController _sceneController;
     public GameState CurrentGameState { get; private set; }
     
-    private ReactiveProperty<GameObject> titleObject = new ReactiveProperty<GameObject>();
 
     protected override void OnAwake()
     {
@@ -23,24 +21,10 @@ public class GameManager : AbstractSingleton<GameManager>
 
     public void Initialize()
     {
-        _sceneController = new SceneController(SceneManager.GetActiveScene());
         ChangeGameState(GameState.Title);
     }
 
-    public async UniTask LoadSceneAsync(string sceneName)
-    {
-        // シーンを非同期にロード
-        await  _sceneController.LoadNewScene(sceneName);
-    }
-
-    private async UniTask UnloadTitleScene()
-    {
-        if (titleObject.Value != null)
-        {
-            Destroy(titleObject.Value);
-            titleObject.Value = null;
-        }
-    }
+    
 
     public async UniTask ChangeGameState(GameState newState)
     {
@@ -49,7 +33,7 @@ public class GameManager : AbstractSingleton<GameManager>
         {
             case GameState.Title:
                 // Title画面の初期化や表示処理を行う
-                await LoadSceneAsync(newState.ToString());
+                await SceneController.Instance.LoadScene(CurrentGameState.ToString());
                 break;
             case GameState.GameStart:
                 // ゲームを開始するための初期化処理を行う

@@ -55,7 +55,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     void GameStart()
     {
         _timerManager.TimerStart();
-        CriAudioManager.Instance.CribgmPlay(criAudioNumber, delayTime);
+        CRIAudioManager.Instance.CribgmPlay(criAudioNumber, delayTime);
     }
 
 

@@ -7,7 +7,7 @@ using UniRx;
 using Cysharp.Threading.Tasks;
 
 
-public class CriAudioManager : AbstractSingleton<CriAudioManager>
+public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
 {
     string _streamingAssetsPathAcf = "ChronicleDimension";
     string _cueSheetBGM = "CueSheet_BGM";
@@ -19,7 +19,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     private CriAtomExPlayback _criAtomExPlaybackBGM;
     CriAtomEx.CueInfo _cueInfo;
 
-    private void OnAwake()
+    protected override void OnAwake()
     {
         //acf設定
         string path = Common.streamingAssetsPath + $"/{_streamingAssetsPathAcf}.acf";

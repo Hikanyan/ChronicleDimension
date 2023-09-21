@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 2597209610664363181}
   - component: {fileID: 1091196080671949478}
   m_Layer: 0
-  m_Name: ExplanationUI
+  m_Name: Explanation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 88586718980623187}
   - component: {fileID: 1340856878}
   m_Layer: 0
-  m_Name: TitleGameObject
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed37d76269da2aa4386db0e81f2b1fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleUI: {fileID: 0}
+  titleUI: {fileID: 2031152494582766243}
   bgmName: 0
 --- !u!1 &2031152494582766243
 GameObject:
@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 1353213817424422676}
   - component: {fileID: 4654273407166399502}
   m_Layer: 0
-  m_Name: GameUI
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 8690425415968754911}
   - component: {fileID: 7338924809694201690}
   m_Layer: 0
-  m_Name: GachaUI
+  m_Name: Gacha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 1675692985315297325}
   - component: {fileID: 5775763621757187629}
   m_Layer: 0
-  m_Name: ResultUI
+  m_Name: Result
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 4257604738870212271}
   - component: {fileID: 418998873805969490}
   m_Layer: 0
-  m_Name: GameModeSelectUI
+  m_Name: GameModeSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

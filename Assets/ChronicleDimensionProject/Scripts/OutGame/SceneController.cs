@@ -1,13 +1,19 @@
 using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 //SceneControllerクラスは、シーンのロードとアンロードを管理します。
-public class SceneController
+public class SceneController : AbstractSingleton<SceneController>
 {
-    private Scene _lastScene;
-    private readonly Scene _neverUnloadScene;
+    [Header("UI")]
+    [SerializeField] GameObject loadingUI;
+    [SerializeField] Slider slider;
+    
+    Scene _lastScene;
+    readonly Scene _neverUnloadScene;
+
     /// <summary>
     //このコンストラクタは、SceneControllerオブジェクトを作成する際に呼び出される特殊なメソッドです。
     /// </summary>
@@ -31,7 +37,10 @@ public class SceneController
 
         await UnloadLastScene();
 
+        
+        loadingUI.SetActive(true);
         await LoadSceneAdditive(scene);
+        loadingUI.SetActive(false);
     }
 
     /// <summary>
@@ -70,7 +79,7 @@ public class SceneController
     /// <param name="scene"></param>
     private async UniTask LoadSceneAdditive(string scene)
     {
-        var asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
         await asyncLoad;
 
         _lastScene = SceneManager.GetSceneByName(scene);
@@ -79,6 +88,7 @@ public class SceneController
         // シーンが完全に読み込まれるまで待機する
         while (!_lastScene.isLoaded)
         {
+            slider.value = asyncLoad.progress;
             await UniTask.Yield();
         }
     }

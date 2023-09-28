@@ -4,17 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-
+using State = StateMachine<GameManager>.State;
 [Serializable]
 public class GameManager : AbstractSingleton<GameManager>
 {
     public StateMachine<GameManager> stateMachine;
-    SceneController _sceneController;
     public GameState CurrentGameState { get; private set; }
     
-    private ReactiveProperty<GameObject> titleObject = new ReactiveProperty<GameObject>();
 
     protected override void OnAwake()
     {
@@ -23,24 +19,11 @@ public class GameManager : AbstractSingleton<GameManager>
 
     public void Initialize()
     {
-        _sceneController = new SceneController(SceneManager.GetActiveScene());
-        ChangeGameState(GameState.Title);
+        stateMachine = new StateMachine<GameManager>(this);
+        stateMachine.Start<TitleState>();
     }
 
-    public async UniTask LoadSceneAsync(string sceneName)
-    {
-        // シーンを非同期にロード
-        await  _sceneController.LoadNewScene(sceneName);
-    }
-
-    private async UniTask UnloadTitleScene()
-    {
-        if (titleObject.Value != null)
-        {
-            Destroy(titleObject.Value);
-            titleObject.Value = null;
-        }
-    }
+    
 
     public async UniTask ChangeGameState(GameState newState)
     {
@@ -49,7 +32,8 @@ public class GameManager : AbstractSingleton<GameManager>
         {
             case GameState.Title:
                 // Title画面の初期化や表示処理を行う
-                await LoadSceneAsync(newState.ToString());
+                await SceneController.Instance.LoadScene("TitleScene");
+                await UIManager.Instance.OpenUI<Title>();
                 break;
             case GameState.GameStart:
                 // ゲームを開始するための初期化処理を行う
@@ -60,6 +44,28 @@ public class GameManager : AbstractSingleton<GameManager>
         }
 
         CurrentGameState = newState;
+    }
+    
+    
+    private class TitleState : State
+    {
+        protected override async void OnEnter(State prevState)
+        {
+            // タイトルステートに入った時の処理
+            await SceneController.Instance.LoadScene("TitleScene");
+            await UIManager.Instance.OpenUI<Title>();
+        }
+
+        protected override void OnUpdate()
+        {
+            // タイトルステートの更新処理
+        }
+
+        protected override async void OnExit(State nextState)
+        {
+            // タイトルステートから出た時の処理
+            UIManager.Instance.CloseUI<Title>();
+        }
     }
 }
 

@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/ChronicleDimensionProject/Scenes/Main/GameSelectScene.unity
     guid: 594812453dcf05d489d7aa9faa812d94
   - enabled: 1
-    path: Assets/ChronicleDimensionProject/Scenes/Main/RhythmGameScene.unity
+    path: Assets/ChronicleDimensionProject/Scenes/Main/RhythmGame/RhythmGameScene.unity
     guid: 093ae74a9ba5da840913ad970f730ed9
   m_configObjects: {}

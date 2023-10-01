@@ -665,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3167184336932331168, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8593057880710303424, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
       propertyPath: m_Pivot.x
@@ -3979,6 +3979,10 @@ PrefabInstance:
     - target: {fileID: 2872486378029068954, guid: d93fb72a8376a134ca4cdc5acd0a2c31, type: 3}
       propertyPath: m_Name
       value: GameModeSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2872486378029068954, guid: d93fb72a8376a134ca4cdc5acd0a2c31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2872486378029068958, guid: d93fb72a8376a134ca4cdc5acd0a2c31, type: 3}
       propertyPath: m_Pivot.x

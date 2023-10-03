@@ -1,6 +1,7 @@
 using UniRx;
+using UnityEngine;
 
-public class ScoreManager
+public class ScoreManager : MonoBehaviour
 {
     private IntReactiveProperty _score = new IntReactiveProperty(0);
 

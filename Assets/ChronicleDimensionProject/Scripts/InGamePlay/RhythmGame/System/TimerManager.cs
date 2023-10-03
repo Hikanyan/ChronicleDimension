@@ -1,9 +1,8 @@
 using System;
 using UniRx;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-public class TimerManager
+public class TimerManager : MonoBehaviour
 {
     private double _startTime = 0;
     private double _cacheTime = 0;
@@ -20,7 +19,7 @@ public class TimerManager
 
     public TimerManager()
     {
-        RealTime.Subscribe(UpdateRealTime).AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
+        RealTime.Subscribe(UpdateRealTime).AddTo(FindObjectOfType<MainThreadDispatcher>());
     }
 
     public void TimerStart()
@@ -32,7 +31,7 @@ public class TimerManager
         // 100ミリ秒ごとにUpdateRealTimeメソッドを呼び出す
         _timerDisposable = Observable.Interval(TimeSpan.FromMilliseconds(1))
             .Subscribe(_ => UpdateRealTime(_startTime))
-            .AddTo(Object.FindObjectOfType<MainThreadDispatcher>());
+            .AddTo(FindObjectOfType<MainThreadDispatcher>());
     }
 
     public void TimerPause()

@@ -5,14 +5,14 @@ using UnityEngine;
 public class Title : UIBase
 {
     [SerializeField] private GameObject titleUI;
-    [SerializeField] private CRIAudioList bgmName;
+    [SerializeField] private CriAudioList bgmName;
 
 
     // Titleの実装
     void OnEnable()
     {
         //ログイン、BGM、TitleUIの表示
-        CRIAudioManager.Instance.CribgmPlay(bgmName);
+        //CRIAudioManager.Instance.CribgmPlay(bgmName);
     }
     
     private void Update()

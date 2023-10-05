@@ -16,11 +16,7 @@ public class TimerManager : MonoBehaviour
     public event Action TimerStopped;
 
     private IDisposable _timerDisposable;
-
-    public TimerManager()
-    {
-        RealTime.Subscribe(UpdateRealTime).AddTo(FindObjectOfType<MainThreadDispatcher>());
-    }
+    
 
     public void TimerStart()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Title : UIBase
 {
     [SerializeField] private GameObject titleUI;
-    [SerializeField] private CriAudioList bgmName;
+    [SerializeField] private CRIAudioPlayer bgmName;
 
 
     // Titleの実装

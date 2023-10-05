@@ -1,20 +1,16 @@
 // 日本語対応
-using CriWare;
-using Cysharp.Threading.Tasks;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+using CriWare;
 using UnityEngine.SceneManagement;
+using System;
 
-public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
+public class CriAudioManager : AbstractSingleton<CriAudioManager>
 {
+
     private float _masterVolume = 1F;
     private float _bgmVolume = 1F;
     private float _seVolume = 1F;
     private float _voiceVolume = 1F;
-    
     private const float diff = 0.01F;
 
     /// <summary>マスターボリュームが変更された際に呼ばれるEvent</summary>
@@ -23,14 +19,17 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
     public Action<float> BGMVolumeChanged;
     /// <summary>SEボリュームが変更された際に呼ばれるEvent</summary>
     public Action<float> SEVolumeChanged;
+    /// <summary>Voiceボリュームが変更された際に呼ばれる処理</summary>
+    public Action<float> VoiceVolumeChanged;
 
     private CriAtomExPlayer _bgmPlayer = new CriAtomExPlayer();
     private CriAtomExPlayback _bgmPlayback;
+    
     private CriAtomExPlayer _sePlayer = new CriAtomExPlayer();
     private CriAtomExPlayer _loopSEPlayer = new CriAtomExPlayer();
-    private CriAtomExPlayer _voicePlayer = new CriAtomExPlayer();
-
     private List<CriPlayerData> _seData = new List<CriPlayerData>();
+
+    private CriAtomExPlayer _voicePlayer = new CriAtomExPlayer();
     private List<CriPlayerData> _voiceData = new List<CriPlayerData>();
     
     private string _currentBGMCueName = "";
@@ -81,8 +80,6 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         }
     }
 
-    /// <summary>ボイスのボリューム</summary>
-    /// <value>変更したい値</value>
     public float VoiceVolume
     {
         get => _voiceVolume;
@@ -90,14 +87,14 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         {
             if (_voiceVolume + diff < value || _voiceVolume - diff > value)
             {
-                SEVolumeChanged.Invoke(value);
+                VoiceVolumeChanged.Invoke(value);
                 _voiceVolume = value;
             }
         }
     }
 
     /// <summary>SEのPlayerとPlaback</summary>
-    struct CriPlayerData
+    private struct CriPlayerData
     {
         private CriAtomExPlayback _playback;
         private CriAtomEx.CueInfo _cueInfo;
@@ -120,7 +117,7 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         }
     }
 
-    public CRIAudioManager()
+    private CriAudioManager()
     {
         MasterVolumeChanged += volume =>
         {
@@ -139,6 +136,12 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
                     _sePlayer.SetVolume(volume * _seVolume);
                     _sePlayer.Update(_seData[i].Playback);
                 }
+            }
+            
+            for (int i = 0; i < _voiceData.Count; i++)
+            {
+                _voicePlayer.SetVolume(_masterVolume * volume);
+                _voicePlayer.Update(_voiceData[i].Playback);
             }
         };
 
@@ -165,10 +168,19 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
             }
         };
 
+        VoiceVolumeChanged += volume =>
+        {
+            for (int i = 0; i < _voiceData.Count; i++)
+            {
+                _voicePlayer.SetVolume(_masterVolume * volume);
+                _voicePlayer.Update(_voiceData[i].Playback);
+            }
+        };
+
         SceneManager.sceneUnloaded += Unload;
     }
 
-    ~CRIAudioManager()
+    ~CriAudioManager()
     {
         SceneManager.sceneUnloaded -= Unload;
     }
@@ -190,10 +202,7 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         StopBGM();
 
         _bgmPlayer.SetCue(temp, cueName);
-        _bgmPlayer.SetVolume(_bgmVolume * _masterVolume);
-        _bgmPlayer.SetStartTime(0);
         _bgmPlayback = _bgmPlayer.Start();
-
         _currentBGMAcb = temp;
         _currentBGMCueName = cueName;
     }
@@ -228,16 +237,14 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
     /// <returns>停止する際に必要なIndex</returns>
     public int PlaySE(string cueSheetName, string cueName, float volume = 1f)
     {
-        if (cueName == "") return -1;
-
         CriAtomEx.CueInfo cueInfo;
         CriPlayerData newAtomPlayer = new CriPlayerData();
-
+        
         var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
         tempAcb.GetCueInfo(cueName, out cueInfo);
 
         newAtomPlayer.CueInfo = cueInfo;
-
+        
         if (newAtomPlayer.IsLoop)
         {
             _loopSEPlayer.SetCue(tempAcb, cueName);
@@ -251,11 +258,6 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
             newAtomPlayer.Playback = _sePlayer.Start();
         }
 
-        var targets = _seData.Where(se => se.CueInfo.name == cueName && se.Playback.status != CriAtomExPlayback.Status.Playing);
-        if (targets.Count() > 0)
-        {
-            targets.First().Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
-        }
         _seData.Add(newAtomPlayer);
         return _seData.Count - 1;
     }
@@ -273,7 +275,7 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
     /// <param name="index">再開させたいPlaySE()の戻り値 (-1以下を渡すと処理を行わない)</param>
     public void ResumeSE(int index)
     {
-        if (index < 0) return;
+        if (index < 0) return; 
 
         _seData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
     }
@@ -287,37 +289,36 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         _seData[index].Playback.Stop();
     }
 
-    /// <summary>ボイスを流す関数</summary>
+    /// <summary>ループしているすべてのSEを止める</summary>
+    public void StopLoopSE()
+    {
+        _loopSEPlayer.Stop();
+    }
+
+    /// <summary>Voiceを流す関数</summary>
     /// <param name="cueSheetName">流したいキューシートの名前</param>
     /// <param name="cueName">流したいキューの名前</param>
     /// <returns>停止する際に必要なIndex</returns>
     public int PlayVoice(string cueSheetName, string cueName, float volume = 1f)
     {
-        if (cueName == "") return -1;
-
         CriAtomEx.CueInfo cueInfo;
         CriPlayerData newAtomPlayer = new CriPlayerData();
-
+        
         var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
         tempAcb.GetCueInfo(cueName, out cueInfo);
 
         newAtomPlayer.CueInfo = cueInfo;
-
+        
         _voicePlayer.SetCue(tempAcb, cueName);
-        _voicePlayer.SetVolume(volume * _seVolume * _masterVolume);
+        _voicePlayer.SetVolume(volume * _masterVolume * _voiceVolume);
         newAtomPlayer.Playback = _voicePlayer.Start();
- 
-        var targets = _voiceData.Where(se => se.CueInfo.name == cueName && se.Playback.status != CriAtomExPlayback.Status.Playing);
-        if (targets.Count() > 0)
-        {
-            targets.First().Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
-        }
+
         _voiceData.Add(newAtomPlayer);
         return _voiceData.Count - 1;
     }
 
-    /// <summary>ボイスをPauseさせる </summary>
-    /// <param name="index">一時停止させたいPlaySE()の戻り値 (-1以下を渡すと処理を行わない)</param>
+    /// <summary>VoiceをPauseさせる </summary>
+    /// <param name="index">一時停止させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
     public void PauseVoice(int index)
     {
         if (index < 0) return;
@@ -325,67 +326,24 @@ public class CRIAudioManager : AbstractSingleton<CRIAudioManager>
         _voiceData[index].Playback.Pause();
     }
 
-    /// <summary>Pauseさせたボイスを再開させる</summary>
-    /// <param name="index">再開させたいPlaySE()の戻り値 (-1以下を渡すと処理を行わない)</param>
+    /// <summary>PauseさせたVoiceを再開させる</summary>
+    /// <param name="index">再開させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
     public void ResumeVoice(int index)
     {
-        if (index < 0) return;
+        if (index < 0) return; 
 
         _voiceData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
     }
 
-    /// <summary>ボイスを停止させる </summary>
-    /// <param name="index">止めたいPlaySE()の戻り値 (-1以下を渡すと処理を行わない)</param>
-    public void StopVoice(string cueName)
+    /// <summary>Voiceを停止させる </summary>
+    /// <param name="index">止めたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
+    public void StopVoice(int index)
     {
-        var targets = _voiceData.Where(se => se.CueInfo.name == cueName);
-        foreach (var se in targets)
-        {
-            se.Playback.Stop();
-            UnityEngine.Debug.Log(se.CueInfo.name);
-        }
+        if (index < 0) return;
+
+        _voiceData[index].Playback.Stop();
     }
-
-    /// <summary>BGM以外を全停止させる </summary>
-    public void StopAllSEAndVoice()
-    {
-        _sePlayer.Stop();
-        _loopSEPlayer.Stop();
-        _voicePlayer.Stop();
-
-        foreach (var se in _seData)
-        {
-            se.Playback.Stop();
-            UnityEngine.Debug.Log(se.CueInfo.name);
-        }
-        _seData.Clear();
-
-        foreach (var se in _voiceData)
-        {
-            se.Playback.Stop();
-            UnityEngine.Debug.Log(se.CueInfo.name);
-        }
-        _voiceData.Clear();
-    }
-
-    /// <summary>SEを停止させる </summary>
-    /// <param name="cueName">止めたいSEのcueName</param>
-    public void StopSE(string cueName)
-    {
-        var targets = _seData.Where(se => se.CueInfo.name == cueName);
-        foreach (var se in targets)
-        {
-            se.Playback.Stop();
-            UnityEngine.Debug.Log(se.CueInfo.name);
-        }
-    }
-
-    /// <summary>ループしているすべてのSEを止める</summary>
-    public void StopLoopSE()
-    {
-        _loopSEPlayer.Stop();
-    }
-
+    
     private void Unload(Scene scene)
     {
         StopLoopSE();

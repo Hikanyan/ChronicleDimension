@@ -1,11 +1,18 @@
 // 日本語対応
+
 using System.Collections.Generic;
 using CriWare;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine;
 
 public class CriAudioManager : AbstractSingleton<CriAudioManager>
 {
+    [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
+    [SerializeField] string _cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
+    [SerializeField] string _cueSheetSE = "CueSheet_SE"; //.acb
+    [SerializeField] string _cueSheetVoice = "CueSheet_Voice"; //.acb
+
 
     private float _masterVolume = 1F;
     private float _bgmVolume = 1F;
@@ -15,25 +22,75 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
 
     /// <summary>マスターボリュームが変更された際に呼ばれるEvent</summary>
     public Action<float> MasterVolumeChanged;
+
     /// <summary>BGMボリュームが変更された際に呼ばれるEvent</summary>
     public Action<float> BGMVolumeChanged;
+
     /// <summary>SEボリュームが変更された際に呼ばれるEvent</summary>
     public Action<float> SEVolumeChanged;
+
     /// <summary>Voiceボリュームが変更された際に呼ばれる処理</summary>
     public Action<float> VoiceVolumeChanged;
 
     private CriAtomExPlayer _bgmPlayer = new CriAtomExPlayer();
     private CriAtomExPlayback _bgmPlayback;
-    
+
     private CriAtomExPlayer _sePlayer = new CriAtomExPlayer();
     private CriAtomExPlayer _loopSEPlayer = new CriAtomExPlayer();
     private List<CriPlayerData> _seData = new List<CriPlayerData>();
 
     private CriAtomExPlayer _voicePlayer = new CriAtomExPlayer();
     private List<CriPlayerData> _voiceData = new List<CriPlayerData>();
-    
+
     private string _currentBGMCueName = "";
     private CriAtomExAcb _currentBGMAcb = null;
+
+    private CueSheet _cueSheet = CueSheet.None;
+
+    public CueSheet CurrentCueSheet => _cueSheet;
+
+    public enum CueSheet
+    {
+        None,
+        Bgm,
+        Se,
+        Voice
+    }
+
+
+    string GetCueSheetString(CueSheet cueSheet)
+    {
+        if (cueSheet == CueSheet.Bgm)
+        {
+            return _cueSheetBGM;
+        }
+        else if (cueSheet == CueSheet.Se)
+        {
+            return _cueSheetSE;
+        }
+        else if (cueSheet == CueSheet.Voice)
+        {
+            return _cueSheetVoice;
+        }
+
+        return null;
+    }
+
+
+    private void Start()
+    {
+        // acf設定
+        string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
+        CriAtomEx.RegisterAcf(null, path);
+        // CriAtom作成
+        new GameObject().AddComponent<CriAtom>();
+        // BGM acb追加
+        CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", null, null);
+        // SE acb追加
+        CriAtom.AddCueSheet(_cueSheetSE, $"{_cueSheetSE}.acb", null, null);
+        //Voice acb追加
+        CriAtom.AddCueSheet(_cueSheetVoice, $"{_cueSheetVoice}.acb", null, null);
+    }
 
     /// <summary>マスターボリューム</summary>
     /// <value>変更したい値</value>
@@ -105,6 +162,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
             get => _playback;
             set => _playback = value;
         }
+
         public CriAtomEx.CueInfo CueInfo
         {
             get => _cueInfo;
@@ -137,7 +195,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
                     _sePlayer.Update(_seData[i].Playback);
                 }
             }
-            
+
             for (int i = 0; i < _voiceData.Count; i++)
             {
                 _voicePlayer.SetVolume(_masterVolume * volume);
@@ -187,10 +245,17 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     // ここに音を鳴らす関数を書いてください
 
     /// <summary>BGMを開始する</summary>
-    /// <param name="cueSheetName">流したいキューシートの名前</param>
+    /// <param name="cueSheet">流したいキューシートの名前</param>
     /// <param name="cueName">流したいキューの名前</param>
-    public void PlayBGM(string cueSheetName, string cueName)
+    public void PlayBGM(CueSheet cueSheet, string cueName)
     {
+        string cueSheetName = GetCueSheetString(cueSheet);
+        if (cueSheetName == null)
+        {
+            Debug.LogWarning("CueSheetがNullです。");
+            return;
+        }
+        
         var temp = CriAtom.GetCueSheet(cueSheetName).acb;
 
         if (_currentBGMAcb == temp && _currentBGMCueName == cueName &&
@@ -232,19 +297,26 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     }
 
     /// <summary>SEを流す関数</summary>
-    /// <param name="cueSheetName">流したいキューシートの名前</param>
+    /// <param name="cueSheet">流したいキューシートの名前</param>
     /// <param name="cueName">流したいキューの名前</param>
     /// <returns>停止する際に必要なIndex</returns>
-    public int PlaySE(string cueSheetName, string cueName, float volume = 1f)
+    public int PlaySE(CueSheet cueSheet, string cueName, float volume = 1f)
     {
         CriAtomEx.CueInfo cueInfo;
         CriPlayerData newAtomPlayer = new CriPlayerData();
         
+        string cueSheetName = GetCueSheetString(cueSheet);
+        if (cueSheetName == null)
+        {
+            Debug.LogWarning("CueSheetがNullです。");
+            return -1;
+        }
+
         var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
         tempAcb.GetCueInfo(cueName, out cueInfo);
 
         newAtomPlayer.CueInfo = cueInfo;
-        
+
         if (newAtomPlayer.IsLoop)
         {
             _loopSEPlayer.SetCue(tempAcb, cueName);
@@ -275,7 +347,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     /// <param name="index">再開させたいPlaySE()の戻り値 (-1以下を渡すと処理を行わない)</param>
     public void ResumeSE(int index)
     {
-        if (index < 0) return; 
+        if (index < 0) return;
 
         _seData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
     }
@@ -296,19 +368,26 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     }
 
     /// <summary>Voiceを流す関数</summary>
-    /// <param name="cueSheetName">流したいキューシートの名前</param>
+    /// <param name="cueSheet">流したいキューシートの名前</param>
     /// <param name="cueName">流したいキューの名前</param>
     /// <returns>停止する際に必要なIndex</returns>
-    public int PlayVoice(string cueSheetName, string cueName, float volume = 1f)
+    public int PlayVoice(CueSheet cueSheet, string cueName, float volume = 1f)
     {
         CriAtomEx.CueInfo cueInfo;
         CriPlayerData newAtomPlayer = new CriPlayerData();
         
+        string cueSheetName = GetCueSheetString(cueSheet);
+        if (cueSheetName == null)
+        {
+            Debug.LogWarning("CueSheetがNullです。");
+            return -1;
+        }
+
         var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
         tempAcb.GetCueInfo(cueName, out cueInfo);
 
         newAtomPlayer.CueInfo = cueInfo;
-        
+
         _voicePlayer.SetCue(tempAcb, cueName);
         _voicePlayer.SetVolume(volume * _masterVolume * _voiceVolume);
         newAtomPlayer.Playback = _voicePlayer.Start();
@@ -330,7 +409,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
     /// <param name="index">再開させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
     public void ResumeVoice(int index)
     {
-        if (index < 0) return; 
+        if (index < 0) return;
 
         _voiceData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
     }
@@ -343,7 +422,7 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
 
         _voiceData[index].Playback.Stop();
     }
-    
+
     private void Unload(Scene scene)
     {
         StopLoopSE();

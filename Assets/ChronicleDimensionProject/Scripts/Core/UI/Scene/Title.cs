@@ -15,17 +15,8 @@ public class Title : UIBase
     void Start()
     {
         //ログイン、BGM、TitleUIの表示
-        //CriAudioManager.Instance.PlayBGM(bgmName);
 
-        // GameManagerのOnGameStartイベントにイベントハンドラを登録
-        _start += HandleGameStart;
-    }
-
-    void HandleGameStart()
-    {
-        // ゲームが開始されたときの処理をここに記述
-        // 例えば、タイトルUIの非表示化など
-        titleUI.SetActive(false);
-        
+        titleUI.SetActive(true);
+        //CriAudioManager.Instance.PlayBGM(CriAudioManager.Instance.CurrentCueSheet.Bgm);
     }
 }

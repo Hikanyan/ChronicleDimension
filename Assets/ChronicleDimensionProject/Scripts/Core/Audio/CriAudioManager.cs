@@ -76,8 +76,8 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
         return null;
     }
 
-
-    private void Start()
+    /// <summary>CriAtom の追加。acb追加</summary>
+    protected override void OnAwake()
     {
         // acf設定
         string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";

@@ -181,26 +181,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1804163710539016800, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}
---- !u!1 &186764180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1804163710539016803, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}
-  m_PrefabInstance: {fileID: 186764179}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &186764184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186764180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2314e5095e29462ea6f897cf854fd005, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  streamingAssetsPathAcf: Chronicle Dimention
-  _cueSheetBGM: CueSheet_Chronicle_Dimention_20221024_2
-  _cueSheetSE: CueSheet_SE
 --- !u!1 &1002380914
 GameObject:
   m_ObjectHideFlags: 0

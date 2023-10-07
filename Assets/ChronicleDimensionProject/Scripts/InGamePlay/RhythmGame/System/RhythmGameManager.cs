@@ -19,7 +19,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     [Header("GetOpenMusic")] [SerializeField]
     AssetReferenceT<TextAsset> musicJsonReference;
 
-    CRIAudioPlayer _criAudioNumber;
+    CriAudioPlayer _criAudioNumber;
     float _delayTime = 0.0f;
     bool _showFPS = false;
 

@@ -11,8 +11,6 @@ public class GameManager : AbstractSingleton<GameManager>
     public StateMachine<GameManager> stateMachine;
     public GameState CurrentGameState { get; private set; }
     
-    // ゲーム開始時に実行されるイベント
-    public event Action OnGameStart;
     protected override void OnAwake()
     {
         Initialize();
@@ -67,11 +65,6 @@ public class GameManager : AbstractSingleton<GameManager>
             // タイトルステートから出た時の処理
             UIManager.Instance.CloseUI<Title>();
         }
-    }
-
-    private void OnOnGameStart()
-    {
-        OnGameStart?.Invoke();
     }
 }
 

@@ -43,12 +43,14 @@ MonoBehaviour:
     maxFaders: 4
     maxBuses: 8
     maxParameterBlocks: 1024
-    vrMode: 0
+    soundRendererType: 1
     keepPlayingSoundOnPause: 1
+    enableSonicSync: 1
     editorPcmOutputConfig:
       enable: 0
       bufferLength: 4096
     pcBufferingTime: 0
+    useMicrosoftSpatialSound: 1
     iosEnableSonicSync: 1
     iosBufferingTime: 50
     iosOverrideIPodMusic: 0
@@ -61,3 +63,4 @@ MonoBehaviour:
     androidUsesAndroidFastMixer: 1
     androidForceToUseAsrForDefaultPlayback: 1
     androidUsesAAudio: 0
+    androidStreamType: 0

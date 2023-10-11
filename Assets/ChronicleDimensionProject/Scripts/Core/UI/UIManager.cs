@@ -26,6 +26,20 @@ public class UIManager : AbstractSingleton<UIManager>
         }
     }
 
+    public async UniTask AddUI<T>(GameObject uiPrefab) where T : UIBase
+    {
+        string uiName = typeof(T).Name;
+        if (!uiDictionary.ContainsKey((uiName)))
+        {
+            GameObject uiObject = await InstantiateUI(uiName, uiPrefab);
+            uiDictionary.Add(uiName, uiObject);
+        }
+        else
+        {
+            Debug.Log($"{uiName} UI already exists in the dictionary.");
+        }
+    }
+
     // 指定されたUIを表示するメソッド
     public async UniTask OpenUI<T>() where T : UIBase
     {
@@ -58,12 +72,24 @@ public class UIManager : AbstractSingleton<UIManager>
         }
     }
 
-    // UIを非同期に生成するメソッド
     private async UniTask<GameObject> InstantiateUI(string uiName)
     {
-        GameObject uiObject = (GameObject)await Resources.LoadAsync(uiName).ToUniTask(); // UIのプレハブを非同期にロード
+        return await InstantiateUI(uiName, null);
+    }
 
-        uiObject = Instantiate(uiObject); // プレハブからインスタンスを生成し、親オブジェクトの下に配置
+    private async UniTask<GameObject> InstantiateUI(string uiName, GameObject uiPrefab)
+    {
+        GameObject uiObject;
+
+        if (uiPrefab != null)
+        {
+            uiObject = Instantiate(uiPrefab); // プレハブからインスタンスを生成し、親オブジェクトの下に配置
+        }
+        else
+        {
+            uiObject = (GameObject)await Resources.LoadAsync(uiName).ToUniTask(); // UIのプレハブを非同期にロード
+        }
+
         uiObject.name = uiName; // UIの名前を設定
 
         await uiObject.transform.DOScale(Vector3.zero, 0f).From().SetEase(Ease.OutBack).AsyncWaitForCompletion();
@@ -74,5 +100,6 @@ public class UIManager : AbstractSingleton<UIManager>
 
         return uiObject; // 生成したUIのインスタンスを返す
     }
+
 }
 

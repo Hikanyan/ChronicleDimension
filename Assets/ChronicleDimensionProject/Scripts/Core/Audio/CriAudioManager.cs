@@ -5,7 +5,13 @@ using CriWare;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine;
-
+public enum CueSheet
+{
+    None,
+    Bgm,
+    Se,
+    Voice
+}
 public class CriAudioManager : AbstractSingleton<CriAudioManager>
 {
     [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
@@ -47,17 +53,14 @@ public class CriAudioManager : AbstractSingleton<CriAudioManager>
 
     private CueSheet _cueSheet = CueSheet.None;
 
-    public CueSheet CurrentCueSheet => _cueSheet;
-
-    public enum CueSheet
-    {
-        None,
-        Bgm,
-        Se,
-        Voice
-    }
+    
 
 
+    /// <summary>
+    /// enum からstringを返す
+    /// </summary>
+    /// <param name="cueSheet"></param>
+    /// <returns></returns>
     string GetCueSheetString(CueSheet cueSheet)
     {
         if (cueSheet == CueSheet.Bgm)

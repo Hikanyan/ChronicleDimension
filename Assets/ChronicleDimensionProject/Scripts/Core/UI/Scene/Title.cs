@@ -17,6 +17,6 @@ public class Title : UIBase
         //ログイン、BGM、TitleUIの表示
 
         titleUI.SetActive(true);
-        //CriAudioManager.Instance.PlayBGM(CriAudioManager.Instance.CurrentCueSheet.Bgm);
+        CriAudioManager.Instance.PlayBGM(CueSheet.Bgm,bgmName);
     }
 }

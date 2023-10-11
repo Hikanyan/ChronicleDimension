@@ -19,9 +19,18 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     [Header("GetOpenMusic")] [SerializeField]
     AssetReferenceT<TextAsset> musicJsonReference;
 
-    CriAudioPlayer _criAudioNumber;
+    CueSheet _cueSheet;
+    string _musicName;
+    
     float _delayTime = 0.0f;
     bool _showFPS = false;
+    bool _autoMode = false;
+
+    public bool AutoMode
+    {
+        get => _autoMode;
+        set => _autoMode = value;
+    }
 
     private TimerManager _timerManager;
     private ScoreManager _scoreManager;
@@ -50,9 +59,11 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
         if (openMusic != null)
         {
-            _criAudioNumber = openMusic.musicData.musicNumber;
+            _cueSheet = openMusic.musicData.cueSheet;
+            _musicName = openMusic.musicData.musicName;
             musicJsonReference = openMusic.musicData.musicJsonReference;
             _delayTime = openMusic.musicData.delayTime;
+            _autoMode = openMusic.musicData.autoMode;
         }
         
         SetShowMusicPreviewUI(true);

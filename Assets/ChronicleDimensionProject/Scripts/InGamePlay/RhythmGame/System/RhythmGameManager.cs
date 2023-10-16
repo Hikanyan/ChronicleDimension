@@ -19,7 +19,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     [Header("GetOpenMusic")] [SerializeField]
     AssetReferenceT<TextAsset> musicJsonReference;
 
-    CueSheet _cueSheet;
+    CriAudioManager.CueSheet _cueSheet;
     string _musicName;
     
     float _delayTime = 0.0f;

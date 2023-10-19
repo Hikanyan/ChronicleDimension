@@ -2,4 +2,5 @@
 https://github.com/Hikanyan/RythemGameConverter
 
 ゲームのフローチャート
-![image](https://github.com/Hikanyan/ChronicleDimension/assets/86185936/4b31c5e0-5417-461c-9a7e-839d466efc32)
+
+![GameFlow-](https://github.com/Hikanyan/ChronicleDimension/assets/86185936/f5bebeba-5c56-4ed7-903f-f93c7d494704)

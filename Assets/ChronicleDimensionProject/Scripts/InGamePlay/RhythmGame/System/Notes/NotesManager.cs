@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class NotesManager: MonoBehaviour
+public class NotesManager: AbstractSingleton<NotesManager>
 {
     [SerializeField] public string perfectSoundName;
     [SerializeField] public string greatSoundName;
@@ -14,10 +14,15 @@ public class NotesManager: MonoBehaviour
     bool _autoMode;
     float _judgeOffset;
 
+    private NotesGenerator NotesGenerator;
+    private NotesController NotesController;
+
     private void Start()
     {
         // PlayerSettings settings = SaveLoad.LoadSettings<PlayerSettings>();
         // _autoMode = RhythmGameManager.Instance.AutoMode;
         // _judgeOffset = settings.judgeOffset;
     }
+    
+    
 }

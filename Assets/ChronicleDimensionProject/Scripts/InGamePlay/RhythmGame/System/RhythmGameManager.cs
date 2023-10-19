@@ -32,8 +32,8 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
         set => _autoMode = value;
     }
 
-    private TimerManager _timerManager;
-    private ScoreManager _scoreManager;
+    public TimerManager timerManager;
+    public ScoreManager scoreManager;
 
 
     private IntReactiveProperty _playerLevel = new(1);
@@ -53,8 +53,8 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
     void Start()
     {
-        TryGetComponent(out _timerManager);
-        TryGetComponent(out _scoreManager);
+        TryGetComponent(out timerManager);
+        TryGetComponent(out scoreManager);
         OpenMusic openMusic = GameObject.FindObjectOfType<OpenMusic>();
 
         if (openMusic != null)
@@ -81,10 +81,14 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
     void GameStart()
     {
-        _timerManager.TimerStart();
+        timerManager.TimerStart();
         //CRIAudioManager.Instance.PlayBGM();
     }
 
+    public void GameEnd()
+    {
+        timerManager.TimerStop();
+    }
     public enum RhythmGameState
     {
         None, // ゲームが開始されていない状態

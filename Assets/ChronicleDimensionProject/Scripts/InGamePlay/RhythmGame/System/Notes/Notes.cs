@@ -1,25 +1,28 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 
-public enum NotesType
-{
-    None,
-    TapNote,
-    SkillNote,
-    FlickNote,
-    DamageNote,
-    LongNote,
-}
 
 public class Notes : MonoBehaviour
 {
-    float _time = 0.00f;
-    private float _endTime = 0.00f; // ホールド
-    int _block = 0;
-    NotesType _type;
-    bool _visible = false;
-    bool _disable = false;
-    bool _holding = false; // ホールド
+    public float _time = 0.00f;
+    public int _block = 0;
+    public NotesType _type;
+    public bool _visible = false;
+    public bool _disable = false;
+
+    [SerializeField] public GameObject endObject = default;
+    public float _endTime = 0.00f; // ホールド
+    public bool _holding = false; // ホールド
+
+    public enum NotesType
+    {
+        None,
+        TapNote,
+        SkillNote,
+        FlickNote,
+        DamageNote,
+        LongNote,
+    }
 
     public void SetVisible(bool visible)
     {
@@ -41,9 +44,10 @@ public class Notes : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, posz);
     }
 
+    /// <summary>LongNotesの最後の処理 </summary>
+    /// <param name="posz"></param>
     public void SetEndNotesPos(float posz)
     {
-        GameObject endObject = Instantiate(gameObject);
         endObject.transform.position = new Vector3(transform.position.x, transform.position.y, posz);
     }
 }

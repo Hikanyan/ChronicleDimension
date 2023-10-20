@@ -1,4 +1,5 @@
 ﻿using System;
+using ChronicleDimension.Core;
 using TMPro;
 using UnityEngine;
 using UniRx;

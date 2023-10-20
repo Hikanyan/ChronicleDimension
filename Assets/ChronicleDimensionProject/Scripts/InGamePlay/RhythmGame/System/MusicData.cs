@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ChronicleDimension.Core;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 

@@ -1,0 +1,98 @@
+﻿@startuml
+
+class MasterVersion {
+    - string masterName
+    - int version
+}
+
+class MasterDataBase {
+    - int Version
+}
+
+class TextData {
+    - string Text
+}
+
+class SaveData {
+    - List<RhythmGameDate> RhythmGameDate
+    - Sprite BackgroundImage
+    - Sprite CharacterStandImage
+    - Sprite CharacterFaceImage
+    - Sprite TextBox
+    - string PlayerName
+    - string BGM
+    - string SE
+}
+
+class RhythmGameDate {
+    - AssetReferenceT<TextAsset> _musicJsonReference
+    - string MusicName
+    - float DelayTime
+    - int MaxScore
+    - int MaxCombo
+    - int PerfectCount
+    - int GreatCount
+    - int GoodCount
+    - int BadCount
+    - int MissCount
+}
+
+class EventMaster {
+    - EventData[] Data
+}
+
+class EventData {
+    - int Id
+    - string Name
+    - string Resource
+    - string StartAt
+    - string GameEndAt
+    - string EndAt
+}
+
+class GameEvent {
+    - int Id
+    - string Name
+    - string Resource
+    - DateTime StartAt
+    - DateTime GameEndAt
+    - DateTime EndAt
+}
+
+class QuestMaster {
+    - QuestData[] Data
+}
+
+class QuestData {
+    - int Id
+    - string Name
+    - string Resource
+    - DateTime StartAt
+    - DateTime GameEndAt
+    - DateTime EndAt
+}
+
+class ItemMaster {
+    - ItemData[] Data
+}
+
+class ItemData {
+    - int Id
+    - string Name
+    - string Resource
+    - string Description
+    - int Price
+    - int MaxCount
+    - int MaxLevel
+    - int Rarity
+    - int Type
+    - int[] Effect
+}
+
+SaveData --> RhythmGameDate : contains
+
+EventMaster --> EventData : contains
+QuestMaster --> QuestData : contains
+ItemMaster --> ItemData : contains
+
+@enduml

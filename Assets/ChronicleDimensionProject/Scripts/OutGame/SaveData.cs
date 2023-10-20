@@ -9,113 +9,122 @@ public class MasterVersion
     public string masterName;
     public int version;
 }
+
 [Serializable]
 public class MasterDataBase
 {
     public int Version;
 }
-[Serializable]
-public class TextData : MasterDataBase
-{
-    public string Text;
-}
 
-/// <summary>
-/// SaveDataクラスはセーブデータのクラスです。
-/// </summary>
-[System.Serializable]
-public class SaveData: MasterDataBase
-{
-    // ゲームの進行状況を保存する変数やプロパティを定義する
-    public List<RhythmGameDate> RhythmGameDate;
-    public Sprite BackgroundImage = null;
-    public Sprite CharacterStandImage = null;
-    public Sprite CharacterFaceImage = null;
-    public Sprite TextBox = null;
-    public string PlayerName = "Default";
-    public string BGM = null;
-    public string SE = null;
-}
-/// <summary>
-/// RhythmGameScoreDateクラスはリズムゲームのスコアデータのクラスです。
-/// </summary>
-[CreateAssetMenu(fileName = "RhythmGameDate", menuName = "ScriptableObjects/CreateRhythmGameDateAsset")]
-public class RhythmGameDate : ScriptableObject
-{
-    public AssetReferenceT<TextAsset> _musicJsonReference;
-    public int MusicNumber = default;//CRI
-    public float DelayTime = 0.0f;
-    
-    public int MaxScore = 0;
-    public int MaxCombo = 0;
-    
-    public int PerfectCount = 0;
-    public int GreatCount = 0;
-    public int GoodCount = 0;
-    public int BadCount = 0;
-    public int MissCount = 0;
-    
-}
 [Serializable]
-public class EventMaster : MasterDataBase
+public class SaveData : MasterDataBase
 {
-    public EventData[] Data;
+    public RhythmGameMaster rhythmGameMaster;
+    public ActionGameMaster actionGameMaster;
+    public NovelGameMaster novelGameMaster;
+    public Sprite backgroundImage;
+    public Sprite characterStandImage;
+    public string playerName = "Default";
+    public string bgm;
+    public string se;
 }
 
 [Serializable]
-public class EventData
+public class RhythmGameMaster : MasterDataBase
 {
-    public int Id;
-    public string Name;
-    public string Resource;
-    public string StartAt;
-    public string GameEndAt;
-    public string EndAt;
+    public RhythmGameData[] rhythmGameDatas;
 }
-public class GameEvent
+
+[CreateAssetMenu(fileName = "RhythmGameData", menuName = "ScriptableObjects/CreateRhythmGameDataAsset")]
+public class RhythmGameData : ScriptableObject
 {
-    public int Id;
-    public string Name;
-    public string Resource;
-    public DateTime StartAt;
-    public DateTime GameEndAt;
-    public DateTime EndAt;
+    public AssetReferenceT<TextAsset> musicJsonReference;
+    public string musicName;
+    public float delayTime;
+    public int maxScore;
+    public int maxCombo;
+    public int perfectCount;
+    public int greatCount;
+    public int goodCount;
+    public int badCount;
+    public int missCount;
+}
+
+[Serializable]
+public class ActionGameMaster : MasterDataBase
+{
+    public ActionGameData[] actionGameDatas;
+}
+
+[Serializable]
+public class ActionGameData : ScriptableObject
+{
+    // Add ActionGameData fields here (e.g., score, level, etc.)
+}
+
+[Serializable]
+public class NovelGameMaster : MasterDataBase
+{
+    public NovelGameData[] novelGameDatas;
+}
+
+[Serializable]
+public class NovelGameData : ScriptableObject
+{
+    // Add NovelGameData fields here (e.g., currentChapter, choicesMade, etc.)
+}
+
+[Serializable]
+public class GameEventMaster : MasterDataBase
+{
+    public GameEventData[] gameEventDatas;
+}
+
+[Serializable]
+public class GameEventData
+{
+    public int id;
+    public string name;
+    public string resource;
+    public DateTime startAt;
+    public DateTime gameEndAt;
+    public DateTime endAt;
 }
 
 [Serializable]
 public class QuestMaster : MasterDataBase
 {
-    public QuestData[] Data;
+    public QuestData[] questDatas;
 }
 
 [Serializable]
 public class QuestData
 {
-    public int Id;
-    public string Name;
-    public string Resource;
-    public DateTime StartAt;
-    public DateTime GameEndAt;
-    public DateTime EndAt;
+    public int id;
+    public string name;
+    public string resource;
+    public DateTime startAt;
+    public DateTime gameEndAt;
+    public DateTime endAt;
 }
 
 [Serializable]
 public class ItemMaster : MasterDataBase
 {
-    public ItemData[] Data;
+    public ItemData[] itemDatas;
 }
 
 [Serializable]
 public class ItemData
 {
-    public int Id;
-    public string Name;
-    public string Resource;
-    public string Description;
-    public int Price;
-    public int MaxCount;
-    public int MaxLevel;
-    public int Rarity;
-    public int Type;
-    public int[] Effect;
+    public int id;
+    public string name;
+    public string resource;
+    public string description;
+    public int price;
+    public int maxCount;
+    public int maxLevel;
+    public int rarity;
+    public int type;
+    public int[] effect;
 }

@@ -15,6 +15,8 @@ package Core {
 
     class GameManager {
         -rhythmGameManager: RhythmGameManager
+        -actionGameManager: ActionGameManager
+        -novelGameManager: NovelGameManager
         -gachaManager: GachaManager
         -sceneController: SceneController
         -audioManager: CRIAudioManager
@@ -141,6 +143,26 @@ package RhythmGame {
 
     GameManager o-- RhythmGameManager
     RhythmGameManager o-- NotesManager
+}
+
+package ActionGame {
+    class ActionGameManager {
+        -stageManager: StageManager
+        -enemyManager: EnemyManager
+        -playerManager: PlayerManager
+        -stateMachine: StateMachine<ActionGameManager>
+    }
+
+    GameManager o-- ActionGameManager
+}
+
+package NovelGame {
+    class NovelGameManager {
+        -episodeManager: EpisodeManager
+        -stateMachine: StateMachine<NovelGameManager>
+    }
+
+    GameManager o-- NovelGameManager
 }
 
 package PlayerComponent {

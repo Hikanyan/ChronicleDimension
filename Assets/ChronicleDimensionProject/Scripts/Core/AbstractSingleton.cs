@@ -54,5 +54,6 @@ public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
     protected void Delete()
     {
         Destroy(gameObject);
+        _instance = null;//インスタンスをnullにすることで再度Awakeが呼ばれるようにする
     }
 }

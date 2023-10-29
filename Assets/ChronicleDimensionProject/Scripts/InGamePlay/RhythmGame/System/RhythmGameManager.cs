@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ChronicleDimension.Core;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(TimerManager), typeof(ScoreManager))]
+[RequireComponent(typeof(TimerManager), typeof(RhythmGameScore))]
 public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 {
     [Header("UI")] [SerializeField] GameObject hudUI = default;
@@ -33,7 +34,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     }
 
     public TimerManager timerManager;
-    public ScoreManager scoreManager;
+    [FormerlySerializedAs("rhythmGameScoreManager")] public RhythmGameScore rhythmGameScore;
 
 
     private IntReactiveProperty _playerLevel = new(1);
@@ -54,7 +55,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     void Start()
     {
         TryGetComponent(out timerManager);
-        TryGetComponent(out scoreManager);
+        TryGetComponent(out rhythmGameScore);
         OpenMusic openMusic = GameObject.FindObjectOfType<OpenMusic>();
 
         if (openMusic != null)

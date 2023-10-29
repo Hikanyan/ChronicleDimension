@@ -21,7 +21,7 @@ public class Notes : MonoBehaviour
         SkillNote,
         FlickNote,
         DamageNote,
-        LongNote,
+        HoldNote,
     }
 
     public void SetVisible(bool visible)

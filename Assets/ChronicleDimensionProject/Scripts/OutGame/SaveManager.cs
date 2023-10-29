@@ -2,26 +2,32 @@ using System.IO;
 using UnityEngine;
 
 /// <summary>
-/// SaveManagerを使用するとセーブデータを保存、読み込みすることができます。
+/// SaveManagerは、セーブデータの読み込み、保存、削除を行うためのシングルトンクラスです。
 /// </summary>
-
-public class SaveManager
+public class SaveManager : AbstractSingleton<SaveManager>
 {
+    /// <summary> セーブデータの保存先パスを取得します。 </summary>
+    string SavePath => Application.persistentDataPath + "/savedata.json";
+
+    /// <summary> 現在のセーブデータを取得します。 </summary>
+    public SaveData SaveData { get; private set; }
+
+    /// <summary> 指定された型に基づいてセーブデータのパスを取得します。 </summary>
     static string GetPath<T>()
     {
-        return Path.Combine(Application.persistentDataPath, $"{typeof(T)}b.json");
+        return Path.Combine(Application.persistentDataPath, $"{typeof(T)}.json");
     }
 
+    /// <summary> 指定された型の設定をロードします。 </summary>
     public static T LoadSettings<T>() where T : new()
     {
         FileInfo info = new FileInfo(GetPath<T>());
         if (!info.Exists)
         {
-            SaveSettings<T>(new T());
+            SaveSettings(new T());
         }
 
-        string datastr = "";
-
+        string datastr;
 #if UNITY_IOS && UNITY_EDITOR
         datastr = File.ReadAllText(GetPath<T>());
 #else
@@ -33,10 +39,10 @@ public class SaveManager
         return JsonUtility.FromJson<T>(datastr);
     }
 
+    /// <summary> 指定された設定をセーブします。 </summary>
     public static void SaveSettings<T>(T setting)
     {
         string jsonstr = JsonUtility.ToJson(setting);
-
         Debug.Log(jsonstr);
 #if UNITY_IOS && UNITY_EDITOR
         File.WriteAllText(GetPath<T>(), jsonstr);
@@ -48,85 +54,46 @@ public class SaveManager
 #endif
     }
 
+    /// <summary> ゲームのセーブデータを保存します。 </summary>
+    public void SaveGame()
+    {
+        string json = JsonUtility.ToJson(SaveData);
+        using (StreamWriter writer = new StreamWriter(SavePath, false))
+        {
+            writer.WriteLine(json);
+        }
+    }
 
-    // //Singletonを使用するインスタンスを作成する
-    // private static SaveManager _instance = new SaveManager();
-    // //インスタンスを取得するためのプロパティ
-    // public static SaveManager Instance => _instance;
-    //
-    // //これをすることで外部からインスタンス化できない
-    // SaveManager()
-    // {
-    //     //インスタンス化したときに必ずLoadGameを呼ぶ
-    //     LoadGame();
-    // }
-    //
-    // //セーブデータのパス
-    // //=>はgetの省略形
-    // string SavePath => Application.dataPath + "/savedata.json";
-    //
-    // //セーブデータのプロパティ
-    // public SaveData SaveData { get; private set; }
-    //
-    // //コンストラクタ
-    // public void SaveGame()
-    // {
-    //     //セーブデータを保存する
-    //     var json = JsonUtility.ToJson(SaveData);
-    //     //writerを使ってjsonを保存する
-    //     StreamWriter writer = new StreamWriter(SavePath, false);
-    //     //書き込み
-    //     writer.WriteLine(json);
-    //     //Flush()を呼ぶことで書き込みが確定する
-    //     writer.Flush();
-    //     //閉じる
-    //     writer.Close();
-    // }
-    //
-    // /// <summary>
-    // /// LoadGameを呼ぶとセーブデータを読み込むことができます。
-    // /// </summary>
-    // public void LoadGame()
-    // {
-    //     //セーブデータがあるかどうかを判別する
-    //     //なければ処理を終了する
-    //     if (!File.Exists((SavePath)))
-    //     {
-    //         Debug.Log("セーブデータがありません。\n新しくセーブデータを作成します。");
-    //         //セーブデータを作成する
-    //         SaveData = new SaveData();
-    //         //セーブデータを保存する
-    //         SaveGame();
-    //     }
-    //     else
-    //     {
-    //         //セーブデータを読み込む
-    //         //readerを使ってjsonを読み込む
-    //         StreamReader reader = new StreamReader(SavePath);
-    //         //読み込んだjsonをstringに変換する
-    //         var jsonDate = reader.ReadToEnd();
-    //         //stringをSaveDataに変換する
-    //         SaveData = JsonUtility.FromJson<SaveData>(jsonDate);
-    //         //readerを閉じる
-    //         reader.Close();
-    //     }
-    // }
-    //
-    // /// <summary>
-    // /// SeveDateDelete()はセーブデータを削除するメソッドです。
-    // /// </summary>
-    // public void SeveDateDelete()
-    // {
-    //     // セーブデータが存在するかを判定する
-    //     if (File.Exists(SavePath))
-    //     {
-    //         // セーブデータが存在する場合、削除する
-    //         File.Delete(SavePath);
-    //         Debug.Log("セーブデータが削除されました。");
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("セーブデータは存在しません。");
-    //     }
-    // }
+    /// <summary> ゲームのセーブデータをロードします。 </summary>
+    public void LoadGame()
+    {
+        if (!File.Exists(SavePath))
+        {
+            Debug.Log("セーブデータがありません。\n新しくセーブデータを作成します。");
+            SaveData = new SaveData();
+            SaveGame();
+        }
+        else
+        {
+            using (StreamReader reader = new StreamReader(SavePath))
+            {
+                string jsonDate = reader.ReadToEnd();
+                SaveData = JsonUtility.FromJson<SaveData>(jsonDate);
+            }
+        }
+    }
+
+    /// <summary> セーブデータを削除します。 </summary>
+    public void SaveDataDelete()
+    {
+        if (File.Exists(SavePath))
+        {
+            File.Delete(SavePath);
+            Debug.Log("セーブデータが削除されました。");
+        }
+        else
+        {
+            Debug.Log("セーブデータは存在しません。");
+        }
+    }
 }

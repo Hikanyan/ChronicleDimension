@@ -1,7 +1,8 @@
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+/// <summary>  共通のスコアクラス </summary>
+public class ScoreController : MonoBehaviour, IScore
 {
     private IntReactiveProperty _score = new IntReactiveProperty(0);
 

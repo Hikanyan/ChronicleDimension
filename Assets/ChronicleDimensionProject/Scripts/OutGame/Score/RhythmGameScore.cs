@@ -102,11 +102,11 @@ public class RhythmGameScore : ScoreController
     public ResultDatas GetResultData()
     {
         ResultDatas resultDatas = new ResultDatas();
-        resultDatas.Rank = GetRank();
-        resultDatas.ClearPercent = clearPercent;
-        resultDatas.Score = Score.Value;
-        resultDatas._judgeScores = _judgeScores;
-        resultDatas._maxCombo = _maxCombo;
+        resultDatas.rank = GetRank();
+        resultDatas.clearPercent = clearPercent;
+        resultDatas.score = Score.Value;
+        resultDatas.judgeScores = _judgeScores;
+        resultDatas.maxCombo = _maxCombo;
         return resultDatas;
     }
 }

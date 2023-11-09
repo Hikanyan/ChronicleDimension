@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-/// <summary>PlayerInfo </summary>
+/// <summary>Playerの情報 </summary>
 public class PlayerInfo
 {
     //Playerのlevel

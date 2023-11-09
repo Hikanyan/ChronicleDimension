@@ -9,13 +9,9 @@ public class RhythmGameMaster : MasterDataBase
     public RhythmGameData[] rhythmGameDatas;
 }
 
-[CreateAssetMenu(fileName = "RhythmGameData", menuName = "ScriptableObjects/CreateRhythmGameDataAsset")]
-public class RhythmGameData : ScriptableObject
+public class RhythmGameData
 {
-    [SerializeField] private MusicData musicData;
-
-    public MusicData MusicData => musicData;
-
+    public MusicData musicData;
     public int maxScore;
     public int maxCombo;
     public int perfectCount;
@@ -29,7 +25,6 @@ public class RhythmGameData : ScriptableObject
 public class MusicData : ScriptableObject
 {
     public AssetReferenceT<TextAsset> musicJsonReference;
-
     public CriAudioManager.CueSheet cueSheet;
     public string musicName;
     public float delayTime;

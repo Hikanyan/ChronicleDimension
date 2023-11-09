@@ -1,0 +1,178 @@
+﻿@startuml
+
+skinparam packageStyle rect
+skinparam monochrome true
+
+package Core {
+    class BootLoader {
+        -sequenceManager: SequenceManager
+    }
+
+    class SequenceManager {
+        +Initialize(): void
+        -InstantiatePreloadedAssets: void
+    }
+
+    class GameManager {
+        -rhythmGameManager: RhythmGameManager
+        -actionGameManager: ActionGameManager
+        -novelGameManager: NovelGameManager
+        -gachaManager: GachaManager
+        -sceneController: SceneController
+        -audioManager: CRIAudioManager
+        -saveManager: SaveManager
+        -uiManager: UIManager
+        -stateMachine: StateMachine<GameManager>
+    }
+
+    BootLoader o-- SequenceManager
+    SequenceManager o-- GameManager
+}
+
+package Singleton {
+    class AbstractSingleton<T> {
+        -_instance: static T
+        +Instance: T {get}
+        +Awake(): void
+        +OnAwake(): void
+        +Delete(): void
+    }
+
+    class MonoBehaviour {
+        ' UnityのMonoBehaviour
+    }
+
+    AbstractSingleton -|> MonoBehaviour: Extends
+    note right of AbstractSingleton
+      サブクラスのシングルトンの振る舞いを提供。
+    end note
+}
+
+package State {
+    class StateMachine<TOwner> {
+        -states: LinkedList<State>
+        -currentState: State
+        +Owner: TOwner
+        +StateMachine(owner: TOwner)
+        +Add<T>(): T
+        +GetOrAddState<T>(): T
+        +AddTransition<TFrom, TTo>(eventId: int)
+        +AddAnyTransition<TTo>(eventId: int)
+        +Start<TFirst>()
+        +Start(firstState: State)
+        +Update()
+        +Dispatch(eventId: int)
+        -Change(nextState: State)
+    }
+
+    abstract class State {
+        -stateMachine: StateMachine<TOwner>
+        -transitions: Dictionary<int, State>
+        +StateMachine: StateMachine<TOwner>
+        +Owner: TOwner
+        +Enter(prevState: State)
+        +OnEnter(prevState: State)
+        +Update()
+        +OnUpdate()
+        +Exit(nextState: State)
+        +OnExit(nextState: State)
+    }
+
+    StateMachine <|-- State
+}
+
+package "MVRP Pattern" {
+    class Model {
+        +data: DataStructure
+        +GetData(): DataStructure
+        +SetData(data: DataStructure)
+    }
+
+    class View {
+        +UpdateView()
+        +UserInputReceived()
+    }
+
+    class Router {
+        +NavigateTo(view: View)
+        +GoBack()
+    }
+
+    class Presenter {
+        +HandleUserInput()
+        +UpdateView()
+    }
+
+    Model <.. Presenter : <<データを提供>>
+    Presenter --> View : <<更新>>
+    Presenter --> Router : <<指示>>
+    Router --> View : <<表示>>
+}
+
+class UIManager {
+    -uiPrefab: GameObject
+    -uiDictionary: Dictionary<string, GameObject>
+    
+    +OnAwake(): void
+    +AddUI<T>(uiPrefab: GameObject): UniTask where T : UIBase
+    +OpenUI<T>(): UniTask where T : UIBase
+    +CloseUI<T>(): void where T : UIBase
+    -InstantiateUI(uiName: string): UniTask<GameObject>
+    -InstantiateUI(uiName: string, uiPrefab: GameObject): UniTask<GameObject>
+}
+
+UIManager .up.> "MVRP Pattern".Router : <<実装>>
+UIManager --> "MVRP Pattern".Presenter : <<対話>>
+
+package RhythmGame {
+    class RhythmGameManager {
+        -scoreManager: ScoreManager
+        -particleManager: ParticleManager
+        -timeManager: TimeManager
+        -inputManager: InputManager
+        -judgeManager: JudgeManager
+        -notesManager: NotesManager
+        -eventManager: EventManager
+        -stateMachine: StateMachine<RhythmGameManager>
+    }
+
+    class NotesManager {
+        -generator: NotesGenerator
+        -controller: NotesController
+    }
+
+    GameManager o-- RhythmGameManager
+    RhythmGameManager o-- NotesManager
+}
+
+package ActionGame {
+    class ActionGameManager {
+        -stageManager: StageManager
+        -enemyManager: EnemyManager
+        -playerManager: PlayerManager
+        -stateMachine: StateMachine<ActionGameManager>
+    }
+
+    GameManager o-- ActionGameManager
+}
+
+package NovelGame {
+    class NovelGameManager {
+        -episodeManager: EpisodeManager
+        -stateMachine: StateMachine<NovelGameManager>
+    }
+
+    GameManager o-- NovelGameManager
+}
+
+package PlayerComponent {
+    class Player {
+        -inputManager: InputManager
+        -inventory: Inventory
+        -character: Character
+        -info: PlayerInfo
+        -settings: PlayerSettings
+    }
+}
+
+@enduml

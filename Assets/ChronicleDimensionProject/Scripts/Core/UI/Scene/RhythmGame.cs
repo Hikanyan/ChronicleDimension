@@ -2,14 +2,13 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using CriWare;
 
-public class Game : UIBase
+public class RhythmGame : UIBase
 {
     // Game UIの実装
     
-    
     private void Start()
     {
-        
     }
 }

@@ -1,0 +1,67 @@
+@startuml
+
+class Player {
+    +login(): void
+    +checkLevelUp(): void
+    +receiveRewards(Reward): void
+}
+
+class Stamina {
+    +displayStamina(): void
+    +consumeStamina(): void
+    +checkSufficientStamina(): bool
+    +purchaseStamina(): void
+}
+
+class GameSettings {
+    +adjustVolume(): void
+}
+
+class RhythmGame {
+    +select(): void
+    +adjustNoteSpeed(): void
+    +selectSong(): void
+    +startGame(): void
+    +showResult(): void
+}
+
+class ActionGame {
+    +select(): void
+    +selectStage(): void
+    +startGame(): void
+    +showResult(): void
+}
+
+class OnlineMatchmaking {
+    +initiateMatchmaking(): void
+}
+
+class Gacha {
+    +selectGacha(): void
+    +showGachaDetails(): void
+    +spinGacha(): void
+    +consumeCurrency(CurrencyType): void
+}
+
+class Reward {
+    -experience: int
+    -coins: int
+    -items: List<Item>
+}
+
+enum CurrencyType {
+    COIN,
+    GEM
+}
+
+class Item {
+}
+
+Player --> Stamina : Uses
+Player --> Reward : Receives
+RhythmGame --> OnlineMatchmaking : Initiates
+ActionGame --> OnlineMatchmaking : Initiates
+Gacha --> Player : Gives rewards to
+Gacha --> CurrencyType : Consumes
+
+@enduml

@@ -1,28 +1,23 @@
 ﻿using System;
+using ChronicleDimension.Core;
 using TMPro;
 using UnityEngine;
+using UniRx;
+using Cysharp.Threading.Tasks;
 
 public class Title : UIBase
 {
     [SerializeField] private GameObject titleUI;
-    [SerializeField] private CRIAudioList bgmName;
+    [SerializeField] private string bgmName;
 
     private Action _start;
 
     // Titleの実装
-    void TitleStart()
+    void Start()
     {
         //ログイン、BGM、TitleUIの表示
-        CRIAudioManager.Instance.CribgmPlay(bgmName);
 
-        // GameManagerのOnGameStartイベントにイベントハンドラを登録
-        GameManager.Instance.OnGameStart += HandleGameStart;
-    }
-
-    void HandleGameStart()
-    {
-        // ゲームが開始されたときの処理をここに記述
-        // 例えば、タイトルUIの非表示化など
-        titleUI.SetActive(false);
+        titleUI.SetActive(true);
+        CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Bgm,bgmName);
     }
 }

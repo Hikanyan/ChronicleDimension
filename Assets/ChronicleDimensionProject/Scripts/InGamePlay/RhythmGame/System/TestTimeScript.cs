@@ -9,11 +9,10 @@ public class TestTimeScript : MonoBehaviour
 
     private void Start()
     {
-        timerManager = new TimerManager();
-
-        
-        // タイマーのリアルタイム値と状態を出力するサンプル
-        timerManager.RealTime.Subscribe(value => Debug.Log($"RealTime: {(float)value}, IsRunning: {timerManager.IsRunning.Value}")).AddTo(this);
+        // タイマーのリアルタイム値と状態を出力する
+        timerManager.RealTime.Subscribe(value => 
+            Debug.Log($"RealTime: {(float)value}, IsRunning: {timerManager.IsRunning.Value}"))
+            .AddTo(this);
         // タイマーを開始
         timerManager.TimerStart();
 

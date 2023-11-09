@@ -1,0 +1,30 @@
+@startuml
+
+package Core {
+    class GameManager {
+        ' Managerクラスのシングルトンインスタンスにアクセス
+        -rhythmGameManager: RhythmGameManager.Instance
+        -uiManager: UIManager.Instance
+        ' ... 他のManagerクラスへの参照も同様にシングルトンインスタンスを使用
+    }
+}
+
+package Singleton {
+    class AbstractSingleton<T> {
+        -_instance: static T
+        +Instance: T {get}
+        ' ... 他のメソッド
+    }
+    class RhythmGameManager {
+        ' RhythmGameManager固有のメソッドとプロパティ
+    }
+
+    class UIManager {
+        ' UIManager固有のメソッドとプロパティ
+    }
+
+    RhythmGameManager -|> AbstractSingleton
+    UIManager -|> AbstractSingleton
+}
+
+@enduml

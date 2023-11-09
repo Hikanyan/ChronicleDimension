@@ -1,10 +1,9 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
 /// 継承してSingleton使用します。
 /// 継承先でAwakeが必要な場合OnAwake()を呼んでください。
+/// 継承先でインスタンスをDeleteする必要な場合はDelete()を呼んでください。
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
@@ -46,10 +45,15 @@ public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
         OnAwake();
     }
 
-    /// <summary>
-    /// 継承先でAwakeが必要な場合
-    /// </summary>
+    /// <summary> 継承先でAwakeが必要な場合 </summary>
     protected virtual void OnAwake()
     {
+    }
+
+    /// <summary> 継承先でインスタンスをDeleteする必要な場合 </summary>
+    protected void Delete()
+    {
+        Destroy(gameObject);
+        _instance = null;//インスタンスをnullにすることで再度Awakeが呼ばれるようにする
     }
 }

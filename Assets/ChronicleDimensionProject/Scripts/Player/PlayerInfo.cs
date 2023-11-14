@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-
-/// <summary>PlayerInfo </summary>
-public class PlayerInfo : AbstractSingleton<PlayerInfo>
+﻿namespace ChronicleDimensionProject.Player
 {
+    /// <summary>PlayerInfo </summary>
+    public class PlayerInfo : AbstractSingleton<PlayerInfo>
+    {
     
+    }
 }

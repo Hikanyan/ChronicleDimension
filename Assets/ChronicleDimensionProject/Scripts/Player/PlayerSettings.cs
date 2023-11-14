@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-public class PlayerSettings:MonoBehaviour
+namespace ChronicleDimensionProject.Player
 {
-    public float notesSpeed = 10.0f;
-    public float judgeOffset = 0.0f;
-    public bool showFPS = true;
-    public float BGMVolume = 1.0f;
-    public float SEVolume = 0.2f;
+    public class PlayerSettings : MonoBehaviour
+    {
+        public float notesSpeed = 10.0f;
+        public float judgeOffset = 0.0f;
+        public bool showFPS = true;
+        public float bgmVolume = 1.0f;
+        public float seVolume = 0.2f;
+    }
 }

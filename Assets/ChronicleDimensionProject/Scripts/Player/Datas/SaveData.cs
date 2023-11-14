@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using ChronicleDimension.Core;
+using ChronicleDimensionProject.Player;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

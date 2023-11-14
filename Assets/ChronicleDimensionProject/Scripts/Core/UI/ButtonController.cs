@@ -1,17 +1,17 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
-
+﻿using System.Collections.Generic;
+using ChronicleDimensionProject.Scripts.Core.UI;
+using UnityEngine;
+//presenter としての役割を持つ
 [RequireComponent(typeof(InputUIButton))]
-public class TargetChangeUIController : MonoBehaviour
+public class ButtonController : MonoBehaviour
 {
     private InputUIButton _inputUIButton;
-    [SerializeField] private GameObject target;
+    private IUserInterface _targetPanel;
 
     private void Start()
     {
         TryGetComponent(out _inputUIButton);
-        _inputUIButton.Target = target;
-
+        UIManager.Instance.RegisterPanel(_targetPanel);
         // InputUIButtonのイベントにメソッドを登録
         _inputUIButton.OnButtonDown += HandleButtonDown;
         _inputUIButton.OnButtonUp += HandleButtonUp;
@@ -19,16 +19,12 @@ public class TargetChangeUIController : MonoBehaviour
 
     private void HandleButtonDown()
     {
-        // パネルを表示
-        UIManager.Instance.ShowPanel(target); // targetを型ではなくそのまま渡す
     }
 
     private void HandleButtonUp()
     {
-        // パネルを非表示
-        UIManager.Instance.HidePanel(target); // targetを型ではなくそのまま渡す
+        UIManager.Instance.ShowPanel(_targetPanel);
     }
-
     private void OnDestroy()
     {
         // イベントの購読解除

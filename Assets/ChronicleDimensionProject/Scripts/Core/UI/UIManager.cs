@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using ChronicleDimensionProject.Scripts.Core.UI;
 using UnityEngine;
 using UniRx;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 
 
 public class UIManager : AbstractSingleton<UIManager>
 {
-    private readonly Dictionary<Type, IUserInterface> _panels = new();
+    private readonly Dictionary<Type, IUserInterface> _panels = new Dictionary<Type, IUserInterface>();
 
-    /// <summary>  パネルの登録メソッド </summary>
-    public void RegisterPanel<T>(T panel) where T : MonoBehaviour, IUserInterface
+    public void RegisterPanel(IUserInterface panel)
     {
-        _panels[typeof(T)] = panel;
-        // パネルの表示状態を監視して、表示状態が変化したらパネルの表示状態を変更する
+        Type panelType = panel.GetType();
+        _panels[panelType] = panel;
+
+        //AddToの代わりにCompositeDisposableを使うこともできます。
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+
         panel.IsVisible.Subscribe(isVisible =>
         {
             if (isVisible)
@@ -26,16 +27,18 @@ public class UIManager : AbstractSingleton<UIManager>
             {
                 panel.Hide();
             }
-        }).AddTo(panel); //パネルの破棄時に監視を解除する
+        }).AddTo(compositeDisposable);
+
+        // ここで compositeDisposable を Dispose することで、手動で解放できます
+        // compositeDisposable.Dispose();
     }
 
-    /// <summary>  Panelの表示メソッド </summary>
-    public void ShowPanel<T>() where T : IUserInterface
+    public void ShowPanel(IUserInterface panel)
     {
-        Type panelType = typeof(T);
-        if (_panels.TryGetValue(panelType, out IUserInterface panel))
+        Type panelType = panel.GetType();
+        if (_panels.TryGetValue(panelType, out IUserInterface registeredPanel))
         {
-            panel.IsVisible.Value = true;
+            registeredPanel.IsVisible.Value = true;
         }
         else
         {
@@ -43,13 +46,12 @@ public class UIManager : AbstractSingleton<UIManager>
         }
     }
 
-    /// <summary>  パネルの非表示メソッド </summary>
-    public void HidePanel<T>() where T : IUserInterface
+    public void HidePanel(IUserInterface panel)
     {
-        Type panelType = typeof(T);
-        if (_panels.TryGetValue(panelType, out IUserInterface panel))
+        Type panelType = panel.GetType();
+        if (_panels.TryGetValue(panelType, out IUserInterface registeredPanel))
         {
-            panel.IsVisible.Value = false;
+            registeredPanel.IsVisible.Value = false;
         }
         else
         {

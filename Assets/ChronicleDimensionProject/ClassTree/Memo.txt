@@ -54,3 +54,14 @@
 再度使われる場合は、クラスを再生成する。データを読み込む。
 
 
+
+オブジェクト指向
+
+MVRPパターン(UI)
+
+デザインパターン
+Singleton(GameManager)
+Observer(UI)
+Factory(ノーツの生成)
+state(それぞれのゲームの状態、Playerの状態)
+command(ノーツの動き ユーザの入力)

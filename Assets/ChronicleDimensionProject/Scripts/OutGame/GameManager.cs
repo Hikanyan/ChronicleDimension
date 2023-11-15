@@ -71,21 +71,19 @@ namespace ChronicleDimensionProject.Scripts.OutGame
             stateMachine.Start<TitleState>();
         }
 
-        private class TitleState : StateMachine<GameManager>.State
+        private class TitleState : State
         {
             protected override async void OnEnter(State prevState)
             {
                 await SceneController.Instance.LoadScene("TitleScene");
-                UIManager.Instance.ShowPanel<Title>();
             }
 
             protected override void OnUpdate()
             {
             }
 
-            protected override async void OnExit(State nextState)
+            protected override void OnExit(State nextState)
             {
-                UIManager.Instance.HidePanel<Title>();
             }
         }
     }

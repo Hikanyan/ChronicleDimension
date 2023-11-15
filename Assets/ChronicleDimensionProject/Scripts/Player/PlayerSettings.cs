@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary>Playerが編集できるデータ </summary>
 public class PlayerSettings:MonoBehaviour
 {
     public float notesSpeed = 10.0f;

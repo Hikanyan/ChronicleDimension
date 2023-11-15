@@ -5,15 +5,16 @@ using CriWare;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ChronicleDimension.Core
 {
     public class CriAudioManager : AbstractSingleton<CriAudioManager>
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
-        [SerializeField] string _cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
-        [SerializeField] string _cueSheetSE = "CueSheet_SE"; //.acb
-        [SerializeField] string _cueSheetVoice = "CueSheet_Voice"; //.acb
+        [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
+        [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
+        [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
 
         public enum CueSheet
         {
@@ -66,15 +67,15 @@ namespace ChronicleDimension.Core
         {
             if (cueSheet == CueSheet.Bgm)
             {
-                return _cueSheetBGM;
+                return cueSheetBGM;
             }
             else if (cueSheet == CueSheet.Se)
             {
-                return _cueSheetSE;
+                return cueSheetSe;
             }
             else if (cueSheet == CueSheet.Voice)
             {
-                return _cueSheetVoice;
+                return cueSheetVoice;
             }
 
             return null;
@@ -89,11 +90,11 @@ namespace ChronicleDimension.Core
             // CriAtom作成
             new GameObject().AddComponent<CriAtom>();
             // BGM acb追加
-            CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", null, null);
+            CriAtom.AddCueSheet(cueSheetBGM, $"{cueSheetBGM}.acb", null, null);
             // SE acb追加
-            CriAtom.AddCueSheet(_cueSheetSE, $"{_cueSheetSE}.acb", null, null);
+            CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
             //Voice acb追加
-            CriAtom.AddCueSheet(_cueSheetVoice, $"{_cueSheetVoice}.acb", null, null);
+            CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
         }
 
         /// <summary>マスターボリューム</summary>

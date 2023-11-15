@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using ChronicleDimension.Core;
+using ChronicleDimensionProject.Scripts.Core.UI;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
@@ -22,7 +23,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
     CriAudioManager.CueSheet _cueSheet;
     string _musicName;
-    
+
     float _delayTime = 0.0f;
     bool _showFPS = false;
     bool _autoMode = false;
@@ -46,10 +47,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     protected override void OnAwake()
     {
         Application.targetFrameRate = 0;
-        UIManager.Instance.AddUI<RhythmGame>(hudUI);
-        UIManager.Instance.AddUI<RhythmGame>(musicPreviewUI);
-        UIManager.Instance.AddUI<RhythmGame>(fpsUI);
-
+        //UIManager.Instance.RegisterPanel(hudUI.GetComponent<IUserInterface>());
     }
 
     void Start()
@@ -66,7 +64,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
             _delayTime = openMusic.musicData.delayTime;
             _autoMode = openMusic.musicData.autoMode;
         }
-        
+
         SetShowMusicPreviewUI(true);
     }
 
@@ -90,6 +88,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     {
         timerManager.TimerStop();
     }
+
     public enum RhythmGameState
     {
         None, // ゲームが開始されていない状態

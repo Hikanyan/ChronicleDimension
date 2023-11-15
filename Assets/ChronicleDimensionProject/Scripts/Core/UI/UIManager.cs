@@ -1,105 +1,61 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using ChronicleDimensionProject.Scripts.Core.UI;
 using UnityEngine;
 using UniRx;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
+
 
 public class UIManager : AbstractSingleton<UIManager>
 {
-    public GameObject uiPrefab; // UIのプレハブ
-    private Dictionary<string, GameObject> uiDictionary; // UIのインスタンスを管理する辞書
+    private readonly Dictionary<Type, IUserInterface> _panels = new Dictionary<Type, IUserInterface>();
 
-    protected override void OnAwake()
+    public void RegisterPanel(IUserInterface panel)
     {
-        uiDictionary = new Dictionary<string, GameObject>(); // UIのインスタンスを格納する辞書を初期化
+        Type panelType = panel.GetType();
+        _panels[panelType] = panel;
 
-        // UIプレハブをインスタンス化し、各UIを表示する
-        GameObject uiObject = Instantiate(uiPrefab);
-        uiObject.name = uiPrefab.name;
+        //AddToの代わりにCompositeDisposableを使うこともできます。
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-        // 各UIを取得して表示
-        foreach (Transform child in uiObject.transform)
+        panel.IsVisible.Subscribe(isVisible =>
         {
-            string uiName = child.gameObject.name;
-            uiDictionary.Add(uiName, child.gameObject);
-            child.gameObject.SetActive(false);
-        }
+            if (isVisible)
+            {
+                panel.Show();
+            }
+            else
+            {
+                panel.Hide();
+            }
+        }).AddTo(compositeDisposable);
+
+        // ここで compositeDisposable を Dispose することで、手動で解放できます
+        // compositeDisposable.Dispose();
     }
 
-    public async UniTask AddUI<T>(GameObject uiPrefab) where T : UIBase
+    public void ShowPanel(IUserInterface panel)
     {
-        string uiName = typeof(T).Name;
-        if (!uiDictionary.ContainsKey((uiName)))
+        Type panelType = panel.GetType();
+        if (_panels.TryGetValue(panelType, out IUserInterface registeredPanel))
         {
-            GameObject uiObject = await InstantiateUI(uiName, uiPrefab);
-            uiDictionary.Add(uiName, uiObject);
+            registeredPanel.IsVisible.Value = true;
         }
         else
         {
-            Debug.Log($"{uiName} UI already exists in the dictionary.");
+            Debug.LogWarning($"Panel of type {panelType} not found.");
         }
     }
 
-    // 指定されたUIを表示するメソッド
-    public async UniTask OpenUI<T>() where T : UIBase
+    public void HidePanel(IUserInterface panel)
     {
-        string uiName = typeof(T).Name; // ジェネリック型からUIの名前を取得
-
-        if (!uiDictionary.ContainsKey(uiName))
+        Type panelType = panel.GetType();
+        if (_panels.TryGetValue(panelType, out IUserInterface registeredPanel))
         {
-            // UIが辞書に存在しない場合は、UIを生成して辞書に追加
-            GameObject uiObject = await InstantiateUI(uiName);
-            uiDictionary.Add(uiName, uiObject);
+            registeredPanel.IsVisible.Value = false;
         }
         else
         {
-            // UIが辞書に存在する場合は、UIをアクティブにする
-            GameObject uiObject = uiDictionary[uiName];
-            uiObject.SetActive(true);
+            Debug.LogWarning($"Panel of type {panelType} not found.");
         }
     }
-
-    // 指定されたUIを非表示にするメソッド
-    public void CloseUI<T>() where T : UIBase
-    {
-        string uiName = typeof(T).Name; // ジェネリック型からUIの名前を取得
-
-        if (uiDictionary.ContainsKey(uiName))
-        {
-            // UIが辞書に存在する場合は、UIを非アクティブにする
-            GameObject uiObject = uiDictionary[uiName];
-            uiObject.SetActive(false);
-        }
-    }
-
-    private async UniTask<GameObject> InstantiateUI(string uiName)
-    {
-        return await InstantiateUI(uiName, null);
-    }
-
-    private async UniTask<GameObject> InstantiateUI(string uiName, GameObject uiPrefab)
-    {
-        GameObject uiObject;
-
-        if (uiPrefab != null)
-        {
-            uiObject = Instantiate(uiPrefab); // プレハブからインスタンスを生成し、親オブジェクトの下に配置
-        }
-        else
-        {
-            uiObject = (GameObject)await Resources.LoadAsync(uiName).ToUniTask(); // UIのプレハブを非同期にロード
-        }
-
-        uiObject.name = uiName; // UIの名前を設定
-
-        await uiObject.transform.DOScale(Vector3.zero, 0f).From().SetEase(Ease.OutBack).AsyncWaitForCompletion();
-        // UIのスケールをゼロからアニメーションで徐々に拡大する
-
-        // UIの表示
-        uiObject.SetActive(true);
-
-        return uiObject; // 生成したUIのインスタンスを返す
-    }
-
 }
-

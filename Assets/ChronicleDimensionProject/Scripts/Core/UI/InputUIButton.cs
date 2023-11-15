@@ -1,35 +1,41 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
+using DG.Tweening;
+using UniRx;
+using System;
 
 
-public abstract class InputUIButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+[RequireComponent(typeof(CanvasGroup))]
+public class InputUIButton : InputUIButtonBase
 {
-    protected bool isPressed = false;
+    private CanvasGroup _button;
+    private Vector3 _originalScale;
 
-    /// <summary>
-    /// クリックしたときの処理を実装する
-    /// </summary>
-    protected virtual void OnPointerDown()
+    // イベントの定義
+    public event Action OnButtonDown;
+    public event Action OnButtonUp;
+
+    
+    private void Start()
     {
+        _button = GetComponent<CanvasGroup>();
+        _originalScale = transform.localScale;
     }
 
-    /// <summary>
-    /// クリックを離したときの処理を実装する
-    /// </summary>
-    protected virtual void OnPointerUp()
+    protected override void OnPointerDownEvent()
     {
+        // DOTweenを使ってスケールを小さくするアニメーションを実行
+        transform.DOScale(_originalScale * 0.8f, 0.2f);
+        _button.alpha = 0.5f;
+        // イベントの発火
+        OnButtonDown?.Invoke();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    protected override void OnPointerUpEvent()
     {
-        isPressed = true;
-        OnPointerDown();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        isPressed = false;
-        OnPointerUp();
+        // DOTweenを使ってスケールを元に戻すアニメーションを実行
+        transform.DOScale(_originalScale, 0.2f);
+        _button.alpha = 1f;
+        // イベントの発火
+        OnButtonUp?.Invoke();
     }
 }

@@ -1,93 +1,90 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using ChronicleDimension.Core;
 using ChronicleDimension.InGame.ActionGame;
 using ChronicleDimension.InGame.NovelGame;
+using ChronicleDimensionProject.Player;
 using UnityEngine;
-using UniRx;
-using Cysharp.Threading.Tasks;
-using UnityEngine.Serialization;
-using State = StateMachine<GameManager>.State;
+using State = StateMachine<ChronicleDimensionProject.Scripts.OutGame.GameManager>.State;
 
-/// <summary>
-/// ゲーム全体の管理
-/// </summary>
-[Serializable]
-public class GameManager : AbstractSingleton<GameManager>
+namespace ChronicleDimensionProject.Scripts.OutGame
 {
-    public StateMachine<GameManager> stateMachine;
-    public GameState CurrentGameState { get; private set; }
-
-    public RhythmGameManager rhythmGameManager;
-    public ActionGameManager actionGameManager;
-    public NovelGameManager novelGameManager;
-
-    /// <summary> シーン管理 </summary>
-    public SceneController sceneController;
-
-    ///<summary> UI管理 </summary>
-    public UIManager uiManager;
-
-    /// <summary> オーディオ管理 </summary>
-    public CriAudioManager audioManager;
-
-    /// <summary> セーブ管理 </summary>
-    public SaveManager saveManager;
-
-    /// <summary> ゲーム終了の管理 </summary>
-    public void ExitGame()
+    /// <summary>
+    /// ゲーム全体の管理
+    /// </summary>
+    [Serializable]
+    public class GameManager : AbstractSingleton<GameManager>
     {
-        Application.Quit();
-    }
+        public StateMachine<GameManager> stateMachine;
+        public GameState CurrentGameState { get; private set; }
 
-    /// <summary> セーブの管理 </summary>
-    public void SaveGame()
-    {
-        saveManager.SaveGame();
-    }
+        public RhythmGameManager rhythmGameManager;
+        public ActionGameManager actionGameManager;
+        public NovelGameManager novelGameManager;
 
-    /// <summary> ロードの管理 </summary>
-    public void LoadGame()
-    {
-        saveManager.LoadGame();
-    }
+        /// <summary> シーン管理 </summary>
+        public SceneController sceneController;
 
-    protected override void OnAwake()
-    {
-        // 各Singletonクラスの初期化
-        sceneController = SceneController.Instance;
-        uiManager = UIManager.Instance;
-        audioManager = CriAudioManager.Instance;
-        saveManager = SaveManager.Instance;
-        rhythmGameManager = RhythmGameManager.Instance;
-        actionGameManager = ActionGameManager.Instance;
-        novelGameManager = NovelGameManager.Instance;
+        ///<summary> UI管理 </summary>
+        public UIManager uiManager;
 
-        Initialize();
-    }
+        /// <summary> オーディオ管理 </summary>
+        public CriAudioManager audioManager;
 
-    public void Initialize()
-    {
-        stateMachine = new StateMachine<GameManager>(this);
-        stateMachine.Start<TitleState>();
-    }
+        /// <summary> セーブ管理 </summary>
+        public SaveManager saveManager;
 
-    private class TitleState : State
-    {
-        protected override async void OnEnter(State prevState)
+        /// <summary> ゲーム終了の管理 </summary>
+        public void ExitGame()
         {
-            await SceneController.Instance.LoadScene("TitleScene");
-            await UIManager.Instance.OpenUI<Title>();
+            Application.Quit();
         }
 
-        protected override void OnUpdate()
+        /// <summary> セーブの管理 </summary>
+        public void SaveGame()
         {
+            saveManager.SaveGame();
         }
 
-        protected override async void OnExit(State nextState)
+        /// <summary> ロードの管理 </summary>
+        public void LoadGame()
         {
-            UIManager.Instance.CloseUI<Title>();
+            saveManager.LoadGame();
+        }
+
+        protected override void OnAwake()
+        {
+            // 各Singletonクラスの初期化
+            sceneController = SceneController.Instance;
+            uiManager = UIManager.Instance;
+            audioManager = CriAudioManager.Instance;
+            saveManager = SaveManager.Instance;
+            rhythmGameManager = RhythmGameManager.Instance;
+            actionGameManager = ActionGameManager.Instance;
+            novelGameManager = NovelGameManager.Instance;
+
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            stateMachine = new StateMachine<GameManager>(this);
+            stateMachine.Start<TitleState>();
+        }
+
+        private class TitleState : State
+        {
+            protected override async void OnEnter(State prevState)
+            {
+                await SceneController.Instance.LoadScene("TitleScene");
+            }
+
+            protected override void OnUpdate()
+            {
+            }
+
+            protected override void OnExit(State nextState)
+            {
+            }
         }
     }
 }

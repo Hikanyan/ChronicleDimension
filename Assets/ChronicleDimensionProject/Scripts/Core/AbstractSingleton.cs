@@ -8,33 +8,33 @@ using UnityEngine;
 /// <typeparam name="T"></typeparam>
 public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
 {
-    private static T _instance;
+    private static T instance;
 
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = FindObjectOfType<T>();
-                if (_instance == null)
+                instance = FindObjectOfType<T>();
+                if (instance == null)
                 {
                     GameObject singletonObject = new GameObject();
-                    _instance = singletonObject.AddComponent<T>();
+                    instance = singletonObject.AddComponent<T>();
                     singletonObject.name = typeof(T).ToString();
                     DontDestroyOnLoad(singletonObject);
                 }
             }
 
-            return _instance;
+            return instance;
         }
     }
 
     protected virtual void Awake()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            _instance = this as T;
+            instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -54,6 +54,6 @@ public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
     protected void Delete()
     {
         Destroy(gameObject);
-        _instance = null;//インスタンスをnullにすることで再度Awakeが呼ばれるようにする
+        instance = null;//インスタンスをnullにすることで再度Awakeが呼ばれるようにする
     }
 }

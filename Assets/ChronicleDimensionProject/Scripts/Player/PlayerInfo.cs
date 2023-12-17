@@ -18,3 +18,12 @@ public class PlayerInfo
     public string rank = "F";
     
 }
+
+public class PlayData
+{
+    public string rank;
+    public float clearPercent;
+    public int score;
+    public int judgeScores;
+    public int combo;
+}

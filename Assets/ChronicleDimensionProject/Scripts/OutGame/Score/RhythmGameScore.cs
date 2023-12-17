@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ChronicleDimensionProject.Player;
+using UnityEngine;
 using UniRx;
 
 public class RhythmGameScore : ScoreController
@@ -83,25 +84,28 @@ public class RhythmGameScore : ScoreController
         clearPercent = (float)Score.Value / MaxScore;
         if (_judgeScores.PurePerfect >= NotesNum) return "APP";
         if (_judgeScores.Perfect + _judgeScores.PurePerfect >= NotesNum) return "AP";
-        if (clearPercent >= 1.00f) return "EX";
-        if (clearPercent >= 0.99f) return "SSS";
-        if (clearPercent >= 0.98f) return "SS";
-        if (clearPercent >= 0.97f) return "S";
-        if (clearPercent >= 0.96f) return "AAA";
-        if (clearPercent >= 0.95f) return "AA";
-        if (clearPercent >= 0.94f) return "A";
-        if (clearPercent >= 0.93f) return "BBB";
-        if (clearPercent >= 0.90f) return "BB";
-        if (clearPercent >= 0.80f) return "B";
-        if (clearPercent >= 0.70f) return "CCC";
-        if (clearPercent >= 0.60f) return "CC";
-        if (clearPercent >= 0.50f) return "C";
-        return "D";
+        return clearPercent switch
+        {
+            >= 1.00f => "EX",
+            >= 0.99f => "SSS",
+            >= 0.98f => "SS",
+            >= 0.97f => "S",
+            >= 0.96f => "AAA",
+            >= 0.95f => "AA",
+            >= 0.94f => "A",
+            >= 0.93f => "BBB",
+            >= 0.90f => "BB",
+            >= 0.80f => "B",
+            >= 0.70f => "CCC",
+            >= 0.60f => "CC",
+            >= 0.50f => "C",
+            _ => "D"
+        };
     }
 
-    public ResultDatas GetResultData()
+    public RhythmGameResultDatas GetResultData()
     {
-        ResultDatas resultDatas = new ResultDatas();
+        RhythmGameResultDatas resultDatas = new RhythmGameResultDatas();
         resultDatas.rank = GetRank();
         resultDatas.clearPercent = clearPercent;
         resultDatas.score = Score.Value;

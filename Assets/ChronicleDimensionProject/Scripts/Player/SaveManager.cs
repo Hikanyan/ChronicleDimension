@@ -9,7 +9,7 @@ namespace ChronicleDimensionProject.Player
     public class SaveManager : AbstractSingleton<SaveManager>
     {
         /// <summary> セーブデータの保存先パスを取得します。 </summary>
-        string SavePath => Application.persistentDataPath + "/saved.json";
+        private static string SavePath => Application.persistentDataPath + "/saved.json";
 
         /// <summary> 現在のセーブデータを取得します。 </summary>
         private SaveData SaveData { get; set; }
@@ -44,15 +44,13 @@ namespace ChronicleDimensionProject.Player
         /// <summary> 指定された設定をセーブします。 </summary>
         public static void SaveSettings<T>(T setting)
         {
-            string jsonstr = JsonUtility.ToJson(setting);
-            Debug.Log(jsonstr);
+            string jsonStr = JsonUtility.ToJson(setting);
+            Debug.Log(jsonStr);
 #if UNITY_IOS && UNITY_EDITOR
         File.WriteAllText(GetPath<T>(), jsonstr);
 #else
-            using (StreamWriter writer = new StreamWriter(GetPath<T>(), false))
-            {
-                writer.Write(jsonstr);
-            }
+            using StreamWriter writer = new StreamWriter(GetPath<T>(), false);
+            writer.Write(jsonStr);
 #endif
         }
 
@@ -60,10 +58,8 @@ namespace ChronicleDimensionProject.Player
         public void SaveGame()
         {
             string json = JsonUtility.ToJson(SaveData);
-            using (StreamWriter writer = new StreamWriter(SavePath, false))
-            {
-                writer.WriteLine(json);
-            }
+            using StreamWriter writer = new StreamWriter(SavePath, false);
+            writer.WriteLine(json);
         }
 
         /// <summary> ゲームのセーブデータをロードします。 </summary>
@@ -77,11 +73,9 @@ namespace ChronicleDimensionProject.Player
             }
             else
             {
-                using (StreamReader reader = new StreamReader(SavePath))
-                {
-                    string jsonDate = reader.ReadToEnd();
-                    SaveData = JsonUtility.FromJson<SaveData>(jsonDate);
-                }
+                using StreamReader reader = new StreamReader(SavePath);
+                string jsonDate = reader.ReadToEnd();
+                SaveData = JsonUtility.FromJson<SaveData>(jsonDate);
             }
         }
 

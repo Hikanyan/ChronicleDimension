@@ -26,13 +26,8 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
     float _delayTime = 0.0f;
     bool _showFPS = false;
-    bool _autoMode = false;
 
-    public bool AutoMode
-    {
-        get => _autoMode;
-        set => _autoMode = value;
-    }
+    public bool AutoMode { get; set; } = false;
 
     public TimerManager timerManager;
     [FormerlySerializedAs("rhythmGameScoreManager")] public RhythmGameScore rhythmGameScore;
@@ -58,11 +53,10 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
 
         if (openMusic != null)
         {
-            _cueSheet = openMusic.musicData.cueSheet;
             _musicName = openMusic.musicData.musicName;
             musicJsonReference = openMusic.musicData.musicJsonReference;
             _delayTime = openMusic.musicData.delayTime;
-            _autoMode = openMusic.musicData.autoMode;
+            AutoMode = openMusic.musicData.autoMode;
         }
 
         SetShowMusicPreviewUI(true);
@@ -81,7 +75,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     void GameStart()
     {
         timerManager.TimerStart();
-        //CRIAudioManager.Instance.PlayBGM();
+        CriAudioManager.Instance.PlayBGM(_cueSheet, _musicName);
     }
 
     public void GameEnd()

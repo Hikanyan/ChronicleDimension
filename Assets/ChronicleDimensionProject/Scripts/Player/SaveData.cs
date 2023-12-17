@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace ChronicleDimensionProject.Player
 {
@@ -15,7 +16,7 @@ namespace ChronicleDimensionProject.Player
     [Serializable]
     public class MasterDataBase
     {
-        public int Version;
+        [FormerlySerializedAs("Version")] public int version;
     }
 
 
@@ -50,6 +51,28 @@ namespace ChronicleDimensionProject.Player
         public int goodCount;
         public int badCount;
         public int missCount;
+        public bool autoMode;
+    }
+    public class RhythmGameResultDatas
+    {
+        public string rank;
+        public float clearPercent;
+        public int score;
+        public JudgeScores judgeScores;
+        public int maxCombo;
+    }
+    public class RhythmGameResultData
+    {
+        public string musicName;
+        public int score;
+        public int maxScore;
+        public int maxCombo;
+        public int perfectCount;
+        public int greatCount;
+        public int goodCount;
+        public int badCount;
+        public int missCount;
+        public bool autoMode;
     }
 
     [Serializable]
@@ -61,7 +84,6 @@ namespace ChronicleDimensionProject.Player
     [Serializable]
     public class ActionGameData : ScriptableObject
     {
-        // Add ActionGameData fields here (e.g., score, level, etc.)
     }
 
     [Serializable]
@@ -73,7 +95,6 @@ namespace ChronicleDimensionProject.Player
     [Serializable]
     public class NovelGameData : ScriptableObject
     {
-        // Add NovelGameData fields here (e.g., currentChapter, choicesMade, etc.)
     }
 
     [Serializable]
@@ -94,23 +115,6 @@ namespace ChronicleDimensionProject.Player
     }
 
     [Serializable]
-    public class QuestMaster : MasterDataBase
-    {
-        public QuestData[] questDatas;
-    }
-
-    [Serializable]
-    public class QuestData
-    {
-        public int id;
-        public string name;
-        public string resource;
-        public DateTime startAt;
-        public DateTime gameEndAt;
-        public DateTime endAt;
-    }
-
-    [Serializable]
     public class ItemMaster : MasterDataBase
     {
         public ItemData[] itemDatas;
@@ -121,9 +125,6 @@ namespace ChronicleDimensionProject.Player
     {
         public int id;
         public string name;
-        public string resource;
-        public string description;
-        public int price;
         public int maxCount;
         public int maxLevel;
         public int rarity;

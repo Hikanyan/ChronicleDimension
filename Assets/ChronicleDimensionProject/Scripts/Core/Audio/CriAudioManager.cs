@@ -81,21 +81,6 @@ namespace ChronicleDimension.Core
             return null;
         }
 
-        /// <summary>CriAtom の追加。acb追加</summary>
-        protected override void OnAwake()
-        {
-            // acf設定
-            string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
-            CriAtomEx.RegisterAcf(null, path);
-            // CriAtom作成
-            new GameObject().AddComponent<CriAtom>();
-            // BGM acb追加
-            CriAtom.AddCueSheet(cueSheetBGM, $"{cueSheetBGM}.acb", null, null);
-            // SE acb追加
-            CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
-            //Voice acb追加
-            CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
-        }
 
         /// <summary>マスターボリューム</summary>
         /// <value>変更したい値</value>
@@ -180,8 +165,21 @@ namespace ChronicleDimension.Core
             }
         }
 
-        private CriAudioManager()
+        /// <summary>CriAtom の追加。acb追加</summary>
+        protected override void OnAwake()
         {
+            // acf設定
+            string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
+            CriAtomEx.RegisterAcf(null, path);
+            // CriAtom作成
+            new GameObject().AddComponent<CriAtom>();
+            // BGM acb追加
+            CriAtom.AddCueSheet(cueSheetBGM, $"{cueSheetBGM}.acb", null, null);
+            // SE acb追加
+            CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
+            //Voice acb追加
+            CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
+
             MasterVolumeChanged += volume =>
             {
                 _bgmPlayer.SetVolume(volume * _bgmVolume);
@@ -243,7 +241,7 @@ namespace ChronicleDimension.Core
             SceneManager.sceneUnloaded += Unload;
         }
 
-        ~CriAudioManager()
+        private void OnDestroy()
         {
             SceneManager.sceneUnloaded -= Unload;
         }

@@ -1,59 +1,77 @@
 using UnityEngine;
 
-/// <summary>
-/// 継承してSingleton使用します。
-/// 継承先でAwakeが必要な場合OnAwake()を呼んでください。
-/// 継承先でインスタンスをDeleteする必要な場合はDelete()を呼んでください。
-/// </summary>
-/// <typeparam name="T"></typeparam>
-public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
+namespace Hikanyan.Core
 {
-    private static T instance;
-
-    public static T Instance
+    /// <summary>
+    /// 継承してSingleton使用します。
+    /// 継承先でAwakeが必要な場合OnAwake()を呼んでください。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public abstract class AbstractSingleton<T> : MonoBehaviour where T : Component
     {
-        get
+        private static T _instance;
+
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = FindObjectOfType<T>();
-                if (instance == null)
+                // 既存のインスタンスが存在しない場合、シーン内から検索
+                if (_instance == null)
                 {
-                    GameObject singletonObject = new GameObject();
-                    instance = singletonObject.AddComponent<T>();
-                    singletonObject.name = typeof(T).ToString();
-                    DontDestroyOnLoad(singletonObject);
+                    _instance = FindObjectOfType<T>();
+
+                    // 既存のインスタンスが存在しない場合、新しいGameObjectを作成してコンポーネントをアタッチ
+                    if (_instance == null)
+                    {
+                        // 既存のインスタンスが存在しない場合、新しいGameObjectを作成してコンポーネントをアタッチ
+                        GameObject singletonObject = new GameObject();
+                        _instance = singletonObject.AddComponent<T>();
+                        singletonObject.name = typeof(T).ToString();
+
+                        // 継承先でDontDestroyOnLoadを使用するかどうかの判断
+                        AbstractSingleton<T> singleton = _instance as AbstractSingleton<T>;
+                        if (singleton != null && singleton.UseDontDestroyOnLoad)
+                        {
+                            DontDestroyOnLoad(singletonObject);
+                        }
+                    }
                 }
+
+                return _instance;
+            }
+        }
+
+        private void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                // 既存のインスタンスが存在し、かつ自身が既存のインスタンスでない場合、自身を破棄
+                Destroy(gameObject);
+                return;
             }
 
-            return instance;
-        }
-    }
+            // 自身をシングルトンのインスタンスとして設定
+            _instance = this as T;
 
-    protected virtual void Awake()
-    {
-        if (instance == null)
+            // 継承先でDontDestroyOnLoadを使用するかどうかの判断
+            if (UseDontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+
+            OnAwake();
+        }
+
+        /// <summary>
+        /// 継承先でAwakeが必要な場合
+        /// </summary>
+        protected virtual void OnAwake()
         {
-            instance = this as T;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
 
-        OnAwake();
-    }
-
-    /// <summary> 継承先でAwakeが必要な場合 </summary>
-    protected virtual void OnAwake()
-    {
-    }
-
-    /// <summary> 継承先でインスタンスをDeleteする必要な場合 </summary>
-    protected void Delete()
-    {
-        Destroy(gameObject);
-        instance = null;//インスタンスをnullにすることで再度Awakeが呼ばれるようにする
+        /// <summary>
+        /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
+        /// </summary>
+        protected virtual bool UseDontDestroyOnLoad => false;
     }
 }

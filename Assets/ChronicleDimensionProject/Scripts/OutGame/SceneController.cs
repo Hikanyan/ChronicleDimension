@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Hikanyan.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

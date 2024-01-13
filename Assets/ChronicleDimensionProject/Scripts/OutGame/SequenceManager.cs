@@ -1,3 +1,4 @@
+using Hikanyan.Core;
 using UnityEngine;
 
 namespace ChronicleDimensionProject.Scripts.OutGame

@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using UniRx;
 using System;
+using UnityEngine.Events;
 
 
 [RequireComponent(typeof(CanvasGroup))]
@@ -12,9 +13,18 @@ public class InputUIButton : InputUIButtonBase
 
     // イベントの定義
     public event Action OnButtonDown;
+
     public event Action OnButtonUp;
 
-    
+    // 自作のクリックイベントを定義
+    [Serializable]
+    public class ButtonClickEvent : UnityEvent<InputUIButton>
+    {
+    }
+
+    public ButtonClickEvent onClick;
+
+
     private void Start()
     {
         _button = GetComponent<CanvasGroup>();
@@ -28,6 +38,7 @@ public class InputUIButton : InputUIButtonBase
         _button.alpha = 0.5f;
         // イベントの発火
         OnButtonDown?.Invoke();
+        
     }
 
     protected override void OnPointerUpEvent()
@@ -37,5 +48,6 @@ public class InputUIButton : InputUIButtonBase
         _button.alpha = 1f;
         // イベントの発火
         OnButtonUp?.Invoke();
+        onClick.Invoke(this);
     }
 }

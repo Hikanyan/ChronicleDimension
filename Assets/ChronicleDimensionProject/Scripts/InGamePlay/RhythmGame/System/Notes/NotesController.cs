@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Hikanyan.Core;
 using UnityEngine;
 
 public class NotesController : AbstractSingleton<NotesController>

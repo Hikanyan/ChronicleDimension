@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Hikanyan.Core;
 using UnityEngine.Events;
 
 namespace ChronicleDimensionProject.Scripts.OutGame

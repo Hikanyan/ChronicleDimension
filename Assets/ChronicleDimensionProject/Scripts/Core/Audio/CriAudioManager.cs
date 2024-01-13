@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace ChronicleDimension.Core
 {
-    public class CriAudioManager : AbstractSingleton<CriAudioManager>
+    public class CriAudioManager
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
@@ -57,6 +57,7 @@ namespace ChronicleDimension.Core
 
         private CueSheet _cueSheet = CueSheet.None;
 
+        public static CriAudioManager Instance;
 
         /// <summary>
         /// enum からstringを返す
@@ -164,9 +165,19 @@ namespace ChronicleDimension.Core
                 get => _cueInfo.length < 0;
             }
         }
+        
+        private void Singleton()
+        {
+            if (Instance == null)
+            {
+                Instance = new CriAudioManager();
+            }
+            
+            
+        }
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        protected override void OnAwake()
+        public CriAudioManager()
         {
             // acf設定
             string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
@@ -241,7 +252,7 @@ namespace ChronicleDimension.Core
             SceneManager.sceneUnloaded += Unload;
         }
 
-        private void OnDestroy()
+        ~CriAudioManager()
         {
             SceneManager.sceneUnloaded -= Unload;
         }

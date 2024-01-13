@@ -3,6 +3,7 @@ using ChronicleDimension.Core;
 using ChronicleDimension.InGame.ActionGame;
 using ChronicleDimension.InGame.NovelGame;
 using ChronicleDimensionProject.Player;
+using Hikanyan.Core;
 using UnityEngine;
 using State = StateMachine<ChronicleDimensionProject.Scripts.OutGame.GameManager>.State;
 
@@ -53,6 +54,7 @@ namespace ChronicleDimensionProject.Scripts.OutGame
 
         protected override void OnAwake()
         {
+            
             // 各Singletonクラスの初期化
             sceneController = SceneController.Instance;
             uiManager = UIManager.Instance;

@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 namespace ChronicleDimension.Core
 {
-    public class CriAudioManager
+    public class CriAudioManager: MonoBehaviour
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb

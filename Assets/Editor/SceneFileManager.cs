@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 
-namespace SoulRunProject.Editor
+namespace ChronicleDimensionProject.Editor
 {
     public class SceneFileManager : EditorWindow
     {
@@ -114,20 +114,21 @@ namespace SoulRunProject.Editor
             GUILayout.BeginHorizontal();
             sceneInfo.GenerateFolder = EditorGUILayout.Toggle(sceneInfo.GenerateFolder, GUILayout.Width(20));
 
-            // シーン名を編集するテキストフィールド
-            GUI.SetNextControlName(sceneInfo.Path);
-            string newName = EditorGUILayout.TextField(sceneInfo.Name, GUILayout.Width(200));
-
-            // Enterキーが押されたらシーン名を更新
+            // Enterキーが押されたかどうかを確認
             if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
             {
-                sceneInfo.Rename(newName);
-                // if (GUI.GetNameOfFocusedControl() == sceneInfo.Path)
-                // {
-                //     sceneInfo.Rename(newName);
-                //     GUI.FocusControl(null); // フォーカスをクリア
-                // }
+                if (GUI.GetNameOfFocusedControl() == sceneInfo.Path)
+                {
+                    // ここでシーン名を更新
+                    sceneInfo.Rename(GUI.TextField(new Rect(), sceneInfo.Name));
+                    GUI.FocusControl(null); // フォーカスをクリア
+                    return; // イベントを処理済みとして終了
+                }
             }
+
+            // シーン名を編集するテキストフィールド
+            GUI.SetNextControlName(sceneInfo.Path);
+            sceneInfo.Name = EditorGUILayout.TextField(sceneInfo.Name, GUILayout.Width(200));
 
             // シーンを開くボタン
             if (GUILayout.Button("Open"))
@@ -143,6 +144,7 @@ namespace SoulRunProject.Editor
 
             GUILayout.EndHorizontal();
         }
+
 
 
         /// <summary> 新しいシーンを作成するセクションを描画します。 </summary>

@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ChronicleDimensionProject/Scenes/Main/Boot.unity
+    path: Assets/ChronicleDimensionProject/Scenes/MainScene/Boot/Boot.unity
     guid: da2dab3a88111f546b21e13975c41eea
   - enabled: 1
-    path: Assets/ChronicleDimensionProject/Scenes/Main/TitleScene.unity
+    path: Assets/ChronicleDimensionProject/Scenes/MainScene/Boot/TitleScene.unity
     guid: f76224ef064e2c94fad2910fcd1cb66d
   - enabled: 1
-    path: Assets/ChronicleDimensionProject/Scenes/Main/GameSelectScene.unity
+    path: Assets/ChronicleDimensionProject/Scenes/MainScene/GameSelectScene/GameSelectScene.unity
     guid: 594812453dcf05d489d7aa9faa812d94
   - enabled: 1
-    path: Assets/ChronicleDimensionProject/Scenes/Main/RhythmGame/RhythmGameScene.unity
+    path: Assets/ChronicleDimensionProject/Scenes/MainScene/RhythmGameScene/RhythmGameScene.unity
     guid: 093ae74a9ba5da840913ad970f730ed9
   m_configObjects: {}

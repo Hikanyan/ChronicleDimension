@@ -2,12 +2,14 @@ using System;
 using ChronicleDimension.Core;
 using ChronicleDimension.InGame.ActionGame;
 using ChronicleDimension.InGame.NovelGame;
+using ChronicleDimensionProject.Common;
 using ChronicleDimensionProject.Player;
-using Hikanyan.Core;
+using ChronicleDimensionProject.Program.Scripts.Gacha.Core;
+using ChronicleDimensionProject.Scripts.OutGame;
+using ChronicleDimensionProject.Title;
 using UnityEngine;
-using State = StateMachine<ChronicleDimensionProject.Scripts.OutGame.GameManager>.State;
 
-namespace ChronicleDimensionProject.Scripts.OutGame
+namespace ChronicleDimensionProject.Boot
 {
     /// <summary>
     /// ゲーム全体の管理
@@ -18,9 +20,12 @@ namespace ChronicleDimensionProject.Scripts.OutGame
         public StateMachine<GameManager> stateMachine;
         public GameState CurrentGameState { get; private set; }
 
+        /// <summary> ゲームの状態 </summary>
         public RhythmGameManager rhythmGameManager;
+
         public ActionGameManager actionGameManager;
         public NovelGameManager novelGameManager;
+        public GachaManager gachaManager;
 
         /// <summary> シーン管理 </summary>
         public SceneController sceneController;
@@ -54,15 +59,15 @@ namespace ChronicleDimensionProject.Scripts.OutGame
 
         protected override void OnAwake()
         {
-            
             // 各Singletonクラスの初期化
             sceneController = SceneController.Instance;
             uiManager = UIManager.Instance;
             audioManager = CriAudioManager.Instance;
             saveManager = SaveManager.Instance;
-            rhythmGameManager = RhythmGameManager.Instance;
-            actionGameManager = ActionGameManager.Instance;
-            novelGameManager = NovelGameManager.Instance;
+
+            // rhythmGameManager = RhythmGameManager.Instance;
+            // actionGameManager = ActionGameManager.Instance;
+            // novelGameManager = NovelGameManager.Instance;
 
             Initialize();
         }
@@ -71,22 +76,6 @@ namespace ChronicleDimensionProject.Scripts.OutGame
         {
             stateMachine = new StateMachine<GameManager>(this);
             stateMachine.Start<TitleState>();
-        }
-
-        private class TitleState : State
-        {
-            protected override async void OnEnter(State prevState)
-            {
-                await SceneController.Instance.LoadScene("TitleScene");
-            }
-
-            protected override void OnUpdate()
-            {
-            }
-
-            protected override void OnExit(State nextState)
-            {
-            }
         }
     }
 }

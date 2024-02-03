@@ -1,6 +1,6 @@
 using System;
+using ChronicleDimensionProject.Common;
 using Cysharp.Threading.Tasks;
-using Hikanyan.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

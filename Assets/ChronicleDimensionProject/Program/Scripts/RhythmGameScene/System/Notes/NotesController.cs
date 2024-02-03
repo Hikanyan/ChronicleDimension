@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Hikanyan.Core;
+using ChronicleDimensionProject.Common;
 using UnityEngine;
 
 public class NotesController : AbstractSingleton<NotesController>

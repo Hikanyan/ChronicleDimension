@@ -1,4 +1,4 @@
-﻿using Hikanyan.Core;
+﻿using ChronicleDimensionProject.Common;
 using UnityEngine;
 
 namespace ChronicleDimension.InGame.NovelGame

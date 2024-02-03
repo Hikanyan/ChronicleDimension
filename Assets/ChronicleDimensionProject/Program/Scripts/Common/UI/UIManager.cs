@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using ChronicleDimensionProject.Common;
 using ChronicleDimensionProject.Scripts.Core.UI;
-using Hikanyan.Core;
 using UnityEngine;
 using UniRx;
 

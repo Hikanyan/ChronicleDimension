@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ChronicleDimension.Core;
+using ChronicleDimension.Common;
 using ChronicleDimensionProject.Common;
-using ChronicleDimensionProject.Scripts.Core.UI;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;

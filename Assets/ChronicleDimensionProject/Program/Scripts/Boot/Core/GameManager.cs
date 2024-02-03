@@ -1,5 +1,5 @@
 using System;
-using ChronicleDimension.Core;
+using ChronicleDimension.Common;
 using ChronicleDimension.InGame.ActionGame;
 using ChronicleDimension.InGame.NovelGame;
 using ChronicleDimensionProject.Common;

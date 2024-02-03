@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using ChronicleDimension.Core;
+using ChronicleDimension.Common;
 using UnityEngine;
 
-public class CriPlay : MonoBehaviour
+namespace ChronicleDimensionProject.Common.Test
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CriPlay : MonoBehaviour
     {
-        CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Bgm,"BGM_Running Through The Galaxy_BPM150 20220630");
-    }
+        [SerializeField] CriAudioManager.CueSheet cueSheet;
+        [SerializeField] string cueName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            Debug.Log("Play BGM");
+            CriAudioManager.Instance.PlayBGM(cueSheet, cueName);
+        }
     }
 }

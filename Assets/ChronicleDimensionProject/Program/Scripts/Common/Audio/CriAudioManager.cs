@@ -42,22 +42,21 @@ namespace ChronicleDimension.Common
         /// <summary>Voiceボリュームが変更された際に呼ばれる処理</summary>
         public Action<float> VoiceVolumeChanged;
 
-        private CriAtomExPlayer _bgmPlayer = new CriAtomExPlayer();
+        private CriAtomExPlayer _bgmPlayer;
         private CriAtomExPlayback _bgmPlayback;
 
-        private CriAtomExPlayer _sePlayer = new CriAtomExPlayer();
-        private CriAtomExPlayer _loopSEPlayer = new CriAtomExPlayer();
-        private List<CriPlayerData> _seData = new List<CriPlayerData>();
+        private CriAtomExPlayer _sePlayer;
+        private CriAtomExPlayer _loopSEPlayer;
+        private List<CriPlayerData> _seData;
 
-        private CriAtomExPlayer _voicePlayer = new CriAtomExPlayer();
-        private List<CriPlayerData> _voiceData = new List<CriPlayerData>();
+        private CriAtomExPlayer _voicePlayer;
+        private List<CriPlayerData> _voiceData;
 
         private string _currentBGMCueName = "";
         private CriAtomExAcb _currentBGMAcb = null;
 
         private CueSheet _cueSheet = CueSheet.None;
 
-        public static CriAudioManager Instance;
 
         /// <summary>
         /// enum からstringを返す
@@ -166,17 +165,15 @@ namespace ChronicleDimension.Common
             }
         }
 
-        private void Singleton()
-        {
-            if (Instance == null)
-            {
-                Instance = new CriAudioManager();
-            }
-        }
 
         /// <summary>CriAtom の追加。acb追加</summary>
         private void Awake()
         {
+            _bgmPlayer = new CriAtomExPlayer();
+            _sePlayer = new CriAtomExPlayer();
+            _loopSEPlayer = new CriAtomExPlayer();
+            _voicePlayer = new CriAtomExPlayer();
+
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);

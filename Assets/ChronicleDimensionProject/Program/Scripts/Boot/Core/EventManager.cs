@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Hikanyan.Core;
+using ChronicleDimensionProject.Common;
 using UnityEngine.Events;
 
 namespace ChronicleDimensionProject.Scripts.OutGame

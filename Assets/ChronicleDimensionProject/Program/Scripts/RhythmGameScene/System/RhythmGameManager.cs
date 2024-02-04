@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ChronicleDimension.Core;
-using ChronicleDimensionProject.Scripts.Core.UI;
+using ChronicleDimension.Common;
+using ChronicleDimensionProject.Common;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
-using Hikanyan.Core;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 

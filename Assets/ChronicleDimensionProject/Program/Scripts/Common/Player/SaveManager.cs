@@ -1,5 +1,5 @@
 using System.IO;
-using Hikanyan.Core;
+using ChronicleDimensionProject.Common;
 using UnityEngine;
 
 namespace ChronicleDimensionProject.Player

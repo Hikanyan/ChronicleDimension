@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-namespace SoulRunProject.Editor
+namespace ChronicleDimensionProject.Editor
 {
     public class ProjectFileStructureGenerator
     {

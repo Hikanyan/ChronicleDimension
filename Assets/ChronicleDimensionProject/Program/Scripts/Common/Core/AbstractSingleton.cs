@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Hikanyan.Core
+namespace ChronicleDimensionProject.Common
 {
     /// <summary>
     /// 継承してSingleton使用します。
@@ -73,5 +73,18 @@ namespace Hikanyan.Core
         /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
         /// </summary>
         protected virtual bool UseDontDestroyOnLoad => false;
+
+        private void OnDestroy()
+        {
+            if (_instance == this)
+            {
+                OnDestroyed();
+                _instance = null;
+            }
+        }
+
+        protected virtual void OnDestroyed()
+        {
+        }
     }
 }

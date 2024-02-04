@@ -41,6 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1804163710539016803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e779817c004c4a44f8c383f1a368ee31, type: 3}
+  m_Script: {fileID: 11500000, guid: f8cf37188a776db4290402e181229986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  streamingAssetsPathAcf: Chronicle Dimention
+  cueSheetBGM: CueSheet_Chronicle_Dimention_20221024_2
+  cueSheetSe: CueSheet_SE
+  cueSheetVoice: CueSheet_Voice

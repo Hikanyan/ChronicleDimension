@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using CriWare;
 using UnityEngine.SceneManagement;
 using System;
+using ChronicleDimensionProject.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ChronicleDimension.Core
+namespace ChronicleDimension.Common
 {
-    public class CriAudioManager: MonoBehaviour
+    public class CriAudioManager : AbstractSingleton<CriAudioManager>
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
@@ -28,7 +28,7 @@ namespace ChronicleDimension.Core
         private float _bgmVolume = 1F;
         private float _seVolume = 1F;
         private float _voiceVolume = 1F;
-        private const float diff = 0.01F;
+        private const float Diff = 0.01F; //音量の変更があったかどうかの判定に使う
 
         /// <summary>マスターボリュームが変更された際に呼ばれるEvent</summary>
         public Action<float> MasterVolumeChanged;
@@ -42,22 +42,21 @@ namespace ChronicleDimension.Core
         /// <summary>Voiceボリュームが変更された際に呼ばれる処理</summary>
         public Action<float> VoiceVolumeChanged;
 
-        private CriAtomExPlayer _bgmPlayer = new CriAtomExPlayer();
+        private CriAtomExPlayer _bgmPlayer;
         private CriAtomExPlayback _bgmPlayback;
 
-        private CriAtomExPlayer _sePlayer = new CriAtomExPlayer();
-        private CriAtomExPlayer _loopSEPlayer = new CriAtomExPlayer();
-        private List<CriPlayerData> _seData = new List<CriPlayerData>();
+        private CriAtomExPlayer _sePlayer;
+        private CriAtomExPlayer _loopSEPlayer;
+        private List<CriPlayerData> _seData;
 
-        private CriAtomExPlayer _voicePlayer = new CriAtomExPlayer();
-        private List<CriPlayerData> _voiceData = new List<CriPlayerData>();
+        private CriAtomExPlayer _voicePlayer;
+        private List<CriPlayerData> _voiceData;
 
         private string _currentBGMCueName = "";
         private CriAtomExAcb _currentBGMAcb = null;
 
         private CueSheet _cueSheet = CueSheet.None;
 
-        public static CriAudioManager Instance;
 
         /// <summary>
         /// enum からstringを返す
@@ -90,7 +89,7 @@ namespace ChronicleDimension.Core
             get => _masterVolume;
             set
             {
-                if (_masterVolume + diff < value || _masterVolume - diff > value)
+                if (_masterVolume + Diff < value || _masterVolume - Diff > value)
                 {
                     MasterVolumeChanged.Invoke(value);
                     _masterVolume = value;
@@ -105,7 +104,7 @@ namespace ChronicleDimension.Core
             get => _bgmVolume;
             set
             {
-                if (_bgmVolume + diff < value || _bgmVolume - diff > value)
+                if (_bgmVolume + Diff < value || _bgmVolume - Diff > value)
                 {
                     BGMVolumeChanged.Invoke(value);
                     _bgmVolume = value;
@@ -120,7 +119,7 @@ namespace ChronicleDimension.Core
             get => _seVolume;
             set
             {
-                if (_seVolume + diff < value || _seVolume - diff > value)
+                if (_seVolume + Diff < value || _seVolume - Diff > value)
                 {
                     SEVolumeChanged.Invoke(value);
                     _seVolume = value;
@@ -133,7 +132,7 @@ namespace ChronicleDimension.Core
             get => _voiceVolume;
             set
             {
-                if (_voiceVolume + diff < value || _voiceVolume - diff > value)
+                if (_voiceVolume + Diff < value || _voiceVolume - Diff > value)
                 {
                     VoiceVolumeChanged.Invoke(value);
                     _voiceVolume = value;
@@ -165,22 +164,18 @@ namespace ChronicleDimension.Core
                 get => _cueInfo.length < 0;
             }
         }
-        
-        private void Singleton()
-        {
-            if (Instance == null)
-            {
-                Instance = new CriAudioManager();
-            }
-            
-            
-        }
+
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        public CriAudioManager()
+        private void Awake()
         {
+            _bgmPlayer = new CriAtomExPlayer();
+            _sePlayer = new CriAtomExPlayer();
+            _loopSEPlayer = new CriAtomExPlayer();
+            _voicePlayer = new CriAtomExPlayer();
+
             // acf設定
-            string path = Common.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
+            string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
             // CriAtom作成
             new GameObject().AddComponent<CriAtom>();
@@ -252,7 +247,7 @@ namespace ChronicleDimension.Core
             SceneManager.sceneUnloaded += Unload;
         }
 
-        ~CriAudioManager()
+        private void OnDestroy()
         {
             SceneManager.sceneUnloaded -= Unload;
         }

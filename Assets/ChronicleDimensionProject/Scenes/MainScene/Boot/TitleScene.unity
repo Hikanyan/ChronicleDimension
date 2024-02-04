@@ -498,6 +498,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2973990768472714859, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973990768472714859, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3167184336932331168, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
       propertyPath: m_Name
       value: TitleUI
@@ -598,6 +606,18 @@ PrefabInstance:
     - target: {fileID: 1226401663648668288, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
       propertyPath: m_Name
       value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226401663648668290, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226401663648668290, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226401663648668290, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 1226401663648668300, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
       propertyPath: m_Pivot.x

@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using ChronicleDimensionProject.Scripts.OutGame;
-using Unity.VisualScripting;
 using UnityEngine;
 
-
-/// <summary>
-/// 開始時に SequenceManager をインスタンス化して初期化します。
-/// </summary>
-public class BootLoader : MonoBehaviour
+namespace ChronicleDimensionProject.Boot
 {
-    [SerializeField] SequenceManager sequenceManagerPrefab;
-
-    void Awake()
+    /// <summary> 繧ｲ繝ｼ繝縺ｮ蛻晄悄蛹悶ｒ陦後≧ </summary>
+    public class BootLoader : MonoBehaviour
     {
-        Instantiate(sequenceManagerPrefab);
-        SequenceManager.Instance.Initialize();
+        [SerializeField] private SequenceManager sequenceManagerPrefab;
+
+        private void Awake()
+        {
+            Instantiate(sequenceManagerPrefab);
+            SequenceManager.Instance.Initialize();
+        }
     }
 }

@@ -169,11 +169,6 @@ namespace ChronicleDimensionProject.Common
         /// <summary>CriAtom の追加。acb追加</summary>
         private void Awake()
         {
-            _bgmPlayer = new CriAtomExPlayer();
-            _sePlayer = new CriAtomExPlayer();
-            _loopSEPlayer = new CriAtomExPlayer();
-            _voicePlayer = new CriAtomExPlayer();
-
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
@@ -185,6 +180,11 @@ namespace ChronicleDimensionProject.Common
             CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
             //Voice acb追加
             CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
+
+            _bgmPlayer = new CriAtomExPlayer();
+            _sePlayer = new CriAtomExPlayer();
+            _loopSEPlayer = new CriAtomExPlayer();
+            _voicePlayer = new CriAtomExPlayer();
 
             MasterVolumeChanged += volume =>
             {
@@ -250,6 +250,7 @@ namespace ChronicleDimensionProject.Common
         private void OnDestroy()
         {
             SceneManager.sceneUnloaded -= Unload;
+            CriAtomPlugin.FinalizeLibrary();
         }
         // ここに音を鳴らす関数を書いてください
 

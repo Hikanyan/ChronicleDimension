@@ -1,26 +1,21 @@
 using ChronicleDimensionProject.Common;
 using UnityEngine;
 
-namespace ChronicleDimensionProject.Scripts.OutGame
+namespace ChronicleDimensionProject.Boot
 {
-    /// <summary>
-    /// ‚±‚ÌƒVƒ“ƒOƒ‹ƒgƒ“‚ÍAŠÏ@‚³‚ê‚½ƒQ[ƒ€‚âƒCƒxƒ“ƒg‚ÉŠî‚Ã‚¢‚ÄƒQ[ƒ€‚Ìó‘Ô‚ğŒˆ’è‚µ‚Ü‚·B
-    /// </summary>
+    /// <summary> ã“ã®ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã¯ã€è¦³å¯Ÿã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚„ã‚¤ãƒ™ãƒ³ãƒˆã«åŸºã¥ã„ã¦ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹ã‚’æ±ºå®šã—ã¾ã™ã€‚ </summary>
     public class SequenceManager : AbstractSingleton<SequenceManager>
     {
         [SerializeField] GameObject[] _preloadedAssets;
-        /// <summary>
-        /// ‰Šú‰»
-        /// </summary>
+
+        /// <summary> åˆæœŸåŒ– </summary>
         public void Initialize()
         {
             InstantiatePreloadedAssets();
         }
 
-        /// <summary>
-        /// “o˜^‚³‚ê‚½Prefab‚ğ‘S‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‰»
-        /// </summary>
-        void InstantiatePreloadedAssets()
+        /// <summary> ç™»éŒ²ã•ã‚ŒãŸPrefabã‚’å…¨ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ– </summary>
+        private void InstantiatePreloadedAssets()
         {
             foreach (var asset in _preloadedAssets)
             {

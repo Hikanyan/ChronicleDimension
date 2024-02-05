@@ -1,7 +1,7 @@
 ﻿using ChronicleDimensionProject.Common;
 using UnityEngine;
 
-namespace ChronicleDimension.InGame.NovelGame
+namespace ChronicleDimensionProject.InGame.NovelGame
 {
     public class NovelGameManager : AbstractSingleton<NovelGameManager>
     {

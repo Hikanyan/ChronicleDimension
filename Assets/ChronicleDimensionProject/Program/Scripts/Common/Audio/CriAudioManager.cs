@@ -7,7 +7,7 @@ using System;
 using ChronicleDimensionProject.Common;
 using UnityEngine;
 
-namespace ChronicleDimension.Common
+namespace ChronicleDimensionProject.Common
 {
     public class CriAudioManager : AbstractSingleton<CriAudioManager>
     {

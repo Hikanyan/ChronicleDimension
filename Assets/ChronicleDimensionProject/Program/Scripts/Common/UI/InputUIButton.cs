@@ -3,6 +3,8 @@ using DG.Tweening;
 using UniRx;
 using System;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 /*
  アニメーションをインターフェースで実装すると
  */
@@ -24,7 +26,7 @@ public class InputUIButton : InputUIButtonBase
     {
     }
 
-    public ButtonClickEvent onClick;
+    public Button.ButtonClickedEvent onClick;
 
 
     private void Start()
@@ -50,6 +52,6 @@ public class InputUIButton : InputUIButtonBase
         _button.alpha = 1f;
         // イベントの発火
         OnButtonUp?.Invoke();
-        onClick.Invoke(this);
+        onClick.Invoke();
     }
 }

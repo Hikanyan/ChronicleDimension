@@ -16,6 +16,8 @@ namespace ChronicleDimensionProject.Common
         [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
         [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
 
+        protected override bool UseDontDestroyOnLoad => true;
+
         public enum CueSheet
         {
             None,
@@ -167,7 +169,7 @@ namespace ChronicleDimensionProject.Common
 
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        private void Awake()
+        protected override void OnAwake()
         {
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
@@ -243,13 +245,10 @@ namespace ChronicleDimensionProject.Common
                     _voicePlayer.Update(_voiceData[i].Playback);
                 }
             };
-
-            SceneManager.sceneUnloaded += Unload;
         }
 
         private void OnDestroy()
         {
-            SceneManager.sceneUnloaded -= Unload;
             CriAtomPlugin.FinalizeLibrary();
         }
         // ここに音を鳴らす関数を書いてください
@@ -431,25 +430,6 @@ namespace ChronicleDimensionProject.Common
             if (index < 0) return;
 
             _voiceData[index].Playback.Stop();
-        }
-
-        private void Unload(Scene scene)
-        {
-            StopLoopSE();
-
-            var removeIndex = new List<int>();
-            for (int i = _seData.Count - 1; i >= 0; i--)
-            {
-                if (_seData[i].Playback.GetStatus() == CriAtomExPlayback.Status.Removed)
-                {
-                    removeIndex.Add(i);
-                }
-            }
-
-            foreach (var i in removeIndex)
-            {
-                _seData.RemoveAt(i);
-            }
         }
     }
 }

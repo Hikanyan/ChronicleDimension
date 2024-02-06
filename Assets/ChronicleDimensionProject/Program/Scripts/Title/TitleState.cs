@@ -1,4 +1,4 @@
-﻿using ChronicleDimensionProject.Scripts.OutGame;
+﻿using ChronicleDimensionProject.Boot;
 using State = StateMachine<ChronicleDimensionProject.Boot.GameManager>.State;
 
 namespace ChronicleDimensionProject.Title

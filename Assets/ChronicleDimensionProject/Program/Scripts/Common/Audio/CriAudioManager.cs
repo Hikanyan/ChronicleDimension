@@ -7,7 +7,7 @@ using System;
 using ChronicleDimensionProject.Common;
 using UnityEngine;
 
-namespace ChronicleDimension.Common
+namespace ChronicleDimensionProject.Common
 {
     public class CriAudioManager : AbstractSingleton<CriAudioManager>
     {
@@ -15,6 +15,8 @@ namespace ChronicleDimension.Common
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
         [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
         [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
+
+        protected override bool UseDontDestroyOnLoad => true;
 
         public enum CueSheet
         {
@@ -167,13 +169,8 @@ namespace ChronicleDimension.Common
 
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        private void Awake()
+        protected override void OnAwake()
         {
-            _bgmPlayer = new CriAtomExPlayer();
-            _sePlayer = new CriAtomExPlayer();
-            _loopSEPlayer = new CriAtomExPlayer();
-            _voicePlayer = new CriAtomExPlayer();
-
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
@@ -185,6 +182,11 @@ namespace ChronicleDimension.Common
             CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
             //Voice acb追加
             CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
+
+            _bgmPlayer = new CriAtomExPlayer();
+            _sePlayer = new CriAtomExPlayer();
+            _loopSEPlayer = new CriAtomExPlayer();
+            _voicePlayer = new CriAtomExPlayer();
 
             MasterVolumeChanged += volume =>
             {
@@ -243,13 +245,11 @@ namespace ChronicleDimension.Common
                     _voicePlayer.Update(_voiceData[i].Playback);
                 }
             };
-
-            SceneManager.sceneUnloaded += Unload;
         }
 
         private void OnDestroy()
         {
-            SceneManager.sceneUnloaded -= Unload;
+            CriAtomPlugin.FinalizeLibrary();
         }
         // ここに音を鳴らす関数を書いてください
 
@@ -430,25 +430,6 @@ namespace ChronicleDimension.Common
             if (index < 0) return;
 
             _voiceData[index].Playback.Stop();
-        }
-
-        private void Unload(Scene scene)
-        {
-            StopLoopSE();
-
-            var removeIndex = new List<int>();
-            for (int i = _seData.Count - 1; i >= 0; i--)
-            {
-                if (_seData[i].Playback.GetStatus() == CriAtomExPlayback.Status.Removed)
-                {
-                    removeIndex.Add(i);
-                }
-            }
-
-            foreach (var i in removeIndex)
-            {
-                _seData.RemoveAt(i);
-            }
         }
     }
 }

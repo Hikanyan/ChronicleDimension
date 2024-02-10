@@ -413,6 +413,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a750e73bb4d8774fbbfb9d5a8fbccca, type: 3}
+--- !u!1 &1729706582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5565337571966383100, guid: 69019594b11a7714fb1a06c8dd532a17, type: 3}
+  m_PrefabInstance: {fileID: 2101649818}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1729706584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729706582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1729706588}
+        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+        m_MethodName: Change
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GameSelectScene
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!225 &1729706585
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729706582}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1729706588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729706582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6589ce3fef99510409ca465a2338dd59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1807498679
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 1226401663648668288, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1226401663648668290, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
@@ -702,6 +763,10 @@ PrefabInstance:
     - target: {fileID: 1226401663648668300, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1226401663648668301, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}

@@ -1,7 +1,7 @@
 ﻿using ChronicleDimensionProject.Program.Scripts.Boot.Interface;
 using ChronicleDimensionProject.Common;
 
-namespace ChronicleDimension.InGame.ActionGame
+namespace ChronicleDimensionProject.InGame.ActionGame
 {
     public class ActionGameManager : AbstractSingleton<ActionGameManager>, IGameModeManager
     {

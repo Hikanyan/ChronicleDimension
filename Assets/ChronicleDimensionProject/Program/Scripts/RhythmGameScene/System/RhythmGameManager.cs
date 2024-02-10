@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ChronicleDimension.Common;
 using ChronicleDimensionProject.Common;
 using UnityEngine;
 using UniRx;

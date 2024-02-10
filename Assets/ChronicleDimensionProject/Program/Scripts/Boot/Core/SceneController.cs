@@ -6,16 +6,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //SceneControllerクラスは、シーンのロードとアンロードを管理します。
-namespace ChronicleDimensionProject.Scripts.OutGame
+namespace ChronicleDimensionProject.Boot
 {
     public class SceneController : AbstractSingleton<SceneController>
     {
-        [Header("UI")]
-        [SerializeField] GameObject loadingUI;
-        [SerializeField] Slider slider;
-    
-        Scene _lastScene;
-        readonly Scene _neverUnloadScene;
+        [SerializeField] private GameObject loadingUI;
+        [SerializeField] private Slider slider;
+
+        private Scene _lastScene;
+        private readonly Scene _neverUnloadScene;
 
         /// <summary>
         //このコンストラクタは、SceneControllerオブジェクトを作成する際に呼び出される特殊なメソッドです。
@@ -40,7 +39,7 @@ namespace ChronicleDimensionProject.Scripts.OutGame
 
             await UnloadLastScene();
 
-        
+
             loadingUI.SetActive(true);
             await LoadSceneAdditive(scene);
             loadingUI.SetActive(false);

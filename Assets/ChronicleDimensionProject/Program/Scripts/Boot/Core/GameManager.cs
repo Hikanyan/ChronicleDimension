@@ -1,7 +1,6 @@
 using System;
-using ChronicleDimension.Common;
-using ChronicleDimension.InGame.ActionGame;
-using ChronicleDimension.InGame.NovelGame;
+using ChronicleDimensionProject.InGame.ActionGame;
+using ChronicleDimensionProject.InGame.NovelGame;
 using ChronicleDimensionProject.Common;
 using ChronicleDimensionProject.Player;
 using ChronicleDimensionProject.Program.Scripts.Gacha.Core;

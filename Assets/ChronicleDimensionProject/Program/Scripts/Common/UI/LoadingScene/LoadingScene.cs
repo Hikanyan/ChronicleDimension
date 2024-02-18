@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ChronicleDimensionProject.Common.UI
 {
-    public class LoadingScene : MonoBehaviour
+    public class LoadingScene : AbstractSingleton<LoadingScene>
     {
         [Tooltip("ロード中に表示するUI")] [SerializeField]
         private GameObject loadingUI;
@@ -24,22 +24,10 @@ namespace ChronicleDimensionProject.Common.UI
         [Tooltip("フェード時間")] [SerializeField] private float fadeDuration = 1.0f;
         [Tooltip("最低ロード時間")] [SerializeField] private float minimumLoadTime = 2.0f;
 
-        public static LoadingScene Instance { get; private set; }
         private AsyncOperation _async;
         private Action _onComplete;
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
-        }
+        protected override bool UseDontDestroyOnLoad => true;
 
         /// <summary> 次のシーンをロードする </summary>
         public async UniTask LoadNextScene(string sceneName)

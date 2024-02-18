@@ -103,6 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1943241925292300943
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,8 +182,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -196,10 +200,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 351.3
+  m_fontSize: 72
   m_fontSizeBase: 351.3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -313,8 +317,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -331,10 +335,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -476,6 +480,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3890724576519342821
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +587,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4456998594276876931
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,8 +666,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -672,10 +684,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 351.3
+  m_fontSize: 72
   m_fontSizeBase: 351.3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -817,6 +829,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5294455465595959282
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,8 +908,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -910,10 +926,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 351.3
+  m_fontSize: 72
   m_fontSizeBase: 351.3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1055,6 +1071,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAnimation: 0
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7547230859175073288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1132,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1312,8 +1332,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1330,10 +1350,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 351.3
+  m_fontSize: 72
   m_fontSizeBase: 351.3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

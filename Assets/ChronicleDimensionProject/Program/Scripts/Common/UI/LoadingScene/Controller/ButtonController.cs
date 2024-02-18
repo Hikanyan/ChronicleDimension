@@ -5,14 +5,14 @@ namespace ChronicleDimensionProject.Common.UI
 {
     public class ButtonController : MonoBehaviour
     {
-        public void ChangeScene(string sceneName)
+        public void Change(string sceneName)
         {
-            //GameManager.Instance.LoadScene(sceneName);
+            LoadingScene.Instance.LoadNextScene(sceneName);
         }
 
         public void SetActive(GameObject setActiveObject)
         {
-            //GameManager.Instance.SetActive(setActiveObject);
+            setActiveObject.SetActive(!setActiveObject.activeSelf);
         }
     }
 }

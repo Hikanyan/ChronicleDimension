@@ -23,8 +23,8 @@ package Singleton {
         ' UIManager固有のメソッドとプロパティ
     }
 
-    RhythmGameManager -|> AbstractSingleton
-    UIManager -|> AbstractSingleton
+    RhythmGameManager -Down|> AbstractSingleton
+    UIManager -Down|> AbstractSingleton
 }
 
 @enduml

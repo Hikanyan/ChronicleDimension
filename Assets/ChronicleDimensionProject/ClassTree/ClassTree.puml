@@ -42,13 +42,13 @@ package Singleton {
         ' UnityのMonoBehaviour
     }
 
-    AbstractSingleton -|> MonoBehaviour: Extends
+    AbstractSingleton -|> MonoBehaviour
     note right of AbstractSingleton
       サブクラスのシングルトンの振る舞いを提供。
     end note
 }
 
-package State {
+package "State Pattern" {
     class StateMachine<TOwner> {
         -states: LinkedList<State>
         -currentState: State
@@ -82,6 +82,18 @@ package State {
 }
 
 package "MVRP Pattern" {
+    class UIManager {
+        -uiPrefab: GameObject
+        -uiDictionary: Dictionary<string, GameObject>
+        
+        +OnAwake(): void
+        +AddUI<T>(uiPrefab: GameObject): UniTask where T : UIBase
+        +OpenUI<T>(): UniTask where T : UIBase
+        +CloseUI<T>(): void where T : UIBase
+        -InstantiateUI(uiName: string): UniTask<GameObject>
+        -InstantiateUI(uiName: string, uiPrefab: GameObject): UniTask<GameObject>
+    }
+
     class Model {
         +data: DataStructure
         +GetData(): DataStructure
@@ -93,36 +105,22 @@ package "MVRP Pattern" {
         +UserInputReceived()
     }
 
-    class Router {
-        +NavigateTo(view: View)
-        +GoBack()
-    }
+
 
     class Presenter {
         +HandleUserInput()
         +UpdateView()
     }
 
-    Model <.. Presenter : <<データを提供>>
-    Presenter --> View : <<更新>>
-    Presenter --> Router : <<指示>>
-    Router --> View : <<表示>>
-}
-
-class UIManager {
-    -uiPrefab: GameObject
-    -uiDictionary: Dictionary<string, GameObject>
+    UIManager -down-> Presenter : <<初期化>>
+    Presenter -down-> View : <<更新>>
+    Presenter .down.> Model : <<更新>>
+     
     
-    +OnAwake(): void
-    +AddUI<T>(uiPrefab: GameObject): UniTask where T : UIBase
-    +OpenUI<T>(): UniTask where T : UIBase
-    +CloseUI<T>(): void where T : UIBase
-    -InstantiateUI(uiName: string): UniTask<GameObject>
-    -InstantiateUI(uiName: string, uiPrefab: GameObject): UniTask<GameObject>
 }
 
-UIManager .up.> "MVRP Pattern".Router : <<実装>>
-UIManager --> "MVRP Pattern".Presenter : <<対話>>
+
+
 
 package RhythmGame {
     class RhythmGameManager {
@@ -165,14 +163,153 @@ package NovelGame {
     GameManager o-- NovelGameManager
 }
 
-package PlayerComponent {
-    class Player {
-        -inputManager: InputManager
-        -inventory: Inventory
-        -character: Character
-        -info: PlayerInfo
-        -settings: PlayerSettings
-    }
+package Data {
+    
 }
 
 @enduml
+@startuml
+
+skinparam packageStyle rect
+skinparam monochrome true
+
+package "Rhythm Game Architecture" {
+
+    package "Game Management" {
+        class RhythmGameManager {
+            +StartGame()
+            +PauseGame()
+            +EndGame()
+        }
+        class PauseController
+        class ResultManager {
+            +ShowResults()
+        }
+    }
+
+    package "Game Core" {
+        class NotesManager {
+            +GenerateNotes()
+            +ManageNotes()
+        }
+        class ScoreManager {
+            +UpdateScore()
+            +UpdateCombo()
+        }
+        class TimerManager {
+            +StartTimer()
+            +StopTimer()
+        }
+        
+        class JudgeManager {
+            +JudgeNote()
+        }
+        class NotesGenerator {
+            +GenerateNotes(): List<Notes>
+        }
+        class NotesController {
+            +ControlNotes(notes: List<Notes>)
+        }
+        class NotesFactory {
+            +createNote(type: NoteType): Notes
+        }
+        
+        abstract class Notes {
+            +play(): void
+            +display(): void
+            +hit(): void
+        }
+        
+        class NormalNote extends Notes {
+            +play(): void
+            +display(): void
+            +hit(): void
+        }
+        
+        class LongNote extends Notes {
+            +play(): void
+            +display(): void
+            +hit(): void
+        }
+        
+        class SlideNote extends Notes {
+            +play(): void
+            +display(): void
+            +hit(): void
+        }
+        
+        enum NoteType {
+            NORMAL
+            LONG
+            SLIDE
+        }
+    }
+
+    package "Data" {
+        class SaveLoadManager {
+            +SaveData()
+            +LoadData()
+        }
+        class DataStorage {
+            +SaveData()
+            +LoadData()
+        }
+        class MusicData{
+            +LoadMusicData()
+        }
+        class ResultDatas{
+            +SaveResultData()
+            +LoadResultData()
+        }
+    }
+
+    package "Audio" {
+        class CRIAudioManager {
+            +PlayMusic()
+            +StopMusic()
+        }
+    }
+
+    package "Visuals" {
+        class ParticleManager {
+            +TriggerEffect()
+        }
+    }
+
+    package "Input" {
+        class InputInterface {
+            +ReceiveInput()
+        }
+        class Player {
+            +UpdateState()
+        }
+    }
+
+    RhythmGameManager -down-> NotesManager : Uses
+    RhythmGameManager -down-> ScoreManager : Uses
+    RhythmGameManager -down-> TimerManager : Uses
+    RhythmGameManager -down-> CRIAudioManager : Uses
+    RhythmGameManager -down-> ParticleManager : Uses
+    RhythmGameManager -down-> InputInterface : Uses
+    RhythmGameManager -down-> Player : Uses
+    RhythmGameManager -down-> PauseController : Uses
+    RhythmGameManager -down-> ResultManager : Uses
+    RhythmGameManager -down-> JudgeManager : Uses
+
+    NotesManager -down-> NotesController : Controls
+    NotesManager -down-> NotesFactory : Uses
+    NotesManager -down-> NotesGenerator : Uses
+    NotesGenerator -down-> SaveLoadManager : Uses
+    NotesController -down-> Notes : Controls
+    NotesFactory -down-> Notes : Creates
+    
+    SaveLoadManager -down-> DataStorage : Uses
+    SaveLoadManager -down-> MusicData : Uses
+    SaveLoadManager -down-> ResultDatas : Uses
+    ResultManager -down-> SaveLoadManager : Uses
+    
+}
+
+@enduml
+
+

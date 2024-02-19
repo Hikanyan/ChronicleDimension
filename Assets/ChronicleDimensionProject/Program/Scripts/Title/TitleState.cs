@@ -1,4 +1,4 @@
-﻿using ChronicleDimensionProject.Boot;
+﻿using ChronicleDimensionProject.Common.UI;
 using State = StateMachine<ChronicleDimensionProject.Boot.GameManager>.State;
 
 namespace ChronicleDimensionProject.Title
@@ -7,7 +7,7 @@ namespace ChronicleDimensionProject.Title
     {
         protected override async void OnEnter(State prevState)
         {
-            await SceneController.Instance.LoadScene("TitleScene");
+            await LoadingScene.Instance.LoadNextScene("TitleScene");
         }
 
         protected override void OnUpdate()

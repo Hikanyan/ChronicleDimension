@@ -9,7 +9,9 @@ namespace ChronicleDimensionProject.Boot
 {
     public class SceneController : AbstractSingleton<SceneController>
     {
-        private Scene _unloadScene;
+        // リードオンリー
+
+        private Scene _unloadScene; // アンロードしないシーン
         private Scene _lastScene;
 
         protected override void OnAwake()
@@ -23,11 +25,7 @@ namespace ChronicleDimensionProject.Boot
             if (string.IsNullOrEmpty(scene))
                 throw new ArgumentException($"{nameof(scene)} は無効です!");
 
-            // 最初にロードされたシーンをアンロードしない
-            if (_lastScene.IsValid() && _lastScene != _unloadScene)
-            {
-                await UnloadScene(_lastScene);
-            }
+            await UnloadScene(_lastScene);
 
             LoadSceneParameters parameters = new LoadSceneParameters(LoadSceneMode.Single);
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, parameters);
@@ -38,23 +36,20 @@ namespace ChronicleDimensionProject.Boot
         }
 
         /// <summary> シーンをロードする </summary>
-        public void LoadScene(string scene)
+        public async void LoadScene(string scene)
         {
             if (string.IsNullOrEmpty(scene))
                 throw new ArgumentException($"{nameof(scene)} は無効です!");
-
-            if (_lastScene.IsValid() && _lastScene != _unloadScene)
-            {
-                UnloadScene(_lastScene);
-            }
+            await UnloadScene(_lastScene);
 
             SceneManager.LoadScene(scene);
+            _lastScene = SceneManager.GetSceneByName(scene);
         }
 
         /// <summary> シーンをアンロードする </summary>
         private async UniTask UnloadScene(Scene scene)
         {
-            if (scene.IsValid())
+            if (scene != _unloadScene && scene.IsValid())
             {
                 await SceneManager.UnloadSceneAsync(scene);
             }

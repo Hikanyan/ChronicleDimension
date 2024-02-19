@@ -308,6 +308,7 @@ namespace ChronicleDimensionProject.Common
         /// <summary>SEを流す関数</summary>
         /// <param name="cueSheet">流したいキューシートの名前</param>
         /// <param name="cueName">流したいキューの名前</param>
+        /// <param name="volume">音量</param>
         /// <returns>停止する際に必要なIndex</returns>
         public int PlaySE(CueSheet cueSheet, string cueName, float volume = 1f)
         {

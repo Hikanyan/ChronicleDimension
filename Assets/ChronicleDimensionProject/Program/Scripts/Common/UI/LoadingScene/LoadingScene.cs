@@ -1,4 +1,5 @@
 ﻿using System;
+using ChronicleDimensionProject.Boot;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace ChronicleDimensionProject.Common.UI
             var targetProgress = 0f;
             var displayProgress = 0f;
 
-            _async = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+            _async = await SceneController.Instance.LoadSceneAsync(sceneName);
 
             while (Time.time - startTime < minimumLoadTime || _async is { isDone: false })
             {

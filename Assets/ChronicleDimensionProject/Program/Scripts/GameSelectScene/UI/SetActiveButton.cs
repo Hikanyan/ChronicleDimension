@@ -11,7 +11,7 @@ namespace ChronicleDimensionProject.GameSelectScene.UI
         [SerializeField] private List<GameObject> _setActiveList;
         private InputUIButton _inputUIButton;
 
-        void Start()
+        private void Start()
         {
             _inputUIButton = GetComponent<InputUIButton>();
             _inputUIButton.onClick.AddListener(SelectGameMode);

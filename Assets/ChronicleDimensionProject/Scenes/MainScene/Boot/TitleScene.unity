@@ -554,16 +554,30 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1729706588}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: Change
+      - m_Target: {fileID: 1729706586}
+        m_TargetAssemblyTypeName: ChronicleDimensionProject.Common.UI.ButtonUIController,
+          Assembly-CSharp
+        m_MethodName: ClickSeButtan
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: GameSelectScene
+          m_StringArgument: Tap
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1729706586}
+        m_TargetAssemblyTypeName: ChronicleDimensionProject.Common.UI.ButtonUIController,
+          Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!225 &1729706585
@@ -578,7 +592,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1729706588
+--- !u!114 &1729706586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,9 +601,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729706582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6589ce3fef99510409ca465a2338dd59, type: 3}
+  m_Script: {fileID: 11500000, guid: 18b5392338a4d7742978cfbb172216bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 2
 --- !u!1 &1807498679
 GameObject:
   m_ObjectHideFlags: 0

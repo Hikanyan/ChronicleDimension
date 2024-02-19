@@ -2,6 +2,7 @@ using System;
 using ChronicleDimensionProject.InGame.ActionGame;
 using ChronicleDimensionProject.InGame.NovelGame;
 using ChronicleDimensionProject.Common;
+using ChronicleDimensionProject.GameSelectScene;
 using ChronicleDimensionProject.Player;
 using ChronicleDimensionProject.Program.Scripts.Gacha.Core;
 using ChronicleDimensionProject.Scripts.OutGame;
@@ -16,6 +17,7 @@ namespace ChronicleDimensionProject.Boot
     [Serializable]
     public class GameManager : AbstractSingleton<GameManager>
     {
+        protected override bool UseDontDestroyOnLoad => true;
         public StateMachine<GameManager> stateMachine;
         public GameState CurrentGameState { get; private set; }
 
@@ -75,6 +77,47 @@ namespace ChronicleDimensionProject.Boot
         {
             stateMachine = new StateMachine<GameManager>(this);
             stateMachine.Start<TitleState>();
+        }
+
+        public void Change(GameState gameState)
+        {
+            CurrentGameState = gameState;
+
+            switch (gameState)
+            {
+                case GameState.None:
+                    break;
+                case GameState.Title:
+                    ChangeState<TitleState>();
+                    break;
+                case GameState.GameSelect:
+                    ChangeState<GameSelectState>();
+                    break;
+                case GameState.RhythmGame:
+                    // ChangeState<RhythmGameState>();
+                    break;
+                case GameState.ActionGame:
+                    // ChangeState<ActionGameState>();
+                    break;
+                case GameState.NovelGame:
+                    // ChangeState<NovelGameState>();
+                    break;
+                case GameState.Explanation:
+                    // ChangeState<ExplanationState>();
+                    break;
+                case GameState.Gacha:
+                    // ChangeState<GachaState>();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            }
+        }
+
+        // ジェネリックタイプを使用したステート遷移の実装例
+        private void ChangeState<TState>() where TState : StateMachine<GameManager>.State, new()
+        {
+            var state = stateMachine.GetOrAddState<TState>();
+            stateMachine.Change(state); // 実際のステート遷移を行う
         }
     }
 }

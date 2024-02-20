@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ChronicleDimensionProject/Scenes/MainScene/RhythmGameScene/RhythmGameScene.unity
     guid: 093ae74a9ba5da840913ad970f730ed9
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: cace766a38a17c947b1019990716f6a4, type: 2}

@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: RhythmGameMusicData
-  m_EditorClassIdentifier: Assembly-CSharp::MusicData
-  musicJsonReference:
+  m_Script: {fileID: 11500000, guid: 00f7c5d88ced4d28b5c01eb7550b4077, type: 3}
+  m_Name: Meteor Shower
+  m_EditorClassIdentifier: 
+  _musicDifficultyLevel: 0
+  _musicName: Meteor Shower
+  _musicJsonReference:
     m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  cueSheet: 1
-  musicName: BGM_Pentagon_BPM160
-  delayTime: 0
-  autoMode: 0
+  _delayTime: 0

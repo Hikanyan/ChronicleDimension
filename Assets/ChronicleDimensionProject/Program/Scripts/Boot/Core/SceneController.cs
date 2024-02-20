@@ -27,11 +27,16 @@ namespace ChronicleDimensionProject.Boot
 
             await UnloadLastScene();
 
-            LoadSceneParameters parameters = new LoadSceneParameters(LoadSceneMode.Single);
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, parameters);
+            // シーンを非同期でロードします。
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            await UniTask.WaitUntil(() => asyncLoad.isDone); // シーンのロードが完了するまで待機します。
 
-            _lastScene = SceneManager.GetSceneByName(scene); // 新しいシーンを_lastSceneとして記録
-            SceneManager.SetActiveScene(_lastScene);
+            // シーンがロードされた後に、アクティブシーンとして設定
+            Scene loadedScene = SceneManager.GetSceneByName(scene);
+            if (!loadedScene.IsValid()) return asyncLoad;
+            SceneManager.SetActiveScene(loadedScene);
+            _lastScene = loadedScene;
+
             return asyncLoad;
         }
 

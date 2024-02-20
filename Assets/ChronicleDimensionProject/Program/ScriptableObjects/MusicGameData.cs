@@ -8,7 +8,7 @@ namespace ChronicleDimensionProject.Data
     {
         [SerializeField] private MusicDifficultyLevel _musicDifficultyLevel;
         [SerializeField] private string _musicName;
-        [SerializeField] public AssetReferenceT<TextAsset> _musicReference;
+        [SerializeField] public AssetReferenceT<TextAsset> _musicSusReference;
         [SerializeField] public float _delayTime = 0.0f;
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicDifficultyLevel: 0
   _musicName: Meteor Shower
-  _musicJsonReference:
+  _musicSusReference:
     m_AssetGUID: 
     m_SubObjectName: 
     m_SubObjectType: 

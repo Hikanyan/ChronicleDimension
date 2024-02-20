@@ -16,7 +16,43 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: ff0e3a6e68a6a394b9b551e0c2561835
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: edd596b2a37f8294993f34f890c7732d
+    m_Address: MeteorShower_Hard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7fe36f2b3d7cc584da79c82f56fdc39c
+    m_Address: Pentagon_Hard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 04abfb0c2d3093948974835cb22120c3
+    m_Address: Venus_Hard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9adcae5d1356e874b8986005f5591099
+    m_Address: AnalogAnthology_Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3903b54a5133c284996fa0d429dc00a5
+    m_Address: MeteorShower_Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 33253e93879a2004a8e3d628a249f0cd
+    m_Address: Pentagon_Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53e60c1571a9c4b43b3a320d3a9c1a6b
+    m_Address: Venus_Normal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e77559d224944e44380a371d761bfc94
+    m_Address: "\u53E4\u306E\u7A7A\u306B\u601D\u3044\u3092\u99B3\u305B\u3066_Normal"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1117d29ebd2d23646a00797b630ec559
+    m_Address: "\u96E8\u96F2\u306E\u5411\u3053\u3046\u306B_Normal"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d9760a4284308e844bda34fa61b2169c, type: 2}
   m_SchemaSet:

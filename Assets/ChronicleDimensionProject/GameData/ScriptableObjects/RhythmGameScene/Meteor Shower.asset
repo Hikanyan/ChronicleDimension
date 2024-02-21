@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f7c5d88ced4d28b5c01eb7550b4077, type: 3}
   m_Name: Meteor Shower
   m_EditorClassIdentifier: 
-  _musicDifficultyLevel: 0
+  _musicDifficultyLevel: 3
   _musicName: Meteor Shower
   _musicSusReference:
-    m_AssetGUID: 
+    m_AssetGUID: d0a254b2e714c3e4aac1c099dbeb8097
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

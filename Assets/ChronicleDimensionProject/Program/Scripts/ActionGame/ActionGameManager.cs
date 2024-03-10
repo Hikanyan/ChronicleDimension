@@ -5,6 +5,7 @@ namespace ChronicleDimensionProject.InGame.ActionGame
 {
     public class ActionGameManager : AbstractSingletonMonoBehaviour<ActionGameManager>, IGameModeManager
     {
+        protected override bool UseDontDestroyOnLoad => false;
         public void Activate()
         {
         }

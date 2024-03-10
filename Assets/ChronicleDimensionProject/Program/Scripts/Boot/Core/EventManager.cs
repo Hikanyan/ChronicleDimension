@@ -9,6 +9,7 @@ namespace ChronicleDimensionProject.Scripts.OutGame
     /// </summary>
     public class EventManager : AbstractSingletonMonoBehaviour<EventManager>
     {
+        protected override bool UseDontDestroyOnLoad => false;
         //イベント待ちを記録するDictionary
         private Dictionary<string, UnityEvent> eventDictionary;
 

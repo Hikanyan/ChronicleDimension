@@ -58,7 +58,7 @@ namespace ChronicleDimensionProject.Boot
             saveManager.LoadGame();
         }
 
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             // 各Singletonクラスの初期化
             sceneController = SceneController.Instance;

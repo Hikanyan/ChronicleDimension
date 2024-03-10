@@ -13,7 +13,7 @@ namespace ChronicleDimensionProject.Boot
         private Scene _lastScene;
         protected override bool UseDontDestroyOnLoad => true;
 
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             _neverUnloadScene = SceneManager.GetActiveScene();
             _lastScene = _neverUnloadScene;

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ChronicleDimensionProject.Common
 {
-    public class CriAudioManager : AbstractSingleton<CriAudioManager>
+    public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
@@ -169,7 +169,7 @@ namespace ChronicleDimensionProject.Common
 
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";

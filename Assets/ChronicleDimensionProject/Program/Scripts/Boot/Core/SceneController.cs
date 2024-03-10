@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace ChronicleDimensionProject.Boot
 {
-    public class SceneController : AbstractSingleton<SceneController>
+    public class SceneController : AbstractSingletonMonoBehaviour<SceneController>
     {
         private Scene _neverUnloadScene; // アンロードしないシーン
         private Scene _lastScene;

@@ -6,8 +6,9 @@ using UnityEngine;
 using UniRx;
 
 
-public class UIManager : AbstractSingleton<UIManager>
+public class UIManager : AbstractSingletonMonoBehaviour<UIManager>
 {
+    protected override bool UseDontDestroyOnLoad => true;
     private readonly Dictionary<Type, IUserInterface> _panels = new Dictionary<Type, IUserInterface>();
 
     public void RegisterPanel(IUserInterface panel)

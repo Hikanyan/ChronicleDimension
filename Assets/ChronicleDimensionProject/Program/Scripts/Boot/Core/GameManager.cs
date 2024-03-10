@@ -15,7 +15,7 @@ namespace ChronicleDimensionProject.Boot
     /// ゲーム全体の管理
     /// </summary>
     [Serializable]
-    public class GameManager : AbstractSingleton<GameManager>
+    public class GameManager : AbstractSingletonMonoBehaviour<GameManager>
     {
         protected override bool UseDontDestroyOnLoad => true;
         public StateMachine<GameManager> stateMachine;

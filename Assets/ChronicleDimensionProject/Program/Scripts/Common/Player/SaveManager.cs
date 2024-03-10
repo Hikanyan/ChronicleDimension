@@ -7,8 +7,10 @@ namespace ChronicleDimensionProject.Player
     /// <summary>
     /// SaveManagerは、セーブデータの読み込み、保存、削除を行うためのシングルトンクラスです。
     /// </summary>
-    public class SaveManager : AbstractSingleton<SaveManager>
+    public class SaveManager : AbstractSingletonMonoBehaviour<SaveManager>
     {
+        protected override bool UseDontDestroyOnLoad => true;
+
         /// <summary> セーブデータの保存先パスを取得します。 </summary>
         private static string SavePath => Application.persistentDataPath + "/saved.json";
 

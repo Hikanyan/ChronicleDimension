@@ -209,7 +209,7 @@ public class StateMachine<TOwner>
     /// ステートを変更する
     /// </summary>
     /// <param name="nextState">遷移先のステート</param>
-    private void Change(State nextState)
+    public void Change(State nextState)
     {
         CurrentState.Exit(nextState);
         nextState.Enter(CurrentState);

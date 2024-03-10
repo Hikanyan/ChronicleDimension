@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using ChronicleDimensionProject.Common;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -6,52 +7,97 @@ using UnityEngine.SceneManagement;
 
 namespace ChronicleDimensionProject.Boot
 {
-    public class SceneController : AbstractSingleton<SceneController>
+    public class SceneController : AbstractSingletonMonoBehaviour<SceneController>
     {
-        public static SceneController Instance { get; private set; }
-
+        private Scene _neverUnloadScene; // アンロードしないシーン
         private Scene _lastScene;
-
-        // 進捗情報を外部に通知するためのAction
-        public Action<float> OnLoadProgressChanged { get; set; }
-
         protected override bool UseDontDestroyOnLoad => true;
 
-        public async UniTask LoadScene(string scene)
+        protected override void OnAwake()
+        {
+            _neverUnloadScene = SceneManager.GetActiveScene();
+            _lastScene = _neverUnloadScene;
+        }
+
+        /// <summary> シーンを非同期でロードする </summary>
+        public async UniTask<AsyncOperation> LoadSceneAsync(string scene)
         {
             if (string.IsNullOrEmpty(scene))
                 throw new ArgumentException($"{nameof(scene)} は無効です!");
 
             await UnloadLastScene();
+
+            // シーンを非同期でロードします。
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            await UniTask.WaitUntil(() => asyncLoad.isDone); // シーンのロードが完了するまで待機します。
+
+            // シーンがロードされた後に、アクティブシーンとして設定
+            Scene loadedScene = SceneManager.GetSceneByName(scene);
+            if (!loadedScene.IsValid()) return asyncLoad;
+            SceneManager.SetActiveScene(loadedScene);
+            _lastScene = loadedScene;
+
+            return asyncLoad;
+        }
+
+        /// <summary> シーンをロードする </summary>
+        public async void LoadScene(string scene)
+        {
+            if (string.IsNullOrEmpty(scene))
+                throw new ArgumentException($"{nameof(scene)} は無効です!");
+            await UnloadLastScene();
+
             await LoadSceneAdditive(scene);
         }
 
-        private async UniTask UnloadScene(Scene scene)
+        public async void LoadNewScene(string scene)
         {
-            if (!_lastScene.IsValid())
-                return;
+            if (string.IsNullOrEmpty(scene))
+                throw new ArgumentException($"{nameof(scene)} は無効です!");
+            await UnloadLastScene();
 
-            await SceneManager.UnloadSceneAsync(scene);
+            LoadNewSceneAdditive(scene);
+        }
+
+        private void LoadNewSceneAdditive(string sceneName)
+        {
+            var scene = SceneManager.CreateScene(sceneName);
+            SceneManager.SetActiveScene(scene);
+            _lastScene = scene;
         }
 
         private async UniTask LoadSceneAdditive(string scene)
         {
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-            while (!asyncLoad.isDone)
-            {
-                OnLoadProgressChanged?.Invoke(asyncLoad.progress);
-                await UniTask.Yield();
-            }
+            var asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            await asyncLoad;
 
             _lastScene = SceneManager.GetSceneByName(scene);
             SceneManager.SetActiveScene(_lastScene);
-            OnLoadProgressChanged?.Invoke(1.0f); // ロード完了時に進捗を100%に設定
+
+            // シーンが完全に読み込まれるまで待機する
+            while (!_lastScene.isLoaded)
+            {
+                await UniTask.Yield();
+            }
         }
 
-        public async UniTask UnloadLastScene()
+        /// <summary> 最後にロードされたシーンを非同期でアンロードします。 </summary>
+        private async UniTask UnloadLastScene()
         {
-            if (_lastScene.IsValid())
+            if (_lastScene != _neverUnloadScene)
+            {
                 await UnloadScene(_lastScene);
+            }
+        }
+
+        /// <summary> シーンをアンロードする </summary>
+        private async UniTask UnloadScene(Scene scene)
+        {
+            if (scene.IsValid())
+            {
+                var asyncUnload = SceneManager.UnloadSceneAsync(scene);
+                await asyncUnload;
+            }
         }
     }
 }

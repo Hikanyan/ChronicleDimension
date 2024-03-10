@@ -12,7 +12,6 @@ namespace ChronicleDimensionProject.Common.Test
 
         private void Start()
         {
-            Debug.Log("Play BGM");
             CriAudioManager.Instance.PlayBGM(cueSheet, cueName);
         }
     }

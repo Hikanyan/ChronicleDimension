@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ChronicleDimensionProject.Common
 {
-    public class CriAudioManager : AbstractSingleton<CriAudioManager>
+    public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
         [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
@@ -169,7 +169,7 @@ namespace ChronicleDimensionProject.Common
 
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
@@ -308,6 +308,7 @@ namespace ChronicleDimensionProject.Common
         /// <summary>SEを流す関数</summary>
         /// <param name="cueSheet">流したいキューシートの名前</param>
         /// <param name="cueName">流したいキューの名前</param>
+        /// <param name="volume">音量</param>
         /// <returns>停止する際に必要なIndex</returns>
         public int PlaySE(CueSheet cueSheet, string cueName, float volume = 1f)
         {

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   streamingAssetsPathAcf: Chronicle Dimention
-  cueSheetBGM: CueSheet_Chronicle_Dimention_20221024_2
+  cueSheetBGM: CueSheet_BGM
   cueSheetSe: CueSheet_SE
   cueSheetVoice: CueSheet_Voice

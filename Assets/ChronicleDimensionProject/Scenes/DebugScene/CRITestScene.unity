@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024c56f0be7f25f488da1c5b86a9051c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cueSheet: 1
-  cueName: BGM_Aries_20221020_BPM180
+  cueSheet: 3
+  cueName: "AIVoice\u30AF\u30ED\u30CB\u30AB\u30EB\u30C7\u30A3\u30E1\u30F3\u30B7\u30E7\u30F3"
 --- !u!4 &1434237417
 Transform:
   m_ObjectHideFlags: 0
@@ -307,10 +307,6 @@ PrefabInstance:
     - target: {fileID: 1804163710539016803, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}
       propertyPath: m_Name
       value: CRIAudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1804163710539016803, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2d3faaf38180f9499e980e7033f41d6, type: 3}

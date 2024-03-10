@@ -1,13 +1,17 @@
-﻿using ChronicleDimensionProject.Common.UI;
+﻿using ChronicleDimensionProject.Boot;
+using ChronicleDimensionProject.Common;
+using ChronicleDimensionProject.Common.UI;
 using State = StateMachine<ChronicleDimensionProject.Boot.GameManager>.State;
 
 namespace ChronicleDimensionProject.Title
 {
     public class TitleState : State
     {
-        protected override async void OnEnter(State prevState)
+        protected override void OnEnter(State prevState)
         {
-            await LoadingScene.Instance.LoadNextScene("TitleScene");
+            SceneController.Instance.LoadScene("TitleScene");
+            //CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Bgm, "Title");
+            CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Voice, "AIVoiceクロニカルディメンション");
         }
 
         protected override void OnUpdate()

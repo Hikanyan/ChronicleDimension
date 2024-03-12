@@ -398,7 +398,7 @@
       "url": "https://packages.unity.com"
     },
     "jp.ai-j.aivoice-for-games": {
-      "version": "file:G:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
+      "version": "file:D:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
       "depth": 0,
       "source": "local",
       "dependencies": {

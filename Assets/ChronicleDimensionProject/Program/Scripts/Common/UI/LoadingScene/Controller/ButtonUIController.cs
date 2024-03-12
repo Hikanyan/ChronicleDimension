@@ -8,7 +8,7 @@ namespace ChronicleDimensionProject.Common.UI
 {
     public class ButtonUIController : MonoBehaviour
     {
-        [SerializeField] GameState gameState;
+        [SerializeField] GameState gameState = default;
         private CriAudioManager.CueSheet cueSheet;
 
         public void ClickSeButtan(string name)
@@ -18,6 +18,7 @@ namespace ChronicleDimensionProject.Common.UI
 
         public void ChangeState()
         {
+            gameState = GameState.GameSelect;
             GameManager.Instance.Change(gameState);
         }
 

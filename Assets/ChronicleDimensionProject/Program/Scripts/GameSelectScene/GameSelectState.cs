@@ -1,5 +1,6 @@
 ﻿using ChronicleDimensionProject.Common;
 using ChronicleDimensionProject.Common.UI;
+using UnityEngine;
 using State = StateMachine<ChronicleDimensionProject.Boot.GameManager>.State;
 
 namespace ChronicleDimensionProject.GameSelectScene
@@ -8,6 +9,7 @@ namespace ChronicleDimensionProject.GameSelectScene
     {
         protected override async void OnEnter(State prevState)
         {
+            Debug.Log("GameSelectState");
             await LoadingScene.Instance.LoadNextScene("GameSelectScene");
             //CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Bgm, "Title");
             //CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Voice, "");

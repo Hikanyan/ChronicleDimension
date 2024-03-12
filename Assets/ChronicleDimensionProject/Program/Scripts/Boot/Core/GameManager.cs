@@ -15,7 +15,7 @@ namespace ChronicleDimensionProject.Boot
     /// ゲーム全体の管理
     /// </summary>
     [Serializable]
-    public class GameManager : AbstractSingleton<GameManager>
+    public class GameManager : AbstractSingletonMonoBehaviour<GameManager>
     {
         protected override bool UseDontDestroyOnLoad => true;
         public StateMachine<GameManager> stateMachine;
@@ -58,7 +58,7 @@ namespace ChronicleDimensionProject.Boot
             saveManager.LoadGame();
         }
 
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             // 各Singletonクラスの初期化
             sceneController = SceneController.Instance;

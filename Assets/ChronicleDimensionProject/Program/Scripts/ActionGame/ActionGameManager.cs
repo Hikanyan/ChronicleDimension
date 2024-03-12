@@ -3,8 +3,9 @@ using ChronicleDimensionProject.Common;
 
 namespace ChronicleDimensionProject.InGame.ActionGame
 {
-    public class ActionGameManager : AbstractSingleton<ActionGameManager>, IGameModeManager
+    public class ActionGameManager : AbstractSingletonMonoBehaviour<ActionGameManager>, IGameModeManager
     {
+        protected override bool UseDontDestroyOnLoad => false;
         public void Activate()
         {
         }

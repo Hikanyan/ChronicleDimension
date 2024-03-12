@@ -2,8 +2,8 @@
 
 namespace ChronicleDimensionProject.Program.Scripts.Gacha.Core
 {
-    public class GachaManager: AbstractSingleton<GachaManager>
+    public class GachaManager: AbstractSingletonMonoBehaviour<GachaManager>
     {
-        
+        protected override bool UseDontDestroyOnLoad => false;
     }
 }

@@ -7,8 +7,9 @@ namespace ChronicleDimensionProject.Scripts.OutGame
     /// <summary>
     /// イベントを管理するクラスです。
     /// </summary>
-    public class EventManager : AbstractSingleton<EventManager>
+    public class EventManager : AbstractSingletonMonoBehaviour<EventManager>
     {
+        protected override bool UseDontDestroyOnLoad => false;
         //イベント待ちを記録するDictionary
         private Dictionary<string, UnityEvent> eventDictionary;
 

@@ -8,8 +8,9 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(TimerManager), typeof(RhythmGameScore))]
-public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
+public class RhythmGameManager : AbstractSingletonMonoBehaviour<RhythmGameManager>
 {
+    protected override bool UseDontDestroyOnLoad => true;
     [Header("UI")] [SerializeField] GameObject hudUI = default;
     [SerializeField] GameObject musicPreviewUI = default;
     [SerializeField] GameObject fpsUI = default;
@@ -29,7 +30,9 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     public bool AutoMode { get; set; } = false;
 
     public TimerManager timerManager;
-    [FormerlySerializedAs("rhythmGameScoreManager")] public RhythmGameScore rhythmGameScore;
+
+    [FormerlySerializedAs("rhythmGameScoreManager")]
+    public RhythmGameScore rhythmGameScore;
 
 
     private IntReactiveProperty _playerLevel = new(1);
@@ -38,7 +41,7 @@ public class RhythmGameManager : AbstractSingleton<RhythmGameManager>
     public IReadOnlyReactiveProperty<int> PlayerLevel => _playerLevel;
     public IReadOnlyReactiveProperty<int> Money => _money;
 
-    protected override void OnAwake()
+    public override void OnAwake()
     {
         Application.targetFrameRate = 0;
         //UIManager.Instance.RegisterPanel(hudUI.GetComponent<IUserInterface>());

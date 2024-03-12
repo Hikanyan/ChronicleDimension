@@ -7,13 +7,13 @@ using UnityEngine.SceneManagement;
 
 namespace ChronicleDimensionProject.Boot
 {
-    public class SceneController : AbstractSingleton<SceneController>
+    public class SceneController : AbstractSingletonMonoBehaviour<SceneController>
     {
         private Scene _neverUnloadScene; // アンロードしないシーン
         private Scene _lastScene;
         protected override bool UseDontDestroyOnLoad => true;
 
-        protected override void OnAwake()
+        public override void OnAwake()
         {
             _neverUnloadScene = SceneManager.GetActiveScene();
             _lastScene = _neverUnloadScene;

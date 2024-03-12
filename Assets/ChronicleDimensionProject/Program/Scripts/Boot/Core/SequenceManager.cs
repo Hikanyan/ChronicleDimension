@@ -4,8 +4,9 @@ using UnityEngine;
 namespace ChronicleDimensionProject.Boot
 {
     /// <summary> このシングルトンは、観察されたゲームやイベントに基づいてゲームの状態を決定します。 </summary>
-    public class SequenceManager : AbstractSingleton<SequenceManager>
+    public class SequenceManager : AbstractSingletonMonoBehaviour<SequenceManager>
     {
+        protected override bool UseDontDestroyOnLoad => false;
         [SerializeField] GameObject[] _preloadedAssets;
 
         /// <summary> 初期化 </summary>

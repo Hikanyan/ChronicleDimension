@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace ChronicleDimensionProject.Common.UI
 {
-    public class LoadingScene : AbstractSingleton<LoadingScene>
+    public class LoadingScene : AbstractSingletonMonoBehaviour<LoadingScene>
     {
         [Tooltip("ロード中に表示するUI")] [SerializeField]
         private GameObject loadingUI;

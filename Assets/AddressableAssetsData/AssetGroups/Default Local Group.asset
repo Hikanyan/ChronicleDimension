@@ -16,11 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: ff0e3a6e68a6a394b9b551e0c2561835
-  m_SerializeEntries:
-  - m_GUID: d0a254b2e714c3e4aac1c099dbeb8097
-    m_Address: Assets/Resources_moved/MusicData/Hard/MeteorShower_Hard.txt
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d9760a4284308e844bda34fa61b2169c, type: 2}
   m_SchemaSet:

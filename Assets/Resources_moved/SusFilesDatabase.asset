@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce15775f5905e445b01be8f5568b6ac, type: 3}
+  m_Name: SusFilesDatabase
+  m_EditorClassIdentifier: 
+  files:
+  - susFilePath: Assets/Resources_moved/MusicData/Normal/AnalogAnthology_Normal.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Normal/AnalogAnthology_Normal.json
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Normal/MeteorShower_Normal.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Normal/MeteorShower_Normal.json
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Normal/Pentagon_Normal.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Normal/Pentagon_Normal.json
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Normal/Venus_Normal.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Normal/Venus_Normal.json
+    isConverted: 1
+  - susFilePath: "Assets/Resources_moved/MusicData/Normal/\u53E4\u306E\u7A7A\u306B\u601D\u3044\u3092\u99B3\u305B\u3066_Normal.sus"
+    jsonFilePath: "Assets/Resources_moved/MusicData/Normal/\u53E4\u306E\u7A7A\u306B\u601D\u3044\u3092\u99B3\u305B\u3066_Normal.json"
+    isConverted: 1
+  - susFilePath: "Assets/Resources_moved/MusicData/Normal/\u96E8\u96F2\u306E\u5411\u3053\u3046\u306B_Normal.sus"
+    jsonFilePath: "Assets/Resources_moved/MusicData/Normal/\u96E8\u96F2\u306E\u5411\u3053\u3046\u306B_Normal.json"
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Hard/MeteorShower_Hard.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Hard/MeteorShower_Hard.json
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Hard/Pentagon_Hard.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Hard/Pentagon_Hard.json
+    isConverted: 1
+  - susFilePath: Assets/Resources_moved/MusicData/Hard/Venus_Hard.sus
+    jsonFilePath: Assets/Resources_moved/MusicData/Hard/Venus_Hard.json
+    isConverted: 1

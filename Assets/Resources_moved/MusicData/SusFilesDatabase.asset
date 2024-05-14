@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce15775f5905e445b01be8f5568b6ac, type: 3}
+  m_Script: {fileID: 11500000, guid: af579fe952e776d4db20c9c42dad332a, type: 3}
   m_Name: SusFilesDatabase
   m_EditorClassIdentifier: 
   files:

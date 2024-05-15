@@ -12,7 +12,7 @@ namespace ChronicleDimensionProject.Common
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
-        [SerializeField] string cueSheetBGM = "CueSheet_Chronicle_Dimention_20221024_2"; //.acb
+        [SerializeField] string cueSheetBGM = "CueSheet_BGM"; //.acb
         [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
         [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
 
@@ -169,7 +169,7 @@ namespace ChronicleDimensionProject.Common
 
 
         /// <summary>CriAtom の追加。acb追加</summary>
-        public override void OnAwake()
+        protected override void OnAwake()
         {
             // acf設定
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";

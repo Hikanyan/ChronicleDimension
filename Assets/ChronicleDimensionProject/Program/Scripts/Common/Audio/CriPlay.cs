@@ -7,8 +7,8 @@ namespace ChronicleDimensionProject.Common.Test
 {
     public class CriPlay : MonoBehaviour
     {
-        [SerializeField] CriAudioManager.CueSheet cueSheet;
-        [SerializeField] string cueName;
+        [SerializeField] private CriAudioManager.CueSheet cueSheet;
+        [SerializeField] private string cueName;
 
         private void Start()
         {

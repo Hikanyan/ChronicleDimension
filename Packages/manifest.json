@@ -7,16 +7,16 @@
     "com.unity.feature.2d": "2.0.0",
     "com.unity.feature.characters-animation": "1.0.0",
     "com.unity.feature.cinematic": "1.0.0",
-    "com.unity.ide.rider": "3.0.27",
-    "com.unity.ide.visualstudio": "2.0.18",
+    "com.unity.ide.rider": "3.0.28",
+    "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.7.0",
     "com.unity.render-pipelines.universal": "12.1.12",
     "com.unity.test-framework": "1.1.33",
-    "com.unity.textmeshpro": "3.0.6",
+    "com.unity.textmeshpro": "3.0.8",
     "com.unity.timeline": "1.6.5",
     "com.unity.ugui": "1.0.0",
-    "com.unity.visualscripting": "1.9.0",
+    "com.unity.visualscripting": "1.9.4",
     "jp.ai-j.aivoice-for-games": "file:G:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer",
     "com.unity.modules.ai": "1.0.0",
@@ -57,6 +57,13 @@
       "url": "https://unitynuget-registry.azurewebsites.net",
       "scopes": [
         "org.nuget"
+      ]
+    },
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.google.external-dependency-manager"
       ]
     }
   ]

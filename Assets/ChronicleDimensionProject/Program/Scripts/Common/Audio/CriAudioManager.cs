@@ -14,14 +14,6 @@ namespace ChronicleDimensionProject.Common
 
         protected override bool UseDontDestroyOnLoad => true;
 
-        public enum CueSheet
-        {
-            None,
-            Bgm,
-            Se,
-            Voice
-        }
-
         private float _masterVolume = 1F;
         private float _bgmVolume = 1F;
         private float _seVolume = 1F;
@@ -52,33 +44,6 @@ namespace ChronicleDimensionProject.Common
 
         private string _currentBGMCueName = "";
         private CriAtomExAcb _currentBGMAcb = null;
-
-        private CueSheet _cueSheet = CueSheet.None;
-
-
-        /// <summary>
-        /// enum からstringを返す
-        /// </summary>
-        /// <param name="cueSheet"></param>
-        /// <returns></returns>
-        string GetCueSheetString(CueSheet cueSheet)
-        {
-            if (cueSheet == CueSheet.Bgm)
-            {
-                return cueSheetBGM;
-            }
-            else if (cueSheet == CueSheet.Se)
-            {
-                return cueSheetSe;
-            }
-            else if (cueSheet == CueSheet.Voice)
-            {
-                return cueSheetVoice;
-            }
-
-            return null;
-        }
-
 
         /// <summary>マスターボリューム</summary>
         /// <value>変更したい値</value>
@@ -243,7 +208,6 @@ namespace ChronicleDimensionProject.Common
         {
             CriAtomPlugin.FinalizeLibrary();
         }
-        // ここに音を鳴らす関数を書いてください
 
         /// <summary>BGMを開始する</summary>
         /// <param name="cueName">流したいキューの名前</param>
@@ -363,20 +327,11 @@ namespace ChronicleDimensionProject.Common
         /// <param name="cueSheet">流したいキューシートの名前</param>
         /// <param name="cueName">流したいキューの名前</param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlayVoice(CueSheet cueSheet, string cueName, float volume = 1f)
+        public int PlayVoice(string cueName, float volume = 1f)
         {
-            CriAtomEx.CueInfo cueInfo;
             CriPlayerData newAtomPlayer = new CriPlayerData();
-
-            string cueSheetName = GetCueSheetString(cueSheet);
-            if (cueSheetName == null)
-            {
-                Debug.LogWarning("CueSheetがNullです。");
-                return -1;
-            }
-
-            var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
-            tempAcb.GetCueInfo(cueName, out cueInfo);
+            var tempAcb = CriAtom.GetCueSheet(cueSheetSe).acb;
+            tempAcb.GetCueInfo(cueName, out var cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
 

@@ -49,7 +49,7 @@ namespace ChronicleDimensionProject.Common.Test
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 Debug.Log("ボイスを再生");
-                _criAudioManager.PlayVoice(CriAudioManager.CueSheet.Voice, "SomeVoiceCueName");
+                _criAudioManager.PlayVoice("SomeVoiceCueName");
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha6))

@@ -163,7 +163,7 @@ namespace ChronicleDimensionProject.Common
             string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
             // CriAtom作成
-            new GameObject().AddComponent<CriAtom>();
+            gameObject.AddComponent<CriAtom>();
             // BGM acb追加
             CriAtom.AddCueSheet(cueSheetBGM, $"{cueSheetBGM}.acb", null, null);
             // SE acb追加

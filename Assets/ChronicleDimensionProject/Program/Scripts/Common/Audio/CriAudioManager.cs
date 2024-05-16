@@ -1,20 +1,16 @@
-// 日本語対応
-
 using System.Collections.Generic;
 using CriWare;
-using UnityEngine.SceneManagement;
 using System;
-using ChronicleDimensionProject.Common;
 using UnityEngine;
 
 namespace ChronicleDimensionProject.Common
 {
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
-        [SerializeField] string streamingAssetsPathAcf = "Chronicle Dimention";
-        [SerializeField] string cueSheetBGM = "CueSheet_BGM"; //.acb
-        [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
-        [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
+        [SerializeField] private string streamingAssetsPathAcf = "Chronicle Dimention";
+        [SerializeField] private string cueSheetBGM = "CueSheet_BGM"; //.acb
+        [SerializeField] private string cueSheetSe = "CueSheet_SE"; //.acb
+        [SerializeField] private string cueSheetVoice = "CueSheet_Voice"; //.acb
 
         protected override bool UseDontDestroyOnLoad => true;
 
@@ -91,11 +87,9 @@ namespace ChronicleDimensionProject.Common
             get => _masterVolume;
             set
             {
-                if (_masterVolume + Diff < value || _masterVolume - Diff > value)
-                {
-                    MasterVolumeChanged.Invoke(value);
-                    _masterVolume = value;
-                }
+                if (!(_masterVolume + Diff < value) && !(_masterVolume - Diff > value)) return;
+                MasterVolumeChanged.Invoke(value);
+                _masterVolume = value;
             }
         }
 
@@ -106,11 +100,9 @@ namespace ChronicleDimensionProject.Common
             get => _bgmVolume;
             set
             {
-                if (_bgmVolume + Diff < value || _bgmVolume - Diff > value)
-                {
-                    BGMVolumeChanged.Invoke(value);
-                    _bgmVolume = value;
-                }
+                if (!(_bgmVolume + Diff < value) && !(_bgmVolume - Diff > value)) return;
+                BGMVolumeChanged.Invoke(value);
+                _bgmVolume = value;
             }
         }
 
@@ -121,11 +113,9 @@ namespace ChronicleDimensionProject.Common
             get => _seVolume;
             set
             {
-                if (_seVolume + Diff < value || _seVolume - Diff > value)
-                {
-                    SEVolumeChanged.Invoke(value);
-                    _seVolume = value;
-                }
+                if (!(_seVolume + Diff < value) && !(_seVolume - Diff > value)) return;
+                SEVolumeChanged.Invoke(value);
+                _seVolume = value;
             }
         }
 
@@ -134,11 +124,9 @@ namespace ChronicleDimensionProject.Common
             get => _voiceVolume;
             set
             {
-                if (_voiceVolume + Diff < value || _voiceVolume - Diff > value)
-                {
-                    VoiceVolumeChanged.Invoke(value);
-                    _voiceVolume = value;
-                }
+                if (!(_voiceVolume + Diff < value) && !(_voiceVolume - Diff > value)) return;
+                VoiceVolumeChanged.Invoke(value);
+                _voiceVolume = value;
             }
         }
 
@@ -188,29 +176,33 @@ namespace ChronicleDimensionProject.Common
             _loopSEPlayer = new CriAtomExPlayer();
             _voicePlayer = new CriAtomExPlayer();
 
+            _seData = new List<CriPlayerData>();
+            _voiceData = new List<CriPlayerData>();
+
             MasterVolumeChanged += volume =>
             {
                 _bgmPlayer.SetVolume(volume * _bgmVolume);
                 _bgmPlayer.Update(_bgmPlayback);
 
-                for (int i = 0; i < _seData.Count; i++)
+                foreach (var se in _seData)
                 {
-                    if (_seData[i].IsLoop)
+                    if (se.IsLoop)
                     {
                         _loopSEPlayer.SetVolume(volume * _seVolume);
-                        _loopSEPlayer.Update(_seData[i].Playback);
+                        _loopSEPlayer.Update(se.Playback);
                     }
                     else
                     {
                         _sePlayer.SetVolume(volume * _seVolume);
-                        _sePlayer.Update(_seData[i].Playback);
+                        _sePlayer.Update(se.Playback);
                     }
                 }
 
-                for (int i = 0; i < _voiceData.Count; i++)
+
+                foreach (var voice in _voiceData)
                 {
                     _voicePlayer.SetVolume(_masterVolume * volume);
-                    _voicePlayer.Update(_voiceData[i].Playback);
+                    _voicePlayer.Update(voice.Playback);
                 }
             };
 
@@ -222,62 +214,57 @@ namespace ChronicleDimensionProject.Common
 
             SEVolumeChanged += volume =>
             {
-                for (int i = 0; i < _seData.Count; i++)
+                foreach (var se in _seData)
                 {
-                    if (_seData[i].IsLoop)
+                    if (se.IsLoop)
                     {
                         _loopSEPlayer.SetVolume(_masterVolume * volume);
-                        _loopSEPlayer.Update(_seData[i].Playback);
+                        _loopSEPlayer.Update(se.Playback);
                     }
                     else
                     {
                         _sePlayer.SetVolume(_masterVolume * volume);
-                        _sePlayer.Update(_seData[i].Playback);
+                        _sePlayer.Update(se.Playback);
                     }
                 }
             };
 
             VoiceVolumeChanged += volume =>
             {
-                for (int i = 0; i < _voiceData.Count; i++)
+                foreach (var voice in _voiceData)
                 {
                     _voicePlayer.SetVolume(_masterVolume * volume);
-                    _voicePlayer.Update(_voiceData[i].Playback);
+                    _voicePlayer.Update(voice.Playback);
                 }
             };
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             CriAtomPlugin.FinalizeLibrary();
         }
         // ここに音を鳴らす関数を書いてください
 
         /// <summary>BGMを開始する</summary>
-        /// <param name="cueSheet">流したいキューシートの名前</param>
         /// <param name="cueName">流したいキューの名前</param>
-        public void PlayBGM(CueSheet cueSheet, string cueName)
+        public void PlayBGM(string cueName)
         {
-            string cueSheetName = GetCueSheetString(cueSheet);
-            if (cueSheetName == null)
+            var tempAcb = CriAtom.GetCueSheet(cueSheetBGM).acb;
+            if (!tempAcb.GetCueInfo(cueName, out var cueInfo))
             {
-                Debug.LogWarning("CueSheetがNullです。");
+                Debug.LogError($"BGMキュー名 '{cueName}' がキューシート '{cueSheetBGM}' に存在しません。");
                 return;
             }
 
-            var temp = CriAtom.GetCueSheet(cueSheetName).acb;
-
-            if (_currentBGMAcb == temp && _currentBGMCueName == cueName &&
+            if (_currentBGMCueName == cueName &&
                 _bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
             {
                 return;
             }
 
             StopBGM();
-
-            _bgmPlayer.SetCue(temp, cueName);
+            _bgmPlayer.SetCue(_currentBGMAcb, cueName);
             _bgmPlayback = _bgmPlayer.Start();
-            _currentBGMAcb = temp;
             _currentBGMCueName = cueName;
         }
 
@@ -306,24 +293,19 @@ namespace ChronicleDimensionProject.Common
         }
 
         /// <summary>SEを流す関数</summary>
-        /// <param name="cueSheet">流したいキューシートの名前</param>
         /// <param name="cueName">流したいキューの名前</param>
         /// <param name="volume">音量</param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlaySE(CueSheet cueSheet, string cueName, float volume = 1f)
+        public int PlaySE(string cueName, float volume = 1f)
         {
-            CriAtomEx.CueInfo cueInfo;
             CriPlayerData newAtomPlayer = new CriPlayerData();
 
-            string cueSheetName = GetCueSheetString(cueSheet);
-            if (cueSheetName == null)
+            var tempAcb = CriAtom.GetCueSheet(cueSheetSe).acb;
+            if (!tempAcb.GetCueInfo(cueName, out var cueInfo))
             {
-                Debug.LogWarning("CueSheetがNullです。");
+                Debug.LogError($"SEキュー名 '{cueName}' がキューシート '{cueSheetSe}' に存在しません。");
                 return -1;
             }
-
-            var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
-            tempAcb.GetCueInfo(cueName, out cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
 

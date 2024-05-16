@@ -251,5 +251,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024c56f0be7f25f488da1c5b86a9051c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cueSheet: 1
-  cueName: Meteor Shower
+  cueNameBgm: Running Through The Galaxy 20220629
+  cueNameSe: Perfect

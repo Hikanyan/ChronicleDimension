@@ -182,5 +182,6 @@ PrefabInstance:
       propertyPath: sequenceManagerPrefab
       value: 
       objectReference: {fileID: 7160175442453625851, guid: 54165c672e5beaa438fa9b4876a29598, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4971981519969121163, guid: bdacee7f570347a4eb7de118b95a3a1a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bdacee7f570347a4eb7de118b95a3a1a, type: 3}

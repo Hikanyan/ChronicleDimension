@@ -19,15 +19,15 @@ namespace Hikanyan.Core
         }
 
         // メニューアイテムを個々に設定
-        [MenuItem("HikanyanTools/AddPackage/Add UniRx")]
+        [MenuItem("HikanyanTools/Add UniRx")]
         static void AddUniRx() => AddPackage("Add UniRx",
             "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts");
 
-        [MenuItem("HikanyanTools/AddPackage/Add UniTask")]
+        [MenuItem("HikanyanTools/Add UniTask")]
         static void AddUniTask() => AddPackage("Add UniTask",
             "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask");
 
-        [MenuItem("HikanyanTools/AddPackage/Add VContainer")]
+        [MenuItem("HikanyanTools/Add VContainer")]
         static void AddVContainer() => AddPackage("Add VContainer",
             "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer");
 

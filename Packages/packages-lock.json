@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "f2773f585e762480c835ac718b82b87cb111e500"
     },
+    "com.harumak.upalette": {
+      "version": "https://github.com/Haruma-K/uPalette.git?path=/Assets/uPalette",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3973bf852c0087909794d65d8a02cba8ee3a49a6"
+    },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
       "depth": 0,
@@ -398,7 +405,7 @@
       "url": "https://packages.unity.com"
     },
     "jp.ai-j.aivoice-for-games": {
-      "version": "file:G:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
+      "version": "file:D:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
       "depth": 0,
       "source": "local",
       "dependencies": {

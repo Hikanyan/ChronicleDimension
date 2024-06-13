@@ -16,7 +16,6 @@ namespace ChronicleDimensionProject.Common
             {
                 if (instance != null) return instance;
                 instance = FindObjectOfType<T>();
-                if (instance != null) return instance;
                 GameObject singletonObject = new GameObject(typeof(T).Name);
                 instance = singletonObject.AddComponent<T>();
                 if ((instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)

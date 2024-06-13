@@ -37,7 +37,7 @@ Shader "HikanyanLaboratory/GlowEffect"
             };
 
             sampler2D _MainTex;
-            float4  _GlowColor;
+            float4 _GlowColor;
             float _GlowAmount;
 
 
@@ -59,9 +59,16 @@ Shader "HikanyanLaboratory/GlowEffect"
                 silhouetteColor.a *= col.a; // 保持するアルファ値
 
                 // グロー
-                 half4 glow = _GlowColor * _GlowAmount;
-                
-                return silhouetteColor * glow;
+                half4 glow = _GlowColor * _GlowAmount;
+                glow *= silhouetteColor.a;
+
+                // 元のテクスチャを最終的な出力として使用
+                fixed4 finalColor = col;
+                finalColor.rgb += glow.rgb;
+
+                finalColor.rgb = lerp(finalColor.rgb, _GlowColor.rgb, _GlowAmount);
+
+                return finalColor;
             }
             ENDCG
         }

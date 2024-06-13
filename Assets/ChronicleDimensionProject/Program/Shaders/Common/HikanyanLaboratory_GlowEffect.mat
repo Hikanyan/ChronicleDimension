@@ -29,5 +29,5 @@ Material:
     - _AlphaCutoff: 0.013
     - _GlowAmount: 1
     m_Colors:
-    - _GlowColor: {r: 57.0379, g: 2.4598532, b: 2.4598532, a: 1}
+    - _GlowColor: {r: 95.87451, g: 13.819808, b: 4.5176444, a: 1}
   m_BuildTextureStacks: []

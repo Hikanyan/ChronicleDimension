@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using ChronicleDimensionProject.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ChronicleDimensionProject.Common.Test
 {
     public class CriPlay : MonoBehaviour
     {
-        [SerializeField] private string cueNameBgm;
-        [SerializeField] private string cueNameSe;
+        [SerializeField] private string _cueNameBgm;
+        [SerializeField] private string _cueNameSe;
 
         private CriAudioManager _criAudioManager;
 
@@ -23,7 +24,7 @@ namespace ChronicleDimensionProject.Common.Test
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Debug.Log("BGMを再生");
-                _criAudioManager.PlayBGM(cueNameBgm);
+                _criAudioManager.PlayBGM(_cueNameBgm);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -36,7 +37,7 @@ namespace ChronicleDimensionProject.Common.Test
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 Debug.Log("SEを再生");
-                _criAudioManager.PlaySE(cueNameSe);
+                _criAudioManager.PlaySE(_cueNameSe);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))

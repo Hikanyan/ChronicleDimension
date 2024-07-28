@@ -14,6 +14,13 @@
       "dependencies": {},
       "hash": "f2773f585e762480c835ac718b82b87cb111e500"
     },
+    "com.harumak.upalette": {
+      "version": "https://github.com/Haruma-K/uPalette.git?path=/Assets/uPalette",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3973bf852c0087909794d65d8a02cba8ee3a49a6"
+    },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
       "depth": 0,
@@ -234,7 +241,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.27",
+      "version": "3.0.28",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -243,7 +250,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.18",
+      "version": "2.0.22",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -358,7 +365,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.6",
+      "version": "3.0.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -388,7 +395,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.0",
+      "version": "1.9.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -398,12 +405,19 @@
       "url": "https://packages.unity.com"
     },
     "jp.ai-j.aivoice-for-games": {
-      "version": "file:G:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
+      "version": "file:D:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
       "depth": 0,
       "source": "local",
       "dependencies": {
         "org.nuget.csvhelper": "30.0.1"
       }
+    },
+    "jp.hadashikick.vcontainer": {
+      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1f611aa8b770ffc1697fbe3a67366734eb9584fa"
     },
     "org.nuget.csvhelper": {
       "version": "30.0.1",

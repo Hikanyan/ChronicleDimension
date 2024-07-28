@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Editor/AddPackageExample.cs.meta
+guid: af579fe952e776d4db20c9c42dad332a
+========
 guid: 7ce15775f5905e445b01be8f5568b6ac
+>>>>>>>> 9314ec647a771b8477bf16b5dbec885a6bb362e4:Assets/ChronicleDimensionProject/Program/Tools/SusFilesDatabase.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

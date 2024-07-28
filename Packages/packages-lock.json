@@ -412,13 +412,6 @@
         "org.nuget.csvhelper": "30.0.1"
       }
     },
-    "jp.hadashikick.vcontainer": {
-      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "1f611aa8b770ffc1697fbe3a67366734eb9584fa"
-    },
     "org.nuget.csvhelper": {
       "version": "30.0.1",
       "depth": 1,

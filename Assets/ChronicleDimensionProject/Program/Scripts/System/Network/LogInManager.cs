@@ -7,7 +7,7 @@ using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ChronicleDimensionProject
+namespace ChronicleDimensionProject.Network
 {
     public class LogInManager : MonoBehaviourPunCallbacks, IChatClientListener
     {

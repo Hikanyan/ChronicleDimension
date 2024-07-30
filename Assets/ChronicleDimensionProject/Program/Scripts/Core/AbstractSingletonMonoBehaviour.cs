@@ -3,48 +3,41 @@ using UnityEngine;
 namespace ChronicleDimensionProject.Common
 {
     /// <summary> シングルトンの基底クラス </summary>
-    public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
+    public class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
     {
-        /// <summary>
-        /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
-        /// </summary>
-        private static T instance;
+        protected virtual bool UseDontDestroyOnLoad { get; } = false;
+        private static T _instance;
 
         public static T Instance
         {
             get
             {
-                if (instance != null) return instance;
-                instance = FindObjectOfType<T>();
-                GameObject singletonObject = new GameObject(typeof(T).Name);
-                instance = singletonObject.AddComponent<T>();
-                if ((instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
+                if (_instance != null) return _instance;
+                // アクセスされたらまずは、インスタンスがあるか調べる
+                _instance = (T)FindObjectOfType(typeof(T));
+
+                if (_instance == null)
                 {
-                    DontDestroyOnLoad(singletonObject);
+                    // なかったら作る
+                    SetupInstance();
+                }
+                else
+                {
+                    // 既にあった時のデバッグログ 特に意味はない
+                    string typeName = typeof(T).Name;
+                    Debug.Log("[Singleton] " + typeName + " instance already created: " +
+                              _instance.gameObject.name);
                 }
 
-                return instance;
+                return _instance;
             }
         }
 
-        protected abstract bool UseDontDestroyOnLoad { get; }
-
-        protected virtual void Awake()
+        private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this as T;
-                if (UseDontDestroyOnLoad)
-                {
-                    DontDestroyOnLoad(gameObject);
-                }
-
-                OnAwake();
-            }
-            else if (instance != this)
-            {
-                Destroy(gameObject);
-            }
+            // 重複回避のためのチェック
+            RemoveDuplicates();
+            OnAwake();
         }
 
         protected virtual void OnAwake()
@@ -53,13 +46,39 @@ namespace ChronicleDimensionProject.Common
 
         protected virtual void OnDestroy()
         {
-            if (instance != this) return;
-            instance = null;
-            OnDestroyed();
+            if (_instance == this)
+            {
+                _instance = null;
+            }
         }
 
-        protected virtual void OnDestroyed()
+        // シングルトン初期化
+        private static void SetupInstance()
         {
+            GameObject gameObj = new GameObject();
+            gameObj.name = typeof(T).Name;
+
+            _instance = gameObj.AddComponent<T>();
+            if ((_instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObj);
+            }
+        }
+
+        private void RemoveDuplicates()
+        {
+            if (_instance == null)
+            {
+                _instance = this as T;
+                if (UseDontDestroyOnLoad)
+                {
+                    DontDestroyOnLoad(gameObject);
+                }
+            }
+            else if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using ChronicleDimensionProject.Common;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ChronicleDimensionProject.UI
 {
-    public class UIManager : MonoBehaviour, IUIManager
+    public class UIManager : AbstractSingletonMonoBehaviour<UIManager>, IUIManager
     {
         private readonly Dictionary<Type, IUIView> _views = new Dictionary<Type, IUIView>();
+
+        protected override bool UseDontDestroyOnLoad => true;
 
         public void RegisterView<T>(T view) where T : IUIView
         {
@@ -18,7 +21,14 @@ namespace ChronicleDimensionProject.UI
         {
             if (_views.TryGetValue(typeof(T), out var view))
             {
-                await view.Show();
+                if (view is IAnimatedUIView animatedView)
+                {
+                    await animatedView.AnimateShow();
+                }
+                else
+                {
+                    await view.Show();
+                }
             }
             else
             {
@@ -30,7 +40,14 @@ namespace ChronicleDimensionProject.UI
         {
             if (_views.TryGetValue(typeof(T), out var view))
             {
-                await view.Hide();
+                if (view is IAnimatedUIView animatedView)
+                {
+                    await animatedView.AnimateHide();
+                }
+                else
+                {
+                    await view.Hide();
+                }
             }
             else
             {

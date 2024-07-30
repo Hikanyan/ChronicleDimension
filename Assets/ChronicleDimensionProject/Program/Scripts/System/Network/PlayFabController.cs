@@ -2,7 +2,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-namespace ChronicleDimensionProject
+namespace ChronicleDimensionProject.Network
 {
     public class PlayFabController : MonoBehaviour
     {

@@ -7,21 +7,29 @@ namespace ChronicleDimensionProject.UI
     {
         public SampleStaticUIView sampleStaticView;
         public SampleAnimatedUIView sampleAnimatedView;
-        private UIManager uiManager;
 
         private async void Start()
         {
-            uiManager = new UIManager();
-            uiManager.RegisterView(sampleStaticView);
-            uiManager.RegisterView(sampleAnimatedView);
+            // モデルの作成
+            var sampleModel = new SampleUIModel("Initial Title", 0);
 
-            await uiManager.Show<SampleStaticUIView>();
-            await UniTask.Delay(2000); // 2秒後に隠す
-            await uiManager.Hide<SampleStaticUIView>();
+            // UIManagerにビューとプレゼンターを登録
+            UIManager.Instance.RegisterView(sampleStaticView);
+            UIManager.Instance.RegisterView(sampleAnimatedView);
+            UIManager.Instance.RegisterPresenter<SampleUIPresenter, SampleAnimatedUIView>(sampleAnimatedView,
+                sampleModel);
 
-            await uiManager.Show<SampleAnimatedUIView>();
+            // Presenterの初期化
+            var presenter = (SampleUIPresenter)UIManager.Instance.GetPresenter<SampleUIPresenter>();
+            await presenter.Initialize();
+
+            // モデルデータの更新
+            presenter.UpdateModel("Updated Title", 10);
+
+            // Presenterを通してUIを表示
+            await UIManager.Instance.ShowPresenter<SampleUIPresenter>();
             await UniTask.Delay(2000); // 2秒後に隠す
-            await uiManager.Hide<SampleAnimatedUIView>();
+            await UIManager.Instance.HidePresenter<SampleUIPresenter>();
         }
     }
 }

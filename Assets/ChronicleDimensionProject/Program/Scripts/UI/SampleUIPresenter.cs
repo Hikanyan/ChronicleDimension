@@ -2,16 +2,47 @@
 
 namespace ChronicleDimensionProject.UI
 {
-    public class SampleUIPresenter : UIPresenter<SampleUIView>
+    public class SampleUIPresenter
     {
-        public SampleUIPresenter(SampleUIView view) : base(view)
+        private readonly SampleAnimatedUIView _view;
+        private readonly SampleUIModel _model;
+
+        public SampleUIPresenter(SampleAnimatedUIView view, SampleUIModel model)
         {
+            this._view = view;
+            this._model = model;
         }
 
-        public override async UniTask Initialize()
+        public async UniTask Initialize()
         {
-            await base.Initialize();
-            // 特定の初期化処理
+            // 初期化ロジック
+            UpdateView();
+            await _view.Show();
+        }
+
+        public void UpdateModel(string title, int count)
+        {
+            _model.Title = title;
+            _model.Count = count;
+            UpdateView();
+        }
+
+        private void UpdateView()
+        {
+            _view.SetTitle(_model.Title);
+            _view.SetCount(_model.Count);
+        }
+
+        public async UniTask Show()
+        {
+            UpdateView();
+            await _view.Show();
+        }
+
+        public async UniTask Hide()
+        {
+            await _view.Hide();
         }
     }
+
 }

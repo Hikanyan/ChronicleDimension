@@ -357,6 +357,11 @@ MonoBehaviour:
   _handoverButton: {fileID: 0}
   _supportButton: {fileID: 0}
   _backButton: {fileID: 0}
+--- !u!1 &736057836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1226401663648668288, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
+  m_PrefabInstance: {fileID: 1226401664298185413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1137391266
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,14 +497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99f6e735c5f0482bb6f5039c630f7a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsPressed>k__BackingField: 0
-  _isAnimation: 0
-  _button: {fileID: 0}
-  _originalScale: {x: 0, y: 0, z: 0}
-  onClick:
-    m_PersistentCalls:
-      m_Calls:
-      - {m_Target: {fileID: 1729706586}, m_TargetAssemblyTypeName: ChronicleDimensionProject.Common.UI.ButtonUIController, Assembly-CSharp: }
 --- !u!225 &1729706585
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -524,8 +521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b5392338a4d7742978cfbb172216bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 2
-  cueSheet: 0
 --- !u!1 &1807498679
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +774,7 @@ GameObject:
   - component: {fileID: 2121049491}
   - component: {fileID: 2121049490}
   m_Layer: 0
-  m_Name: TitleUIView
+  m_Name: TitleTopScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,9 +792,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740a35787f70fb143bd0040102ec87eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _window: {fileID: 0}
-  _background: {fileID: 0}
-  _titleMenu: {fileID: 0}
+  _mainWindow: {fileID: 1970887409}
+  _background: {fileID: 1226401664298185418}
+  _titleMenu: {fileID: 722782679}
 --- !u!4 &2121049491
 Transform:
   m_ObjectHideFlags: 0
@@ -938,6 +933,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226401663648668300, guid: 172d42365b556924dad31a15c1ec87ee, type: 3}
   m_PrefabInstance: {fileID: 1226401664298185413}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1226401664298185418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736057836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb85a4810f83419bb0add5291ed5eb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5001064580662723764
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 
 namespace ChronicleDimensionProject.UI
 {
-    public class TitleUIView : SceneNode
+    public class TitleTopScreen : SceneNode
     {
         [SerializeField] private WindowNode _mainWindow;
         [SerializeField] private Background _background;
@@ -11,6 +11,13 @@ namespace ChronicleDimensionProject.UI
 
         private async void Start()
         {
+            // ノードが正しくアサインされているか確認
+            if (_mainWindow == null || _background == null || _titleMenu == null)
+            {
+                Debug.LogError("One or more components are not assigned in the inspector.");
+                return;
+            }
+
             // ウィンドウノードの初期化と登録
             _mainWindow.AddScreen(_background);
             _mainWindow.AddScreen(_titleMenu);

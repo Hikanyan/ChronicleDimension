@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ChronicleDimensionProject.Common;
+using ChronicleDimensionProject.System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ChronicleDimensionProject.UI
 {
-    public class UIManager : AbstractSingletonMonoBehaviour<UIManager>
+    public class UIManager : Singleton<UIManager>
     {
         private readonly Dictionary<Type, Node> _nodes = new Dictionary<Type, Node>();
         private readonly Dictionary<Type, IUIView> _views = new Dictionary<Type, IUIView>();

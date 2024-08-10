@@ -1,9 +1,8 @@
 using UnityEngine;
 
-namespace ChronicleDimensionProject.Common
+namespace ChronicleDimensionProject.System
 {
-    /// <summary> シングルトンの基底クラス </summary>
-    public class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
+    public class Singleton<T> : MonoBehaviour where T : Component
     {
         protected virtual bool UseDontDestroyOnLoad { get; } = false;
         private static T _instance;
@@ -24,9 +23,9 @@ namespace ChronicleDimensionProject.Common
                 else
                 {
                     // 既にあった時のデバッグログ 特に意味はない
-                    string typeName = typeof(T).Name;
-                    Debug.Log("[Singleton] " + typeName + " instance already created: " +
-                              _instance.gameObject.name);
+                    // string typeName = typeof(T).Name;
+                    // Debug.Log("[Singleton] " + typeName + " instance already created: " +
+                    //           _instance.gameObject.name);
                 }
 
                 return _instance;
@@ -59,7 +58,7 @@ namespace ChronicleDimensionProject.Common
             gameObj.name = typeof(T).Name;
 
             _instance = gameObj.AddComponent<T>();
-            if ((_instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
+            if ((_instance as Singleton<T>).UseDontDestroyOnLoad)
             {
                 DontDestroyOnLoad(gameObj);
             }

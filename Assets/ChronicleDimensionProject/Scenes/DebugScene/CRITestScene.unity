@@ -250,7 +250,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434237417}
-  - component: {fileID: 1434237418}
   m_Layer: 0
   m_Name: CriPlay
   m_TagString: Untagged
@@ -273,17 +272,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1434237418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434237415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024c56f0be7f25f488da1c5b86a9051c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cueNameBgm: Running Through The Galaxy 20220629
-  _cueNameSe: Perfect

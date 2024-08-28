@@ -9,7 +9,7 @@ using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace HikanyanLaboratory.Audio
 {
-    public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
+    public class CriAudioManager : Singleton<CriAudioManager>
     {
         [SerializeField] private CriAudioSetting _audioSetting;
         private const float Diff = 0.01F; // 音量の変更があったかどうかの判定に使う

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ChronicleDimensionProject.System
+namespace ChronicleDimensionProject.Common
 {
     public class Singleton<T> : MonoBehaviour where T : Component
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ChronicleDimensionProject.UI
 {
-    public class UIManager : AbstractSingletonMonoBehaviour<UIManager>
+    public class UIManager : Singleton<UIManager>
     {
         private readonly Dictionary<Type, Node> _nodes = new Dictionary<Type, Node>();
 

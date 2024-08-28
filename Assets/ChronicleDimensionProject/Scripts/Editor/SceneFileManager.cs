@@ -89,8 +89,6 @@ namespace ChronicleDimensionProject.Editor
         void OnGUI()
         {
             DrawSceneFilesSection();
-            DrawCreateNewSceneSection();
-            DrawGenerateProjectFileStructureSection();
         }
 
 

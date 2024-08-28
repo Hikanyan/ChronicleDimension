@@ -6,6 +6,7 @@ namespace ChronicleDimensionProject.UI
     public class TitleTopScreen : SceneNode
     {
         [SerializeField] private WindowNode _mainWindow;
+        [SerializeField] private WindowNode _titleMenuWindow;
         [SerializeField] private TitleMenu _titleMenu;
 
         private async void Start()

@@ -118,36 +118,11 @@ namespace HikanyanLaboratory.Audio
                     _audioSetting.AudioCueSheet.Add(audioCueSheet);
                     _enumEntries.Add(cueSheetName);
 
-                    // キューシートからすべてのキュー名を取得して追加
-                    List<string> cueNames = GetAllCueNames(cueSheetName);
-                    _audioSetting.AddCueSheet(cueSheetType, cueNames);
-
                     acb.Dispose();
                 }
             }
 
             FinalizeCri();
-        }
-
-        /// <summary>
-        /// キューシートを検索し、曲の名前を取得します。
-        /// </summary>
-        /// <param name="cueSheetName"></param>
-        /// <returns></returns>
-        private List<string> GetAllCueNames(string cueSheetName)
-        {
-            List<string> cueNames = new List<string>();
-            var acb = CriAtom.GetCueSheet(cueSheetName).acb;
-            if (acb != null)
-            {
-                CriAtomEx.CueInfo[] cueInfos = acb.GetCueInfoList();
-                foreach (var cueInfo in cueInfos)
-                {
-                    cueNames.Add(cueInfo.name);
-                }
-            }
-
-            return cueNames;
         }
 
         /// <summary>
@@ -188,7 +163,7 @@ namespace HikanyanLaboratory.Audio
 
         public void GenerateEnumFile()
         {
-            string directoryPath = Path.Combine(Application.dataPath, "HikanyanLaboratory/Script/Audio");
+            string directoryPath = Path.Combine(Application.dataPath, "ChronicleDimensionProject/Scripts/System/Audio/AudioManager");
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ChronicleDimensionProject/GameData/Audio.meta
 guid: 97be2c07cf619644697232a4d139de26
+========
+guid: fbd0c21cd52ce2f40947b8d280be23d6
+>>>>>>>> eaf58398e85b78a9d3054cab0373c42aaa273c59:Assets/ChronicleDimensionProject/Scripts/System/Audio.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

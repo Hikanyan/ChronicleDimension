@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ChronicleDimensionProject/Scripts.meta
 guid: 76afbc2397e66784abded19e988d8ef3
+========
+guid: 6bd930dbec9f4e14eb9d41de67b792f3
+>>>>>>>> eaf58398e85b78a9d3054cab0373c42aaa273c59:Assets/ChronicleDimensionProject/Scripts/System/SceneManager.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

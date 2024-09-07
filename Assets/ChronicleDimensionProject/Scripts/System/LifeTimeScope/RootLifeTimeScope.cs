@@ -1,5 +1,4 @@
-﻿using ChargeCatProject.System;
-using Photon.Pun.Demo.PunBasics;
+﻿using Photon.Pun.Demo.PunBasics;
 using VContainer;
 using VContainer.Unity;
 

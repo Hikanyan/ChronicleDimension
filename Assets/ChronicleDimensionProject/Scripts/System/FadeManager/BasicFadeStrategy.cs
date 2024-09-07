@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ChargeCatProject.System
+namespace ChronicleDimensionProject.System
 {
     [Serializable]
     public class BasicFadeStrategy : IFadeStrategy

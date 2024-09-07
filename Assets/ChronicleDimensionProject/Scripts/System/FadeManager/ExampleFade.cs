@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace ChargeCatProject.System
+namespace ChronicleDimensionProject.System
 {
     public class ExampleFade : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using VContainer;
 using Cysharp.Threading.Tasks;
 
-namespace ChargeCatProject.System
+namespace ChronicleDimensionProject.System
 {
     public class FadeView : MonoBehaviour
     {

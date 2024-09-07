@@ -2,7 +2,7 @@
 using UnityEngine;
 using VContainer;
 
-namespace ChargeCatProject.System
+namespace ChronicleDimensionProject.System
 {
     public class FadeManager
     {

@@ -1,23 +1,34 @@
-﻿using Photon.Pun.Demo.PunBasics;
+﻿using ChronicleDimensionProject.Network;
+using HikanyanLaboratory.Audio;
+using Photon.Pun.Demo.PunBasics;
 using VContainer;
 using VContainer.Unity;
 
 namespace ChronicleDimensionProject.System
 {
+    /// <summary>
+    /// GameManager
+    /// SceneManager
+    /// LoginManager
+    /// AudioManager
+    /// </summary>
     public class RootLifeTimeScope : LifetimeScope
     {
-        // LifetimeScopeが開始されるときに呼び出されるメソッド
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<GameManager>(Lifetime.Singleton);
-            
-            
-            // FadeManagerの登録
+
+
+            // Fadeの登録
             builder.Register<IFadeStrategy, BasicFadeStrategy>(Lifetime.Singleton);
             builder.Register<FadeManager>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<FadeView>(); // MonoBehaviourの場合はEntryPointで登録
-            
-            
+            builder.RegisterEntryPoint<FadeView>();
+
+            // PlayFabの登録
+            builder.Register<PlayFabLogin>(Lifetime.Singleton);
+
+            // AudioManagerの登録
+            builder.Register<CriAudioManager>(Lifetime.Singleton);
         }
     }
 }

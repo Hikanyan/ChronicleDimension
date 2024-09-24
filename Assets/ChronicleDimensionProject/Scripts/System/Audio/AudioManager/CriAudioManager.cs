@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChronicleDimensionProject.Common;
-using ChronicleDimention.CueSheet_BGM;
 using CriWare;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UniRx;
-using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace HikanyanLaboratory.Audio
 {
     public class CriAudioManager : Singleton<CriAudioManager>
     {
         [SerializeField] private CriAudioSetting _audioSetting;
-        private const float Diff = 0.01F; // 音量の変更があったかどうかの判定に使う
 
         private Dictionary<CriAudioType, ICriAudioPlayerService> _audioPlayers; // 各音声の再生を管理するクラス
 
@@ -98,16 +94,6 @@ namespace HikanyanLaboratory.Audio
         }
 
 
-        public Guid Play(CriAudioType type, string cueName)
-        {
-            return Play(type, cueName, 1f, false);
-        }
-
-        public Guid Play(CriAudioType type, string cueName, bool isLoop)
-        {
-            return Play(type, cueName, 1f, isLoop);
-        }
-
         public Guid Play(CriAudioType type, string cueName, float volume, bool isLoop = false)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
@@ -122,22 +108,25 @@ namespace HikanyanLaboratory.Audio
                 return Guid.Empty;
             }
         }
-
-        public Guid PlayBGM(ChronicleDimention.CueSheet_BGM.Cue cue, float volume = 1f, bool isLoop = false)
+        
+        /// <summary>
+        /// Enumで指定されたキュー名を使用して音声を再生するメソッド
+        /// </summary>
+        public Guid Play<TEnum>(CriAudioType type, TEnum cue, float volume = 1f, bool isLoop = false) where TEnum : Enum
         {
-            // Cueの名前を取得
-            string cueName = Enum.GetName(typeof(ChronicleDimention.CueSheet_BGM.Cue), cue);
+            // Enumの名前をcueNameとして取得
+            string cueName = cue.ToString();
 
-            // BGM用のAudioPlayerを取得
-            if (_audioPlayers.TryGetValue(CriAudioType.CueSheet_BGM, out var player))
+            // 指定された音声タイプに対応するAudioPlayerを取得
+            if (_audioPlayers.TryGetValue(type, out var player))
             {
                 float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
-                Debug.Log($"Playing BGM: {cueName}, Volume: {adjustedVolume}");
+                Debug.Log($"Playing AudioType: {type}, CueName: {cueName}, Volume: {adjustedVolume}");
                 return player.Play(cueName, adjustedVolume, isLoop);
             }
             else
             {
-                Debug.LogWarning($"BGM audio player not available.");
+                Debug.LogWarning($"Audio player for {type} not available.");
                 return Guid.Empty;
             }
         }

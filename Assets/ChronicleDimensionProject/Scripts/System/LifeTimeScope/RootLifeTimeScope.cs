@@ -1,6 +1,7 @@
 ﻿using ChronicleDimensionProject.Network;
 using HikanyanLaboratory.Audio;
 using Photon.Pun.Demo.PunBasics;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -12,6 +13,7 @@ namespace ChronicleDimensionProject.System
     /// LoginManager
     /// AudioManager
     /// </summary>
+    //[RuntimeInitializeOnLoadMethod]
     public class RootLifeTimeScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)

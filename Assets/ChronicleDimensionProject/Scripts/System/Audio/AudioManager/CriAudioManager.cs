@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ChronicleDimensionProject.Common;
+using ChronicleDimention.CueSheet_BGM;
 using CriWare;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -76,8 +77,6 @@ namespace HikanyanLaboratory.Audio
             SeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_SE, volume)).AddTo(this);
             MeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_ME, volume)).AddTo(this);
             VoiceVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_Voice, volume)).AddTo(this);
-
-            SceneManager.sceneUnloaded += Unload;
         }
 
         private void OnMasterVolumeChanged(float volume)
@@ -98,10 +97,6 @@ namespace HikanyanLaboratory.Audio
             }
         }
 
-        private void OnDestroy()
-        {
-            SceneManager.sceneUnloaded -= Unload;
-        }
 
         public Guid Play(CriAudioType type, string cueName)
         {
@@ -127,6 +122,44 @@ namespace HikanyanLaboratory.Audio
                 return Guid.Empty;
             }
         }
+
+        public Guid PlayBGM(ChronicleDimention.CueSheet_BGM.Cue cue, float volume = 1f, bool isLoop = false)
+        {
+            // Cueの名前を取得
+            string cueName = Enum.GetName(typeof(ChronicleDimention.CueSheet_BGM.Cue), cue);
+
+            // BGM用のAudioPlayerを取得
+            if (_audioPlayers.TryGetValue(CriAudioType.CueSheet_BGM, out var player))
+            {
+                float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
+                Debug.Log($"Playing BGM: {cueName}, Volume: {adjustedVolume}");
+                return player.Play(cueName, adjustedVolume, isLoop);
+            }
+            else
+            {
+                Debug.LogWarning($"BGM audio player not available.");
+                return Guid.Empty;
+            }
+        }
+
+        public Guid Play(CriAudioType type, Enum cue, float volume = 1f, bool isLoop = false)
+        {
+            string cueName = cue.ToString(); // Enumの名前をcueNameとして取得
+
+            // CriAudioTypeに基づいて対応するAudioPlayerを取得
+            if (_audioPlayers.TryGetValue(type, out var player))
+            {
+                float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
+                Debug.Log($"Playing AudioType: {type}, CueName: {cueName}, Volume: {adjustedVolume}");
+                return player.Play(cueName, adjustedVolume, isLoop);
+            }
+            else
+            {
+                Debug.LogWarning($"Audio player for {type} not available.");
+                return Guid.Empty;
+            }
+        }
+
 
         public Guid Play3D(Transform transform, CriAudioType type, string cueName)
         {
@@ -245,23 +278,6 @@ namespace HikanyanLaboratory.Audio
             }
 
             return 1f;
-        }
-
-        private void Unload(Scene scene)
-        {
-            foreach (var player in _audioPlayers.Values)
-            {
-                player.Dispose();
-            }
-        }
-
-        public void Dispose()
-        {
-            SceneManager.sceneUnloaded -= Unload;
-            foreach (var player in _audioPlayers.Values)
-            {
-                player.Dispose();
-            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ChronicleDimensionProject.System
             {
                 var loadSceneOperation =
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-                while (!loadSceneOperation.isDone)
+                while (loadSceneOperation is { isDone: false })
                 {
                     await UniTask.Yield();
                 }
@@ -39,7 +39,7 @@ namespace ChronicleDimensionProject.System
             {
                 var loadSceneOperation =
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(ManagerSceneName, LoadSceneMode.Additive);
-                while (!loadSceneOperation.isDone)
+                while (loadSceneOperation is { isDone: false })
                 {
                     await UniTask.Yield();
                 }
@@ -50,7 +50,7 @@ namespace ChronicleDimensionProject.System
         }
 
         // シーンがロードされているか確認するメソッド
-        public bool IsSceneLoaded(string sceneName)
+        private static bool IsSceneLoaded(string sceneName)
         {
             for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
             {
@@ -76,7 +76,7 @@ namespace ChronicleDimensionProject.System
             if (IsSceneLoaded(sceneName))
             {
                 var unloadSceneOperation = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(sceneName);
-                while (!unloadSceneOperation.isDone)
+                while (unloadSceneOperation is { isDone: false })
                 {
                     await UniTask.Yield();
                 }

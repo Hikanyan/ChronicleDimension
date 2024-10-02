@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace ChronicleDimensionProject.System
+namespace ChronicleDimensionProject.Common
 {
     public class SceneLoader
     {

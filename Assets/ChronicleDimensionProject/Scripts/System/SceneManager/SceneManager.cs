@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ChronicleDimensionProject.System
+namespace ChronicleDimensionProject.Common
 {
     public class SceneManager
     {

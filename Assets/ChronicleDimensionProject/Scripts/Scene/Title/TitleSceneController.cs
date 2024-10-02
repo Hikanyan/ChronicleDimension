@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
-using SceneManager = ChronicleDimensionProject.System.SceneManager;
+using SceneManager = ChronicleDimensionProject.Common.SceneManager;
 
 namespace ChronicleDimensionProject.Title
 {

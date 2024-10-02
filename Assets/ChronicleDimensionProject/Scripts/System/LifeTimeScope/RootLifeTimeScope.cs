@@ -4,7 +4,7 @@ using Photon.Pun.Demo.PunBasics;
 using VContainer;
 using VContainer.Unity;
 
-namespace ChronicleDimensionProject.System
+namespace ChronicleDimensionProject.Common
 {
     /// <summary>
     /// GameManager

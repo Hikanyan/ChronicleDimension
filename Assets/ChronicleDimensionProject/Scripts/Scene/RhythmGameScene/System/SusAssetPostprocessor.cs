@@ -13,10 +13,26 @@ namespace ChronicleDimensionProject.RhythmGame
     {
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            var text = File.ReadAllText(ctx.assetPath);
-            TextAsset textAsset = new TextAsset(text);
-            ctx.AddObjectToAsset("Sus", textAsset);
-            ctx.SetMainObject(textAsset);
+            try
+            {
+                // UnityのAssetDatabase経由でファイルを読み込む
+                var text = File.ReadAllText(ctx.assetPath);
+
+                // TextAssetとして読み込み
+                TextAsset textAsset = new TextAsset(text);
+
+                // オブジェクトを追加
+                ctx.AddObjectToAsset("Sus", textAsset);
+                ctx.SetMainObject(textAsset);
+            }
+            catch (IOException e)
+            {
+                Debug.LogError($"ファイルの読み込みに失敗しました: {ctx.assetPath}\nエラー: {e.Message}");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"予期しないエラーが発生しました: {e.Message}");
+            }
         }
     }
 }

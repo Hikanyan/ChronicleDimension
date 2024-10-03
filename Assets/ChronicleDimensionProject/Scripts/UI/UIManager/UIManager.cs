@@ -16,14 +16,6 @@ namespace ChronicleDimensionProject.UI
             Debug.Log($"Node registered: {node.GetType()}");
         }
 
-        // public Node GetRegisteredNodes()
-        // {
-        //     
-        //     
-        //     return 
-        // }
-
-
         public async UniTask OpenNode<T>() where T : Node
         {
             if (_nodes.TryGetValue(typeof(T), out var node))

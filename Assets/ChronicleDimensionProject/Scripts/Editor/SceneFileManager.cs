@@ -31,7 +31,8 @@ namespace ChronicleDimensionProject.Editor
                     return;
                 }
 
-                string newScenePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Path), newName + ".unity");
+                string newScenePath = global::System.IO.Path.Combine(global::System.IO.Path.GetDirectoryName(Path),
+                    newName + ".unity");
 
                 if (File.Exists(newScenePath))
                 {
@@ -142,7 +143,6 @@ namespace ChronicleDimensionProject.Editor
 
             GUILayout.EndHorizontal();
         }
-
 
 
         /// <summary> 新しいシーンを作成するセクションを描画します。 </summary>

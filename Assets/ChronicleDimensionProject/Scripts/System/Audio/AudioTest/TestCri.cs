@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using ChronicleDimention.CueSheet_BGM;
+using Cysharp.Threading.Tasks;
 using HikanyanLaboratory.Audio;
 using UniRx;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace HikanyanLaboratory.Script.Audio
         private void Start()
         {
             // 初期状態でBGMを再生
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "Running Through The Galaxy 20220629");
+            //CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "Meteor Shower");
 
             // キー入力を監視
             Observable.EveryUpdate()
@@ -26,12 +27,14 @@ namespace HikanyanLaboratory.Script.Audio
 
         private void PlayBGM()
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "Meteor Shower");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, Cue.MeteorShower);
         }
 
         private void PlaySE()
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "Perfect");
+           //CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "Perfect");
+           //CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, CueSheet_BGM.おひつじ座の曲);
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, Cue.おひつじ座の曲);
         }
 
         async UniTask Task()
@@ -40,7 +43,7 @@ namespace HikanyanLaboratory.Script.Audio
             // 1秒後にSEを再生
             for (int i = 0; i < 50; i++)
             {
-                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "Perfect");
+               // CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "Perfect");
             }
         }
     }

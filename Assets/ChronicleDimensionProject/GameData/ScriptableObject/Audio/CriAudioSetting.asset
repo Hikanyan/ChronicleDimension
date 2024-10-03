@@ -16,13 +16,15 @@ MonoBehaviour:
   _audioCueSheet:
   - Type: CueSheet_BGM
     CueSheetName: CueSheet_BGM
-    AcbPath: D:/HikanyanProduction/Unity/ChronicleDimension/Assets/StreamingAssets/CueSheet_BGM.acb
+    AcbPath: CueSheet_BGM
     AwbPath: 
   - Type: CueSheet_SE
     CueSheetName: CueSheet_SE
-    AcbPath: D:/HikanyanProduction/Unity/ChronicleDimension/Assets/StreamingAssets/CueSheet_SE.acb
+    AcbPath: CueSheet_SE
     AwbPath: 
   - Type: CueSheet_Voice
     CueSheetName: CueSheet_Voice
-    AcbPath: D:/HikanyanProduction/Unity/ChronicleDimension/Assets/StreamingAssets/CueSheet_Voice.acb
+    AcbPath: CueSheet_Voice
     AwbPath: 
+  _cueSheetDictionary:
+    _pairs: []

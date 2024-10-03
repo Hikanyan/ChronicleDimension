@@ -28,6 +28,16 @@
       "dependencies": {},
       "hash": "284d5c50d3f1ddd9fa7df3d382ea904732a9c2ff"
     },
+    "com.simonoliver.unityfigma": {
+      "version": "https://github.com/simonoliver/UnityFigmaBridge.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.1-preview.1",
+        "com.unity.textmeshpro": "2.0.1"
+      },
+      "hash": "dbd12bff29e8bc84e2682bb19495899711651455"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.11",
       "depth": 1,
@@ -281,6 +291,13 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.recorder": {
       "version": "3.0.3",
       "depth": 1,
@@ -405,7 +422,7 @@
       "url": "https://packages.unity.com"
     },
     "jp.ai-j.aivoice-for-games": {
-      "version": "file:D:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
+      "version": "file:G:/HighPriorityProjects/AI/AIVOICEforGAMES_Unity",
       "depth": 0,
       "source": "local",
       "dependencies": {

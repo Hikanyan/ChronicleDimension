@@ -11,6 +11,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
     {
         private RhythmGameManager _rhythmGameManager;
         private RhythmGameTimer _rhythmGameTimer;
+        private NotesManager _notesManager;
         private float _blockHeight;
         private float _notesSpeed;
 
@@ -31,7 +32,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
         void CheckNotesIsNothing()
         {
-            if (NotesManager.instance.blockNotes.Any(lane =>
+            if (_notesManager.blockNotes.Any(lane =>
                     lane.Count > 0)) return; // ノーツが残っている場合、何もしない
 
             _rhythmGameManager.GameEnd(); // 全てのノーツが処理されたらゲーム終了
@@ -41,25 +42,21 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         {
             for (int laneIndex = 0; laneIndex < 4; laneIndex++)
             {
-                foreach (Notes note in NotesManager.instance.blockNotes[laneIndex])
+                foreach (Notes note in _notesManager.blockNotes[laneIndex])
                 {
                     ControlNotePosition(laneIndex, note);
                 }
             }
 
             // ノーツが処理された場合にリストから削除
-            if (_removeNotesByLaneIndex.Count > 0)
+            if (_removeNotesByLaneIndex.Count <= 0) return;
+            foreach (var index in _removeNotesByLaneIndex.Where(index =>
+                         _notesManager.blockNotes[index].Count > 0))
             {
-                foreach (int index in _removeNotesByLaneIndex)
-                {
-                    if (NotesManager.instance.blockNotes[index].Count > 0)
-                    {
-                        NotesManager.instance.blockNotes[index].RemoveAt(0);
-                    }
-                }
-
-                _removeNotesByLaneIndex.Clear();
+                _notesManager.blockNotes[index].RemoveAt(0);
             }
+
+            _removeNotesByLaneIndex.Clear();
         }
 
         private void ControlNotePosition(int laneIndex, Notes note)
@@ -77,7 +74,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             // ノーツが見えている場合、移動を続ける
             if (note.IsVisible)
             {
-                note.MoveNote();
+                note.MoveNote(_notesSpeed);
             }
 
             // ノーツが判定エリアを過ぎた場合の処理

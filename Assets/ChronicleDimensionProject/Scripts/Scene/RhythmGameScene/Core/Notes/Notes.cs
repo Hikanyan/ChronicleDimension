@@ -15,12 +15,14 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         [SerializeField] private NotesType _noteType = NotesType.None; // ノーツの種類
         [SerializeField] private float _spawnTime;                     // ノーツが出現するタイミング
         [SerializeField] private float _duration;                      // ノーツの持続時間（ロングノーツ用）
+        [SerializeField] private int _block;                           // ノーツが落ちるレーン番号（ブロック）
         [SerializeField] private bool _isVisible;                      // ノーツが表示されているかどうか
         [SerializeField] private bool _isHit;                          // ノーツがすでにヒットされたかどうか
 
         public NotesType NoteType => _noteType;
         public float SpawnTime => _spawnTime;
         public float Duration => _duration;
+        public int Block => _block;
         public bool IsVisible => _isVisible;
         public bool IsHit
         {
@@ -30,11 +32,12 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
 
         // 初期化メソッド
-        public void Initialize(NotesType type, float time, float duration = 0)
+        public void Initialize(NotesType type, float time, int block, float duration = 0)
         {
             _noteType = type;
             _spawnTime = time;
-            this._duration = duration;
+            _block = block;
+            _duration = duration;
             _isVisible = false;
             _isHit = false;
         }

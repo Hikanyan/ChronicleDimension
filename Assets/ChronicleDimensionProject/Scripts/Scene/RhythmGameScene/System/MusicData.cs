@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace ChronicleDimensionProject.RhythmGame
+namespace ChronicleDimensionProject.RhythmGame.MasterData
 {
     public class MusicData : MonoBehaviour
     {

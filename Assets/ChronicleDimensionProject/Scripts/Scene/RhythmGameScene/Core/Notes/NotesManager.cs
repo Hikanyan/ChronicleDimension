@@ -1,43 +1,43 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ChronicleDimensionProject.Common;
 using ChronicleDimensionProject.RhythmGame.JudgeData;
+using ChronicleDimensionProject.RhythmGameScene;
+using ChronicleDimention.CueSheet_SE;
+using HikanyanLaboratory.Audio;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ChronicleDimensionProject.RhythmGame.Notes
 {
-    public class NotesManager : MonoBehaviour
+    public class NotesManager : Singleton<NotesController>
     {
         public static NotesManager instance = null;
 
-        [SerializeField] public AudioClip _perfectSound;
-        [SerializeField] public AudioClip _greatSound;
-        [SerializeField] public AudioClip _goodSound;
-        [SerializeField] public AudioClip _missSound;
-        [SerializeField] public AudioClip _noneTapSound;
-        [SerializeField] public AudioClip _holdSound;
+        [SerializeField] public Cue _perfectSound;
+        [SerializeField] public Cue _greatSound;
+        [SerializeField] public Cue _goodSound;
+        [SerializeField] public Cue _missSound;
+        [SerializeField] public Cue _noneTapSound;
+        [SerializeField] public Cue _holdSound;
 
         [SerializeField] Text _text;
 
         private bool _autoMode = false;
-
         float _judgeOffset = 0.0f;
-
-        private void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
-        }
+        ScoreManager _scoreManager;
+        CriAudioManager _criAudioManager;
+        RhythmGameTimer _rhythmGameTimer;
 
         private void Start()
         {
+            // 各レーンのノーツリストを初期化
+            for (int i = 0; i < blockNotes.Length; i++)
+            {
+                blockNotes[i] = new List<Notes>();
+            }
+
             if (AutoMode.Instance != null)
             {
                 _autoMode = AutoMode.Instance._autoMode;
@@ -49,23 +49,14 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
         public List<Notes>[] blockNotes = new List<Notes>[4];
 
-        public void SetBlockNotes(List<Notes>[] blockNotesist)
+        public void SetBlockNotes(List<Notes>[] notes)
         {
-            blockNotes = blockNotesist;
+            blockNotes = notes;
             int notesNum = 0;
-            foreach (var blockNoteCount in blockNotes)
-            {
-                foreach (var notesCount in blockNoteCount)
-                {
-                    notesNum++;
-                    if (notesCount._type == NotesType.Meteor)
-                    {
-                        notesNum++;
-                    }
-                }
-            }
+            // ノーツの総数をカウントしてScoreManagerに渡す
+            int totalNotes = blockNotes.Sum(lane => lane.Count);
 
-            ScoreManager.Instance.NotesNum = notesNum;
+            ScoreManager.Instance.NotesNum = totalNotes;
         }
 
 
@@ -77,7 +68,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             {
                 if (blockNotes[i].Count < 1) return;
                 if ((blockNotes[i][0]._type != NotesType.Flare) &&
-                    Timer.instance.realTime - blockNotes[i][0]._time >= 0.0f && !blockNotes[i][0]._holding)
+                    _rhythmGameTimer.RealTime - blockNotes[i][0]._time >= 0.0f && !blockNotes[i][0]._holding)
                 {
                     BlockPress(i);
                     if (blockNotes[i][0]._type == NotesType.Nebula)
@@ -189,14 +180,14 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
                 {
                     notes._holding = true;
                     ParticleManager.Instance.HoldEffect(notes._block, true);
-                    AudioManager.instance.PlayLoopSound(_holdSound, Audio.SE, notes._block + 10);
+                    _criAudioManager.PlayLoopSound(_holdSound, Audio.SE, notes._block + 10);
                 }
 
                 if (release && notes._type == NotesType.Meteor && notes._holding) //ホールド最後で離したとき
                 {
                     ParticleManager.Instance.HoldEffect(notes._block, false);
                     NotesManager.instance.blockNotes[notes._block].RemoveAt(0);
-                    AudioManager.instance.StopLoopSound(notes._block + 10);
+                    _criAudioManager.StopLoopSound(notes._block + 10);
                     notes.SetVisible(false);
                 }
             }
@@ -208,13 +199,13 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
                     NotesManager.instance.blockNotes[notes._block].RemoveAt(0);
                     notes.SetVisible(false);
                     ParticleManager.Instance.HoldEffect(notes._block, false);
-                    AudioManager.instance.StopLoopSound(notes._block + 10);
+                    _criAudioManager.StopLoopSound(notes._block + 10);
                 }
                 else //空タップ
                 {
                     if (_noneTapSound != null)
                     {
-                        AudioManager.instance.PlaySound(_noneTapSound, Audio.SE);
+                        _criAudioManager.PlaySound(_noneTapSound, Audio.SE);
                     }
                 }
             }
@@ -224,68 +215,59 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         {
             ScoreManager.Instance.AddScore(judge);
 
-            if (Judges.PurePerfect == judge)
+            switch (judge)
             {
-                ScoreManager.Instance.Combo(true);
-                ScoreManager.Instance._judgeScores.PurePerfect++;
-            }
-            else if (Judges.Perfect == judge)
-            {
-                ScoreManager.Instance.Combo(true);
-                ScoreManager.Instance._judgeScores.Perfect++;
-            }
-            else if (Judges.Great == judge)
-            {
-                ScoreManager.Instance.Combo(true);
-                ScoreManager.Instance._judgeScores.Great++;
-            }
-            else if (Judges.Good == judge)
-            {
-                ScoreManager.Instance.Combo(false);
-                ScoreManager.Instance._judgeScores.Good++;
-            }
-            else if (Judges.Bad == judge)
-            {
-                ScoreManager.Instance.Combo(false);
-                ScoreManager.Instance._judgeScores.Bad++;
-            }
-            else if (Judges.Miss == judge)
-            {
-                ScoreManager.Instance.Combo(false);
-                ScoreManager.Instance._judgeScores.Miss++;
+                case Judges.PurePerfect:
+                    _scoreManager.SetCombo(true);
+                    ScoreManager.Instance._judgeScores.PurePerfect++;
+                    break;
+                case Judges.Perfect:
+                    _scoreManager.SetCombo(true);
+                    ScoreManager.Instance._judgeScores.Perfect++;
+                    break;
+                case Judges.Great:
+                    _scoreManager.SetCombo(true);
+                    ScoreManager.Instance._judgeScores.Great++;
+                    break;
+                case Judges.Good:
+                    _scoreManager.SetCombo(false);
+                    ScoreManager.Instance._judgeScores.Good++;
+                    break;
+                case Judges.Bad:
+                    _scoreManager.SetCombo(false);
+                    ScoreManager.Instance._judgeScores.Bad++;
+                    break;
+                case Judges.Miss:
+                    _scoreManager.SetCombo(false);
+                    ScoreManager.Instance._judgeScores.Miss++;
+                    break;
             }
 
+            // パーティクルエフェクトの再生
             if (showParticle)
             {
                 ParticleManager.Instance.JudgeEffect(judge, block);
+            }
 
+            // サウンドの再生
+            PlayJudgeSound(judge);
+        }
 
-                AudioClip selectSound = null;
-                switch (judge)
-                {
-                    case Judges.PurePerfect:
-                    case Judges.Perfect:
-                        selectSound = _perfectSound;
-                        break;
-                    case Judges.Great:
-                        selectSound = _greatSound;
-                        break;
-                    case Judges.Good:
-                        selectSound = _goodSound;
-                        break;
-                    case Judges.Bad:
-                    case Judges.Miss:
-                        selectSound = _missSound;
-                        break;
-                    case Judges.None:
-                        break;
-                }
+        // 判定に応じたサウンドを再生
+        private void PlayJudgeSound(Judges judge)
+        {
+            Cue sound = judge switch
+            {
+                Judges.PurePerfect or Judges.Perfect => _perfectSound,
+                Judges.Great => _greatSound,
+                Judges.Good => _goodSound,
+                Judges.Bad or Judges.Miss => _missSound,
+                _ => default
+            };
 
-
-                if (selectSound != null)
-                {
-                    AudioManager.instance.PlaySound(selectSound, Audio.SE);
-                }
+            if (sound != default)
+            {
+                _criAudioManager.Play(CriAudioType.CueSheet_SE, sound);
             }
         }
     }

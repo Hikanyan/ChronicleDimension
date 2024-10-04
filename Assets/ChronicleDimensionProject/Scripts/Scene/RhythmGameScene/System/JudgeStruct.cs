@@ -4,7 +4,6 @@ namespace ChronicleDimensionProject.RhythmGame.JudgeData
 {
     public enum Judges
     {
-        
         PurePerfect,
         Perfect,
         Great,
@@ -12,7 +11,7 @@ namespace ChronicleDimensionProject.RhythmGame.JudgeData
         Bad,
         Miss,
         Auto,
-            None,
+        None,
     }
 
     public enum ResultRank
@@ -35,6 +34,7 @@ namespace ChronicleDimensionProject.RhythmGame.JudgeData
         D,
         Auto
     }
+
     public struct JudgeScores
     {
         public int PurePerfect;
@@ -45,41 +45,41 @@ namespace ChronicleDimensionProject.RhythmGame.JudgeData
         public int Miss;
         public int Auto;
     }
-    
+
     public struct JudgeTime
     {
         #region JudgeTimes
-        private const float purePerfectTime = 0.01f;
-        private const float perfectTime = 0.05f;
-        private const float greatTime = 0.1f;
-        private const float goodTime = 0.15f;
-        public const float badTime = 0.20f;
+
+        private const float PurePerfectTime = 0.01f;
+        private const float PerfectTime = 0.05f;
+        private const float GreatTime = 0.1f;
+        private const float GoodTime = 0.15f;
+        public const float BadTime = 0.20f;
+
         #endregion
 
         public static Judges JudgeNotes(float time)
         {
             time = Mathf.Abs(time);
-            if (time <= purePerfectTime)
+            return time switch
             {
-                return Judges.PurePerfect;
-            }
-            else if (time <= perfectTime)
-            {
-                return Judges.Perfect;
-            }
-            else if (time <= greatTime)
-            {
-                return Judges.Great;
-            }
-            else if (time <= goodTime)
-            {
-                return Judges.Good;
-            }
-            else if (time <= badTime)
-            {
-                return Judges.Bad;
-            }
-            return Judges.None;
+                <= PurePerfectTime => Judges.PurePerfect,
+                <= PerfectTime => Judges.Perfect,
+                <= GreatTime => Judges.Great,
+                <= GoodTime => Judges.Good,
+                <= BadTime => Judges.Bad,
+                _ => Judges.None
+            };
         }
+    }
+
+    public struct ResultData
+    {
+        public JudgeScores JudgeScores;
+        public int MaxCombo;
+        public int Score;
+        public float ClearPercent;
+        public string MusicName;
+        public string Rank;
     }
 }

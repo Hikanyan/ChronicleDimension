@@ -44,19 +44,13 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
 
         //[SerializeField] private string _sonfName;//曲名を入れる関数を作成する。保存したJsonの名前を入れる
-        [SerializeField] private GameObject _starNotesObject; //ノーツのプレハブを入れる
-        [SerializeField] private GameObject _meteorNotesObject; //ロングノーツのプレハブを入れる
+        [SerializeField] private GameObject _tapNotesObject; //ノーツのプレハブを入れる
+        [SerializeField] private GameObject _holdNotesObject; //ロングノーツのプレハブを入れる
         [SerializeField] private GameObject _nebulaNotesObject;
         [SerializeField] private GameObject _flareNotesObject;
         [SerializeField] private float _notesSeed; //ノーツのスピード
         [SerializeField] private float _blockHeight; //ブロックの奥行き、ノーツが表示される奥行きz
         private NotesManager _notesManager;
-        private void Start() //オブジェクトが有効にされたとき一回だけ呼び出される
-        {
-            _notesManager.
-            _notesSeed = setting.notesSpeed;
-            //Load(_sonfName);//Load(sonfName)を呼び出し
-        }
 
         //有効にされたらJsonファイルを読み込み、座標を計算して配置する
         //Updateを使わない理由はPlay中にズレないようにするため
@@ -68,7 +62,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         private readonly List<List<Notes>> _activeNotes = new List<List<Notes>>() { new(), new(), new(), new() };
 
 
-        public async Task StartLoad(AssetReferenceT<TextAsset> jsonReference)
+        public async UniTask StartLoad(AssetReferenceT<TextAsset> susReference)
         {
             string dataStr = "";
 
@@ -76,7 +70,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         string path = AssetDatabase.GetAssetPath(jsonReference.Asset);
         dataStr = File.ReadAllText(path);
 #else
-            TextAsset data = await Addressables.LoadAssetAsync<TextAsset>(jsonReference);
+            TextAsset data = await Addressables.LoadAssetAsync<TextAsset>(susReference);
             dataStr = data.text;
 #endif
 
@@ -134,19 +128,19 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
             switch (type)
             {
-                case NotesType.Star:
-                    notesObject = _starNotesObject;
+                case NotesType.Tap:
+                    notesObject = _tapNotesObject;
                     block = inputJson._tapNotes[i]._block;
                     break;
-                case NotesType.Meteor:
-                    notesObject = _meteorNotesObject;
+                case NotesType.Hold:
+                    notesObject = _holdNotesObject;
                     block = inputJson._holdNotes[i]._block;
                     break;
-                case NotesType.Nebula:
+                case NotesType.ExTap:
                     notesObject = _nebulaNotesObject;
                     block = inputJson._tapNotes[i]._block;
                     break;
-                case NotesType.Flare:
+                case NotesType.Damage:
                     notesObject = _flareNotesObject;
                     block = inputJson._tapNotes[i]._block;
                     break;

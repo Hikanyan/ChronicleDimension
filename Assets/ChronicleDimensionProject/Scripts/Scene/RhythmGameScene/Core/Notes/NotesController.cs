@@ -80,7 +80,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             // ノーツが判定エリアを過ぎた場合の処理
             if (timeSinceStart > JudgeTime.BadTime && !note.IsHit)
             {
-                NotesManager.instance.ApplyJudge(Judges.Miss, note.Block);
+                _notesManager.ApplyJudge(Judges.Miss, note.Track);
                 note.SetVisible(false);
                 note.IsHit = true;
                 _removeNotesByLaneIndex.Add(laneIndex);

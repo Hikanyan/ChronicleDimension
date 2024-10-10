@@ -11,31 +11,45 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         Slide,
         Flick,
         Damage,
-        Air,
-        AirHold,
-        AirSlide,
-        
+        Sky,
+        SkyHold,
+        SkySlide,
+        Trace
     }
 
     public class Notes : MonoBehaviour
     {
         [SerializeField] private NotesType _notesType = NotesType.None; // ノーツの種類
-        [SerializeField] private float _spawnTime;                     // ノーツが出現するタイミング
-        [SerializeField] private float _duration;                      // ノーツの持続時間（ロングノーツ用）
-        [SerializeField] private int _track;                           // ノーツが落ちるレーン番号（ブロック）
-        [SerializeField] private bool _isVisible;                      // ノーツが表示されているかどうか
-        [SerializeField] private bool _isHit;                          // ノーツがすでにヒットされたかどうか
-        [SerializeField] public bool _holding;                          // ホールドノーツが押されているか
-        public NotesType NotesType => _notesType;
+        [SerializeField] private float _spawnTime; // ノーツが出現するタイミング
+        [SerializeField] private float _duration; // ノーツの持続時間（ロングノーツ用）
+        [SerializeField] private int _track; // ノーツが落ちるレーン番号（ブロック）
+        [SerializeField] private bool _isVisible; // ノーツが表示されているかどうか
+        [SerializeField] private bool _isHit; // ノーツがすでにヒットされたかどうか
+        [SerializeField] public bool _holding; // ホールドノーツが押されているか
+
+        public NotesType NotesType
+        {
+            get => _notesType;
+            set => _notesType = value;
+        }
+
         public float SpawnTime => _spawnTime;
         public float Duration => _duration;
-        public int Track => _track;
+
+        public int Track
+        {
+            get => _track;
+            set => _track = value;
+        }
+
         public bool IsVisible => _isVisible;
+
         public bool IsHit
         {
             get => _isHit;
             set => _isHit = value;
         }
+
         public bool IsHolding
         {
             get => _holding;
@@ -64,12 +78,10 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         // ノーツがヒットされたときの処理
         public void Hit()
         {
-            if (!_isHit)
-            {
-                _isHit = true;
-                // ノーツのヒット処理 (スコア追加、エフェクトなど)
-                Debug.Log("Note hit!");
-            }
+            if (_isHit) return;
+            _isHit = true;
+            // ノーツのヒット処理 (スコア追加、エフェクトなど)
+            Debug.Log("Note hit!");
         }
 
         // ノーツの動作 (ノーツが移動する場合など)

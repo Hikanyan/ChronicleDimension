@@ -12,29 +12,6 @@ using UnityEditor;
 
 namespace ChronicleDimensionProject.RhythmGame.Notes
 {
-    [Serializable]
-    public class Data
-    {
-        public TapNotesInput[] _tapNotes;
-        public HoldNotesInput[] _holdNotes;
-    }
-
-    [Serializable]
-    public class TapNotesInput
-    {
-        public int _type;
-        public float _time;
-        public int _block;
-    }
-
-    [Serializable]
-    public class HoldNotesInput
-    {
-        public int _type;
-        public float[] _time;
-        public int _block;
-    }
-
     public class NotesGenerator : MonoBehaviour
     {
         public List<int> _laneNum = new(); //何番目のレーンにノーツが落ちてくるか
@@ -51,12 +28,13 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         [SerializeField] private float _notesSeed; //ノーツのスピード
         [SerializeField] private float _blockHeight; //ブロックの奥行き、ノーツが表示される奥行きz
         private NotesManager _notesManager;
+        private NotesController _notesController;
 
         //有効にされたらJsonファイルを読み込み、座標を計算して配置する
         //Updateを使わない理由はPlay中にズレないようにするため
         //Jsonを使用せず直接susファイルをしようするラッパークラスを参照するのもあり
 
-        private Data inputJson;
+        private NoteCollection _noteCollection;
 
         //[SerializeField] private List<INotes>[] _notesIFList = { null, null, null, null };
         private readonly List<List<Notes>> _activeNotes = new List<List<Notes>>() { new(), new(), new(), new() };
@@ -74,23 +52,30 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             dataStr = data.text;
 #endif
 
-            inputJson = JsonUtility.FromJson<Data>(dataStr); //
+            _noteCollection = JsonUtility.FromJson<Data>(dataStr); //
 
-            int sumTapNotes = inputJson._tapNotes.Length;
-            int sumHoldNotes = inputJson._holdNotes.Length;
+            int sumTapNotes = _noteCollection._tapNotes.Length;
+            int sumHoldNotes = _noteCollection._holdNotes.Length;
             for (int i = 0; i < sumTapNotes; i++) //ノーツの位置を一個ずつ配置していく
             {
-                switch (inputJson._tapNotes[i]._type)
+                switch (_noteCollection._tapNotes[i]._type)
                 {
                     case 1:
-                        GetData(NotesType.Star, i);
+                        GetData(NotesType.Tap, i);
+                        break;
+                    case 2:
+                        GetData(NotesType.ExTap, i);
                         break;
                     case 3:
-                        GetData(NotesType.Nebula, i);
+                        GetData(NotesType.Damage, i);
                         break;
                     case 4:
-                        GetData(NotesType.Flare, i);
+                        GetData(NotesType.Slide, i);
                         break;
+                    case 5:
+                        GetData(NotesType.Flick, i);
+                        break;
+
                     default:
                         break;
                 }
@@ -98,7 +83,7 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
 
             for (int i = 0; i < sumHoldNotes; i++) //ノーツの位置を一個ずつ配置していく
             {
-                GetData(NotesType.Meteor, i);
+                GetData(NotesType.Hold, i);
             }
 
             //時間が早い時間順にソートする
@@ -112,9 +97,9 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
                 }
             }
 
-            NotesManager.instance.SetBlockNotes(SortNotes);
-            NotesController.instance.SetData(_blockHeight, _notesSeed);
-            this.gameObject.SetActive(false);
+            _notesManager.SetBlockNotes(SortNotes);
+            _notesController.SetData(_blockHeight, _notesSeed);
+            gameObject.SetActive(false);
             Debug.Log("Notes Generate Complate");
 
             await Task.Run(() => { }).ConfigureAwait(false);
@@ -124,25 +109,25 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
         {
             GameObject notesObject;
 
-            int block = 0;
+            int _track = 0;
 
             switch (type)
             {
                 case NotesType.Tap:
                     notesObject = _tapNotesObject;
-                    block = inputJson._tapNotes[i]._block;
+                    _track = _noteCollection._tapNotes[i]._block;
                     break;
                 case NotesType.Hold:
                     notesObject = _holdNotesObject;
-                    block = inputJson._holdNotes[i]._block;
+                    _track = _noteCollection._holdNotes[i]._block;
                     break;
                 case NotesType.ExTap:
                     notesObject = _nebulaNotesObject;
-                    block = inputJson._tapNotes[i]._block;
+                    _track = _noteCollection._tapNotes[i]._block;
                     break;
                 case NotesType.Damage:
                     notesObject = _flareNotesObject;
-                    block = inputJson._tapNotes[i]._block;
+                    _track = _noteCollection._tapNotes[i]._block;
                     break;
                 default:
                     notesObject = null;
@@ -150,26 +135,26 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             }
 
             if (notesObject == null) return;
-            GameObject notesInstance = Instantiate(notesObject, new Vector3(block - 1.5f, 0.55f, _blockHeight + 1),
+            GameObject notesInstance = Instantiate(notesObject, new Vector3(_track - 1.5f, 0.55f, _blockHeight + 1),
                 notesObject.transform.rotation);
-            notesInstance.transform.SetParent(NotesManager.instance.transform, false);
+            notesInstance.transform.SetParent(_notesManager.transform, false);
             Notes notes = notesInstance.GetComponent<Notes>();
-            notes._block = block;
-            notes._type = type;
+            notes.Track = _track;
+            notes.NotesType = type;
             switch (type)
             {
                 case NotesType.Star:
-                    notes._time = inputJson._tapNotes[i]._time;
+                    notes._time = _noteCollection._tapNotes[i]._time;
                     break;
                 case NotesType.Meteor:
-                    notes._time = inputJson._holdNotes[i]._time[0];
-                    notes._endTime = inputJson._holdNotes[i]._time[1];
+                    notes._time = _noteCollection._holdNotes[i]._time[0];
+                    notes._endTime = _noteCollection._holdNotes[i]._time[1];
                     break;
                 case NotesType.Nebula:
-                    notes._time = inputJson._tapNotes[i]._time; //DEBUG
+                    notes._time = _noteCollection._tapNotes[i]._time; //DEBUG
                     break;
                 case NotesType.Flare:
-                    notes._time = inputJson._tapNotes[i]._time; //DEBUG
+                    notes._time = _noteCollection._tapNotes[i]._time; //DEBUG
                     break;
                 default:
                     break;

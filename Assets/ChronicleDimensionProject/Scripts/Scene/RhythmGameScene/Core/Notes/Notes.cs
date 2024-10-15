@@ -33,7 +33,12 @@ namespace ChronicleDimensionProject.RhythmGame.Notes
             set => _notesType = value;
         }
 
-        public float SpawnTime => _spawnTime;
+        public float SpawnTime
+        {
+            get => _spawnTime;
+            set => _spawnTime = value;
+        }
+
         public float Duration => _duration;
 
         public int Track
